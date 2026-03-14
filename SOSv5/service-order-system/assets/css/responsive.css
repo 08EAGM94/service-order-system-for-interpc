@@ -1,0 +1,188 @@
+/*
+estilos responsivos de algunos de los elementos de estas vistas:
+views/userLayouts/firstForm.php, 
+views/userLayouts/followup.php, 
+views/userLayouts/menu.php,
+views/userLayouts/welcomeBanner.php,
+views/error.php,
+views/login.php,
+views/adminLayouts/menuSides/welcomeBanner.php,
+views/adminLayouts/menuSides/aside.php,
+views/adminLayouts/binnacleInfoCanvas.php,
+views/adminLayouts/binnaclesFilter.php,
+views/adminLayouts/deviceForm.php,
+views/adminLayouts/devicesReport.php,
+views/adminLayouts/enterpriseForms.php,
+views/adminLayouts/userInsertForm.php,
+views/adminLayouts/userNewPwd.php y
+views/adminLayouts/welcomeMessage.php,
+aqui se establecen estilos dependiendo del tamaño de la 
+vista de la aplicación web haciendo que se vea bien 
+incluso en dispositivos móviles
+*/
+
+@media (min-width: 300px) and (max-width: 600px) {
+    .menu-header__user-wellcome{
+        font-size: 2rem;
+    }
+    
+    .binnacle-link__subtitle,
+    .new-contact-link__subtitle,
+    .new-type-link__subtitle,
+    .new-device-link__subtitle,
+    .following-link__subtitle,
+    .edit-Sign-link__subtitle,
+    .exit-link__subtitle{
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 1443px){
+    .devicesReport__labels-box{
+        width: 20%
+    }
+}
+
+@media (min-width: 1200px){
+    .binn-row {
+        font-size: 4rem;
+    }
+    
+}
+
+@media (max-width: 863px){
+    .devicesReport__labels-box{
+        width: 25%;
+    }
+    
+    .devicesReport__logo{
+        width: 20%;
+    }
+}
+
+@media (min-width: 800px){
+    .user-login__form {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
+
+@media (max-width: 731px){
+    .devicesReport__labels-box{
+        width: 30%;
+    }
+}
+
+@media (min-width: 700px){
+    
+    
+    .menu-header__user-wellcome{
+        font-size: 5rem;
+    }
+    
+    .binnacle-link__subtitle,
+    .new-contact-link__subtitle,
+    .new-type-link__subtitle,
+    .new-device-link__subtitle,
+    .following-link__subtitle,
+    .edit-Sign-link__subtitle,
+    .exit-link__subtitle{
+        font-size: 5rem;
+    }
+ 
+}
+
+@media (max-width: 644px){
+    .devicesReport__labels-box{
+        width: 35%;
+    }
+    
+    .devicesReport__reportTitle{
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 600px) and (max-height: 500px){
+    .menu-header__img {
+        margin-left: 8%;
+        width: 8rem;
+    }
+}
+
+@media (max-width: 582px){
+    .devicesReport__labels-box{
+        width: 40%;
+    }
+}
+
+@media (max-width: 535px){
+    .devicesReport__labels-box{
+        width: 45%;
+    }
+}
+
+@media (max-width: 516px){
+    .enterprise-forms__labels-box{
+        width: 30rem;
+    }
+}
+
+@media (max-width: 500px){
+    
+    #deviceCancelBtn{
+        font-size: 1rem;
+    }
+    
+    #devicetypeCancelBtn{
+        font-size: 1rem;
+    }
+    
+    .devicesReport__labels-box,
+    .devicesReport__inputs-box{
+        font-size: 1rem;
+    }
+    
+    #dceCol,
+    #dceLoc,
+    #dceEml,
+    #dceNs,
+    #dceNumInv{
+        margin-top: 0.2rem;
+    }
+    
+    .filter-options-form__label-box{
+        display: none;
+    }
+    
+}
+
+@media (max-width: 470px){
+    .navbar_mobile-btn {
+        top: 0;
+        left: 11rem;
+    }
+    
+    .adminMenu-header__link{
+        width: 22%;
+    }
+}
+
+@media (max-width: 420px){
+    .left-piece__down-options{
+        width: 90%;
+    }
+    
+    .left-piece__up-options{
+        width: 97%;
+    }
+}    
+
+@media (max-width: 400px){
+    .devicesReport__reportTitle{
+        font-size: 0.8rem;
+    }
+}    
+
+
+
+

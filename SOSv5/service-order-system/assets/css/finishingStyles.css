@@ -1,0 +1,401 @@
+/*
+Estilos de las vistas: views/finishingLayouts/consentInfo.php, 
+views/finishingLayouts/remindedfields.php, 
+views/finishingLayouts/finishingLayout/absoluteElems.php,
+views/finishingLayouts/clientCanvas.php y
+views/finishingLayouts/technicianCanvas.php,
+la gran mayoría de elementos html de estas vistas se les 
+colocó una clase para identificarlos, puedes buscar 
+el elemento en cuestión con ctrl + F y modificar sus 
+estilos si es necesario o crear un bloque de estilos 
+hasta el final de este archivo para modificar un 
+elemento html en especifico.
+*/
+:root{
+    /*Variables*/
+    --header-text: #FFFFFF;
+    --gradient-white: #ebf8e1;
+    --color-secondary: #2F323D;
+    --color-primary: #0B134E;
+    --color-aside: #182546;
+    --background-color: #F5F5F5;
+    --color-form-secondary: #A2AB8C;
+}
+
+.hidThis{
+    display: none !important;
+}
+
+.error-color{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+}
+
+.invalidinput-box{
+    width: 60%;
+    background: red;
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.succeed-box{
+    width: 60%;
+    background: green;
+    color: white;
+    font-size: 1.5rem;
+}
+
+html{
+    font-size: 10px;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    font-family: "outfit", Arial, Helvetica, sans-serif;
+    font-size: 1.6rem;
+    background-color: var(--background-color);
+}
+
+.binnacleremindedfields-main{
+    width: 80%;
+    margin: 0 10%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.binnacleremindedfields-cli-info,
+.binnacleremindedfields-cli-infomain{
+    width: 100%;
+    text-align: center;
+}
+
+.binnacleremindedfields-cli-infomain{
+    font-size: 2.5rem;
+    font-style: italic;
+}
+
+
+.binnacleremindedfields__workmade-wrapper,
+.binnacleremindedfields__remark-wrapper,
+.binnacleremindedfields__client-wrapper,
+.binnacleremindedfields__service-wrapper,
+.binnacle-form__device-wrapper,
+.binnacleremindedfields__binnid-wrapper,
+.binnacleremindedfields__date-wrapper,
+.binnacleremindedfields__techsign-wrapper,
+.binnacleremindedfields__clisign-wrapper{
+    display: flex;
+    justify-content: center;
+    border: 0.5rem solid black;
+    padding: 1rem
+}
+
+.binnacleremindedfields__techsign-wrapper,
+.binnacleremindedfields__clisign-wrapper{
+    flex-direction: column;
+}
+
+.binnacleremindedfields__smallfieldsets-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.smallfieldsets__logo{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.interpc-logo{
+    width: 50%;
+    height: 85%;
+}
+
+.smallfieldsets__binnTitle{
+    width: 25%;
+    display: flex;
+    text-align: center;
+    align-items: center
+}
+
+.smallfieldsets__idanddate-wrapper{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.binnacleremindedfields__binnid-wrapper,
+.binnacleremindedfields__date-wrapper{
+    width: 100%;
+}
+
+.binnacleremindedfields__date-input{
+    font-size: 2rem;
+}
+
+.binnacleremindedfields__first-half,
+.binnacleremindedfields__second-half{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}
+
+
+.labels-box__label,
+.inputs-box__input,
+.inputs-box__device-input{
+    margin-top: 1rem;
+}
+
+
+.binnacleremindedfields__labels-box{
+    width: 16rem;
+    font-size: 1.41rem;
+}
+
+.binnacleremindedfields__inputs-box{
+    width: 70%;
+}
+
+.inputs-box__input,
+.inputs-box__device-input{
+    width: 100%;
+    border: 0;
+    background: var(--background-color);
+    border-bottom: 0.1rem solid black;
+}
+
+.binnacleremindedfields__legend{
+    font-size: 2rem;
+    background: black;
+    color: white;
+}
+
+.workmade-textarea,
+.remark-textarea,
+.service-textarea,
+.cancel-desc-form__desc-input{
+    resize: none;
+    width: 100%;
+    height: 20rem;
+}
+
+.sign-area{
+    width: 100%;
+    height: 20rem;
+}
+
+.binnacleremindedfields__nameandsurname-area{
+    width: 100%;
+    border: 0;
+    border-top: 0.2rem solid black;
+    text-align: center;
+}
+
+.cancel-desc-form__desc-input{
+    margin-bottom: 2rem;
+}
+
+.binnacleremindedfields__button{
+    cursor: pointer;
+    border: 0;
+    float: right;
+    margin-top: 2rem;
+    width: 10rem;
+    height: 5rem;
+    background: black;
+    color: white;
+}
+
+.consentcancel__button{
+    cursor: pointer;
+    border: 0;
+    margin-top: 2rem;
+    width: 10rem;
+    height: 5rem;
+    background: black;
+    color: white;
+    text-align: center;
+}
+
+
+.binnacleremindedfields__button-link{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 0;
+    float: left;
+    margin-top: 2rem;
+    width: 10rem;
+    height: 5rem;
+    background: black;
+    color: white;
+}
+
+.binnacleremindedfields__consent-button-link{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 0;
+    margin-top: 2rem;
+    width: 10rem;
+    height: 5rem;
+    background: black;
+    color: white;
+}
+
+.consent-buttonbox,
+.reminded-fields-buttonbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.binnacle-signmain{
+    width: 100%;
+    height: 98%;    
+}
+
+.binnacle-sign__canvas{
+    width: 100%;
+    height: 100%;    
+}
+
+.binnacle-sign__buttons-box{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.buttons-box__button{
+    width: 15rem;
+}
+
+.binnacle-sign__label{
+    position: absolute;
+    top: 0;
+    background: black;
+    color: white;
+}
+
+.buttons-box__button:nth-child(1),
+.buttons-box__button:nth-child(2),
+.buttons-box__button:nth-child(3){
+    cursor: pointer;
+    border: 0;
+    color: white;
+}
+
+.buttons-box__button:nth-child(1){
+    background: red;
+}
+
+.buttons-box__button:nth-child(2){
+    background: cadetblue;
+}
+
+.buttons-box__button:nth-child(3){
+    background: green;
+}
+
+.binnacle-sign__window-background::before,
+.binnacleremindedfields__window-background::before,
+.binnacleremindedfields__windowform-background::before{
+    content: "";
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: grey;
+    opacity: 0.5;
+    
+}
+
+
+.binnacle-sign__info-window,
+.binnacleremindedfields__form-window,
+.binnacleremindedfields__info-window{
+    z-index: 999;
+    width: 90%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    /*transform: translate(-50%, -50%): Mueve el elemento hacia atrás un 50% de su 
+    propia anchura y altura, logrando el centrado perfecto. */
+    transform: translate(-50%, -50%);
+    background: whitesmoke;
+    border: 0.5rem solid black;
+    border-radius: 1rem;
+}
+
+.info-window__text-box{
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+.form-window__form-box{
+    text-align: center;
+    margin-top: 5%;
+    width: 90%;
+}
+
+.cancel-desc-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cancel-desc-form__label{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.info-window__selectbuttons-box{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5%;
+}
+
+.selectbuttons-box__button{
+    width: 40%;
+    height: 4rem;
+}
+
+.okCenter{
+    justify-content: center !important;
+}
+
+.ok{
+    display: flex;
+    background: black;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}

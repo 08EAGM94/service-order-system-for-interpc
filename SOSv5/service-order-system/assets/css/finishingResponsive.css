@@ -1,0 +1,83 @@
+/*estilos de las vistas: views/userLayouts/consentInfo.php y 
+views/userLayouts/remindedfields.php los cuales son datos 
+informativos durante el sequimiento de bitácoras, 
+aqui se establecen estilos dependiendo del tamaño de la 
+vista de la aplicación web haciendo que se vea bien 
+incluso en dispositivos móviles*/
+@media (max-width: 1249px){
+    
+    .binnacleremindedfields__workmade-wrapper, 
+    .binnacleremindedfields__remark-wrapper, 
+    .binnacleremindedfields__client-wrapper {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .binnacleremindedfields__first-half, 
+    .binnacleremindedfields__second-half{
+        width: 90%;
+    }
+    
+    .binnacleremindedfields__labels-box {
+        width: 20rem;
+    }
+    
+    .binnacleremindedfields__inputs-box {
+        width: 70%;
+    }
+    
+    .inputs-box__input{
+        width: 100%;
+    }
+    
+    
+}
+
+@media (max-width: 914px){
+    .smallfieldsets__binnTitle{
+        font-size: 0.8rem;
+    }
+    
+    .interpc-logo{
+        width: 90%;
+    }
+}
+
+@media (max-width: 500px){
+    .smallfieldsets__idanddate-wrapper{
+        width: 40%;
+    }
+    
+    .binnacleremindedfields__date-input{
+        font-size: 1rem;
+    }
+    
+    .smallfieldsets__logo{
+        width: 20%;
+    }
+    
+    .smallfieldsets__binnTitle{
+        width: 40%;
+    }
+    
+     .binnacleremindedfields__first-half, 
+     .binnacleremindedfields__second-half{
+         font-size: 1rem;
+     }
+     
+     .binnacleremindedfields__labels-box{
+         font-size: 0.9rem;
+     }
+     
+     .binnacleremindedfields__inputs-box{
+         font-size: 0.95rem;
+     }
+     
+     .smallfieldsets__idanddate-wrapper{
+         font-size: 0.9rem;
+     }
+     
+}
+

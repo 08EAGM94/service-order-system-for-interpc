@@ -1,0 +1,1787 @@
+/*
+Estilos de las vistas: views/userLayouts/firstForm.php, 
+views/userLayouts/followup.php, 
+views/userLayouts/menu.php,
+views/userLayouts/welcomeBanner.php,
+views/error.php,
+views/login.php,
+views/adminLayouts/menuSides/welcomeBanner.php,
+views/adminLayouts/menuSides/aside.php,
+views/adminLayouts/binnacleInfoCanvas.php,
+views/adminLayouts/binnaclesFilter.php,
+views/adminLayouts/deviceForm.php,
+views/adminLayouts/devicesReport.php,
+views/adminLayouts/enterpriseForms.php,
+views/adminLayouts/userInsertForm.php,
+views/adminLayouts/userNewPwd.php y
+views/adminLayouts/welcomeMessage.php,
+la gran mayoría de elementos html de estas vistas se les 
+colocó una clase para identificarlos, puedes buscar 
+el elemento en cuestión con ctrl + F y modificar sus 
+estilos si es necesario o crear un bloque de estilos 
+hasta el final de este archivo para modificar un 
+elemento html en especifico. 
+*/
+
+
+
+html{
+    font-size: 10px;
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    font-family: "outfit", Arial, Helvetica, sans-serif;
+    font-size: 1.6rem;
+    background-color: var(--background-color);
+}
+
+.Zebra_Pagination{
+    width: 100%;
+}
+
+.active{
+    background: white !important;
+    color: black !important;
+    border: 0.1rem solid black;
+}
+
+.disabled{
+    background: gray !important;
+}
+
+.disabled > a{
+    cursor: not-allowed !important;
+}
+
+.pdf-disabled{
+    pointer-events: none !important;
+}
+
+.fixed-position{
+    position: fixed !important;
+}
+
+.hidThis{
+    display: none !important;
+}
+
+.without-marginTop{
+    margin-top: 0 !important;
+}
+
+.without-marginTop-red{
+    margin-top: 0 !important;
+    background: red !important;
+}
+
+.paintRed{
+    background: salmon !important;
+}
+
+
+.increseMarginTop{
+    margin-top: 4.8rem !important;
+}
+
+.increseHeight{
+    height: 10vh !important;
+}
+
+.error-absolute{
+    position: absolute;
+    z-index: 99;
+    color: white;
+}
+
+.error-color{
+    color: black !important;
+}
+
+.error-box{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.particles{
+    position: fixed;
+    z-index: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #0e0031;
+}
+
+.user-login{
+    width: 50%;
+    z-index: 999;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    border-radius: 3rem;
+    padding: 1rem;
+    background-color: whitesmoke;
+}
+
+.user-login__logobox-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.user-login__logo-box{
+    width: 30%;
+}
+
+.user-login__title-box{
+    font-style: italic;
+    text-align: center;
+}
+
+.user-login__form{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    font-size: 3rem;
+}
+
+.user-login__pwd-box{
+    width: 100%;
+    position: relative;
+}
+
+.user-login__pwd{
+    width: 100%;
+    padding-right: 3.5rem;
+}
+
+i{
+    position: absolute;
+    top: 15%;
+    right: 0;
+}
+
+.user-login__submit-box{
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
+.user-login__submit{
+    cursor: pointer;
+    width: 15rem;
+    border: 0;
+    background: cornflowerblue;
+    border-radius: 1rem;
+    color: white;
+}
+
+.menu-header{
+    width: 100%;
+    height: 20vh;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    display: flex;
+    justify-content: space-between;
+    background: var(--color-primary);
+    padding-right: 4%;
+    background: linear-gradient(0.10turn, var(--color-primary), 
+        var(--gradient-white) 15%, var(--color-primary) 50%);
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 2rem 2rem;
+}
+
+.menu-header__link{
+    margin-left: 5%;
+}
+
+.menu-header__img{
+    width: 20rem;
+    height: 20vh;
+}
+
+.menu-header__user-wellcome{
+    color: var(--header-text);
+}
+
+.user-mains-wrapper{
+    padding-top: 20vh;
+    width: 100%;
+}
+
+.menu-main{
+    padding: 10% 10%;
+}
+
+.binnacle-main{
+    width: 100%;
+    max-width: 100vw;
+    height: 100%;
+    padding: 1rem;
+}
+
+
+.enterprise-select-table,
+.contact-form-table,
+.device-select-table,
+.device-form-table,
+.type-form-table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.enterprise-select-table__label-column,
+.device-select-table__label-column{
+    width: 10%;
+    border: 0;
+    vertical-align: middle;
+    text-align: right;
+}
+
+.enterprise-select-table__select-column,
+.device-select-table__select-column{
+    width: 60%;
+    border: 0;
+    vertical-align: middle;
+}
+
+.enterprise-select-table__button-column,
+.device-select-table__button-column{
+    width: 30%;
+    border: 0;
+}
+
+.contact-form-table__label-column{
+    width: 10%;
+    border: 0;
+    text-align: right;
+    vertical-align: bottom;       
+}
+
+.contact-form-table__input-column{
+    width: 35%;
+    border: 0;
+    vertical-align: bottom;
+}
+
+.device-form-table__label-column{
+    width: 10%;
+    border: 0;
+    text-align: right;
+    vertical-align: bottom;
+}
+
+.type-form-table__label-column{
+    width: 5%;
+    border: 0;
+    text-align: left; 
+    vertical-align: bottom;
+    font-size: 3rem;
+}
+
+.device-form-table__input-column,
+.type-form-table__input-column{
+    width: 90%;
+    border: 0;
+    vertical-align: bottom;
+}
+
+.type-form-table__input-column{
+    font-size: 3rem;
+}
+
+.binnacle-form__client-wrapper,
+.binnacle-form__serviceOrDevice-wrapper,
+.binnacle-form__service-wrapper,
+.binnacle-form__device-wrapper,
+.newContactForm__fieldset,
+.newTypeForm__fieldset,
+.newDeviceForm__fieldset{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border: 0.5rem solid black;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.binnacle-form__client-wrapper,
+.binnacle-form__device-wrapper,
+.newContactForm__fieldset,
+.newTypeForm__fieldset,
+.newDeviceForm__fieldset{
+    flex-direction: column;
+}
+
+.newTypeForm__fieldset{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.binnacle-form__serviceOrDevice-wrapper{
+    border-top: 0;
+}
+
+
+.binnacle-form__labels-box{
+    font-size: 1.41rem;
+}
+
+.binnacle-form__inputs-box{
+    max-width: 50vw;
+    width: 50%;
+}
+
+
+.inputs-box__input{
+    width: 100%;
+    height: 3rem;
+    padding-left: 1.5rem;
+    min-width: 10rem;
+    border: 0;
+    background: var(--background-color);
+    border-bottom: 0.1rem solid black;
+}
+
+.unset-height{
+    height: 100%;
+}
+
+.serviceOrDevice__radio{
+    width: 2rem;
+}
+
+.serviceOrDevice__service-label{
+    margin-right: 30%;
+}
+
+.binnacle-form__legend,
+.newContactForm__legend,
+.newTypeForm__legend,
+.newDeviceForm__legend{
+    font-size: 2rem;
+    background: black;
+    color: white;
+}
+
+.service-textarea,
+.device-textarea{
+    resize: none;
+    width: 100%;
+    height: 20rem;
+}
+
+.binnacle-form__submit,
+.binnacle-form__button,
+.registration__submit{
+    cursor: pointer;
+    border: 0;
+    float: right;
+    margin-top: 2rem;
+    width: 10rem;
+    height: 5rem;
+    background: black;
+    color: white;
+}
+
+.binnacle-form__button{
+    width: 100%;
+    height: 4rem;
+    margin-top: 0;
+}
+
+
+.binnacle-form__button-link,
+.registration__button-link{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 0;
+    float: left;
+    margin-top: 2rem;
+    width: 10rem;
+    height: 5rem;
+    background: black;
+    color: white;
+}
+
+.binnacle-form__submit:hover,
+.registration__submit::hover{
+    border: 0.5rem solid black;
+    background: white;
+    color: black;
+}
+
+
+.followup-main{
+    margin: 0 5% 5%;
+}
+
+
+.menu-main__binnacle-link,
+.menu-main__new-contact-link,
+.menu-main__new-type-link,
+.menu-main__new-device-link,
+.menu-main__following-link,
+.menu-main__edit-Sign-link,
+.menu-main__exit-link{
+    display: flex;
+    padding: 3%;
+    margin-top: 15%;
+    flex-direction: row;
+    align-items: center;
+    background: var(--color-primary);
+    color: var(--header-text);
+    border-radius: 3rem;
+    box-shadow:
+    inset 2px 2px 3px rgb(255 255 255 / 0.6),
+    inset -2px -2px 3px rgb(0 0 0 / 0.6);
+    text-shadow: 1px 1px 1px black;
+}
+
+.menu-main__binnacle-link{
+    margin-top: 0;
+}
+
+.binnacle-link__img,
+.new-contact-link__img,
+.new-type-link__img,
+.new-device-link__img,
+.following-link__img,
+.edit-Sign-link__img,
+.exit-link__img{
+    width: 30%;
+    margin-left: 3%;
+}
+
+.binnacle-link__subtitle,
+.new-contact-link__subtitle,
+.new-type-link__subtitle,
+.new-device-link__subtitle,
+.following-link__subtitle,
+.edit-Sign-link__subtitle,
+.exit-link__subtitle{
+    /*line-height: 8rem;*/
+    margin-left: 3%
+}
+
+.menu-main__binnacle-link:active,
+.menu-main__new-contact-link:active,
+.menu-main__new-type-link:active,
+.menu-main__new-device-link:active,
+.menu-main__following-link:active,
+.menu-main__edit-Sign-link:active,
+.menu-main__exit-link:active{
+  box-shadow:
+    inset -2px -2px 3px rgb(255 255 255 / 0.6),
+    inset 2px 2px 3px rgb(0 0 0 / 0.6);
+    .binnacle-link__img,
+    .binnacle-link__subtitle,
+    .following-link__img,
+    .following-link__subtitle,
+    .exit-link__img,
+    .exit-link__subtitle,
+    .new-contact-link__img,
+    .new-type-link__img,
+    .new-device-link__img,
+    .new-contact-link__subtitle,
+    .new-type-link__subtitle,
+    .new-device-link__subtitle,
+    .edit-Sign-link__img,
+    .edit-Sign-link__subtitle{
+        margin-left: 1rem;
+    }
+}
+
+.main__numkey-box{
+    margin-top: 2%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.numkey-box__select{
+    width: 50%;
+    text-align: center;
+}
+
+.numkey-box__return-link{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-primary);
+    border-radius: 1rem;
+    color: var(--header-text);
+}
+
+.binn-row{
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 6%;
+    background: var(--color-primary);
+    color: var(--header-text);
+    border-radius: 3rem;
+    text-shadow: 1px 1px 1px black;
+}
+
+.binn-row__id,
+.binn-row__status{
+     width: 20%;
+}
+
+.binn-row__comm-name{
+    width: 50%;
+}
+
+.binn-row__id,
+.binn-row__comm-name,
+.binn-row__status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.binn-row__status{
+    width: 25%;
+    flex-direction: column;
+    background: orangered;
+    color: white;
+}
+
+.status-img{
+    width: 30%;
+}
+
+
+
+.binnacleremindedfields__window-background::before,
+.userCreationFileds__window-background::before,
+.userDelete__window-background::before,
+.enter-or-client-delete__window-background::before,
+.enable-or-disable__window-background::before,
+.enter-edit__background::before,
+.contact-edit__background::before,
+.device-delete__window-background::before,
+.device-edit__background::before,
+.binnacle-delete__window-background::before,
+.binnacle-edit__background::before,
+.registration__window-background::before{
+    content: "";
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: grey;
+    opacity: 0.5;
+}
+
+.binnacleremindedfields__info-window,
+.userCreationFileds__info-window,
+.userDelete__info-window,
+.enter-or-client-delete__info-window,
+.enable-or-disable__info-window,
+.enter-edit__info-window,
+.contact-edit__info-window,
+.device-delete__info-window,
+.device-edit__info-window,
+.binnacle-delete__info-window,
+.binnacle-edit__info-window,
+.registration__info-window{
+    z-index: 999;
+    width: 90%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    /*transform: translate(-50%, -50%): Mueve el elemento hacia atrás un 50% de su 
+    propia anchura y altura, logrando el centrado perfecto. */
+    transform: translate(-50%, -50%);
+    background: whitesmoke;
+    border: 0.5rem solid black;
+    border-radius: 1rem;
+}
+
+
+
+.info-window__text-box{
+    text-align: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.info-window__selectbuttons-box{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 3%;
+}
+
+.selectbuttons-box__button,
+.selectbuttons-box__button-no,
+.selectbuttons-box__cancelContact-edit-button,
+.selectbuttons-box__cancel-delete-button{
+    width: 40%;
+    height: 4rem;
+}
+
+
+
+.invalidinput-box{
+    width: 60%;
+    background: red;
+    color: white;
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.succeed-box{
+    width: 60%;
+    background: green;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.follow-up__pagination-control-box{
+    width: 100%;
+    margin-top: 3rem;
+}
+
+.pagination{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.page-item{
+    width: 20%;
+    background: var(--color-primary);
+    color: var(--header-text);
+    border-radius: 0.5rem;
+}
+
+
+.page-link{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.withoutPendingBinns,
+.binnacles-filter__without-binns-row{
+    width: 100%;
+    height: 80vh;    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.newContactForm-main,
+.newTypeForm-main,
+.newDeviceForm-main,
+.typesEditForms-main,
+.devicesEditForms-main{
+    width: 100%;
+    height: 100%;
+    /*position: relative;*/ 
+    padding: 1rem;
+}
+/*------------------------------Admin styles----------------------------------*/
+.adminMenu-header{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    background-image: var(--background-url);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 0px 0px 15px 15px;
+}
+
+.adminMenu-header__admin-welcome{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--header-text);
+}
+
+.welcome-message-main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-message__message-box{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    border: 0.2rem solid black;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 5rem;
+}
+
+.message-box__img-box{
+    display: flex;
+    justify-content: center;
+}
+
+.message-box__title-box{
+    text-align: center;
+}
+/*---------------mobile navbar-----------------------------------------------*/
+.navbar_mobile-btn{
+    position: absolute;
+    cursor: pointer;
+    top: 6%;
+    left: 21rem;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 3rem;
+    background: black;
+    border: black;
+    padding-top: 0.5rem;
+    border: 0.3rem solid cornflowerblue;
+}
+
+.mobile-btn__line{
+    display: block;
+    width: 2rem;
+    border: 0.1rem solid antiquewhite;
+    margin-bottom: 0.6rem;
+    margin-left: 1.2rem;
+}
+
+.mobile-btn__line:last-child{
+    width: 1rem;
+    margin-left: 2.2rem;
+}
+
+.mobile-navbar{
+    visibility: hidden;
+    opacity: 0;
+    z-index: 999;
+    width: 20rem;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: -20rem;
+    background: black;
+    color: whitesmoke;
+    border-left: 0.5rem solid cornflowerblue;
+    padding: 1rem;
+    overflow-y: scroll;
+    transition: all 800ms ease-in-out;
+}
+
+.mobile-navbar--show{
+    visibility: visible;
+    opacity: 1;
+    right: 0;
+}
+
+.mobile-navbar__header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.mobile-navbar__enterprise-logo{
+    width: 6.5rem;
+}
+
+.mobile-navbar__close-button{
+    cursor: pointer;
+    width: 3.5rem;
+    height: 3.5rem;
+    color: black;
+    font-size: 2.5rem;
+}
+
+.mobile-navbar__devicesReport__info-box{
+    border-top: 0.5rem solid cornflowerblue;
+    padding-top: 2rem;
+}
+
+.mobile-navbar__nav{
+    font-size: 1.45rem;
+}
+
+.mobile-navbar__row{
+    position: relative;
+    margin-bottom: 1.9rem;
+}
+
+.mobile-submenu__row{
+    margin-bottom: 1.9rem;
+}
+
+
+.mobile-navbar__row-link-logout{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 9rem;
+    margin-top: 5.5rem;
+    margin-bottom: 0;
+    border-top: 0.5rem solid cornflowerblue;
+    transition: all 300ms ease-in-out;    
+}
+
+.mobile-navbar__row-link,
+.mobile-submenu__link{
+    width: 100%;
+    height: 4.5rem;
+    display: flex;
+    align-items: center;
+    transition: all 300ms ease-in-out;
+}
+
+.mobile-navbar__row-link:hover,
+.mobile-submenu__link:hover{
+    border-radius: 0.5rem;
+    background: blue; 
+}
+
+.mobile-navbar__row-link-logout:hover{
+    border-radius: 0.5rem;
+    background: red; 
+}
+
+
+/*---------------mobile navbar-----------------------------------------------*/
+
+.adminViews-wrapper{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100vw;
+    height: 80vh;
+}
+
+.adminMenu-wrapper{
+    width: 25%;
+}
+
+.mains-wrapper{
+    width: 75%;
+    overflow-y: scroll;
+}
+
+.adminMenu-leftAside{
+    background: black;
+    border-radius: 16px 0px 0px 0px;
+    color: white;
+    border-right: 0.5rem solid cornflowerblue;
+}
+
+.leftAside__linkList-wrapper{
+    height: 65vh;
+    padding-top: 2rem;
+    padding-right: 2rem;
+    overflow-y: scroll; 
+}
+
+.linkList-wrapper__nav{
+    width: 100%;
+    height: 100%;
+}
+
+.linkList-wrapper__linkList{
+    display: flex;
+    flex-direction: column;
+    align-items: self-end;
+    height: 100%;
+    justify-content: space-around;
+    font-size: 2.4rem;
+}
+
+.leftAside__logoutLink-wrapper{
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.4rem;
+    border-top: 0.5rem solid cornflowerblue;
+    transition: all 300ms ease-in-out;
+}
+
+.logoutLink-wrapper__link{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.linkList__row{
+    width: 95%;
+}
+
+
+.linkList__row-link{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    transition: all 300ms ease-in-out;
+}
+
+.linkList__submenu-links,
+.mobile-submenu__linkList{
+    display: none;
+    visibility: visible;
+    opacity: 1;
+    background: #212121;
+    border-radius: 1.5rem;
+}
+
+.submenu-links__row{
+    margin-bottom: 0.5rem;
+}
+
+.submenu-links__link{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    font-size: 2rem;
+    transition: all 300ms ease-in-out;
+}
+
+.row-link__icon-wrapper{
+    display: inline-block;
+    margin-left: 3rem;
+}
+
+.linkList__row-link:hover,
+.submenu-links__link:hover{
+    border-radius: 1.5rem;
+    background: blue; 
+}
+
+.leftAside__logoutLink-wrapper:hover{
+    background: red;
+}
+
+.userform-main,
+.userNewPwd-main{
+    width: 100%;
+    padding: 1rem;
+}
+
+
+.userform__form{
+    /*position: relative;*/
+}
+
+
+.adminpwdfield{
+    width: 50%;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.userform__usrcreation-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.5rem solid black;
+    padding: 1rem
+}
+
+.userform__legend{
+    font-size: 2rem;
+    background: black;
+    color: white;
+}
+
+.userform__labels-box{
+    width: 25rem;
+    font-size: 2.5rem;
+}
+
+.userform__inputs-box{
+    width: 70%;
+    font-size: 2.7rem;
+}
+
+
+.inputs-box__large_input{
+    margin-top: 5.3rem;
+}
+
+.binnacle-form__main-button-wrapper,
+.registration__main-button-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.inputs-box__input,
+.inputs-box__large_input{
+    width: 100%;
+    border: 0;
+    background: var(--background-color);
+    border-bottom: 0.1rem solid black;
+}
+
+.inputs-box__select{
+    margin-top: 2rem;
+}
+
+.userform__submit,
+.devicesReport__submit,
+.devicesReport__pdf-button,
+.devicesReport__link-wrapper,
+.enterprise-forms__return-link,
+.enterprise-forms__edit-button,
+.enterprise-forms__delete-button,
+.contact-form__edit-button,
+.contact-form__delete-button,
+.device-form__return-link,
+.device-form__edit-button,
+.device-form__delete-button,
+.right-piece__submit,
+.binnacle-data-table__binn-link,
+.binnacle-data-table__binn-pdf-link,
+.binnacle-data-table__binn-edit-link,
+.binnacle-data-table__binn-delete-btn{
+    cursor: pointer;
+    border: 0;
+    margin-top: 2rem;
+    width: 10rem;
+    height: 5rem;
+    background: black;
+    color: white;
+}
+
+.devicesReport__link{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.devicesReport__link-wrapper{
+    background: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+.devicesReport__submit,
+.devicesReport__pdf-button,
+.right-piece__submit,
+.binnacle-data-table__binn-link,
+.binnacle-data-table__binn-pdf-link,
+.binnacle-data-table__binn-edit-link,
+.binnacle-data-table__binn-delete-btn{
+    margin-top: 0;
+}
+
+.devicesReport__pdf-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F5B427;
+    margin-left: 2rem;
+}
+
+.searchUserForm-wrapper,
+.searchForm-wrapper{
+    width: 100%;
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 9;
+}
+
+.searchUserForm,
+.searchForm{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 0.5rem solid cornflowerblue;
+    background: var(--background-color);
+}
+
+.searchUserForm__select-wrapper,
+.searchForm__select-wrapper{
+    width: 50%;
+    margin-right: 2rem;
+}
+
+.userform__buttons-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.devicesReport-main{
+    width: 100%;
+    padding: 1rem;
+}
+
+
+.searchEntersForm__elterSelect-wrapper{
+    margin-right: 2rem;
+    width: 35%;
+}
+
+.searchEntersForm__actionSelect{
+    height: 100%;
+    margin-right: 2rem;
+    width: 20%;
+}
+
+.devicesReport__info-box{
+    width: 100%;  
+}
+
+.devicesReport__head-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    margin-bottom: 2rem;
+}
+
+.devicesReport__logo{
+    width: 10%;
+}
+
+.devicesReport__enterprise-wrapper,
+.devicesReport__device-wrapper,
+.enterprise-forms__fieldset,
+.contact-form__fieldset,
+.device-form__fieldset{
+    border: 0.5rem solid black;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.devicesReport__device-wrapper,
+.enterprise-forms__fieldset,
+.contact-form__fieldset,
+.contact-form__buttons-box,
+.enterprise-forms__buttons-box,
+.device-form__fieldset,
+.device-form__buttons-box{
+    display: flex;
+    flex-direction: row;
+}
+
+.devicesReport__legend,
+.device-form__legend{
+    background: black;
+    color: white;
+}
+
+.devicesReport__enterprise-wrapper{
+    border: 0.5rem solid black;
+    padding: 1rem;
+}
+
+.devicesReport__legend{
+    background: black;
+    color: white;
+}
+
+.devicesReport__first-half,
+.devicesReport__second-half{
+    display: flex;
+    flex-direction: row;
+    font-size: 1.5rem;
+}
+
+.devicesReport__labels-box{
+    width: 15%;   
+}
+
+.devicesReport__inputs-box{
+    width: 85%;
+}
+
+.devicesReport__input{
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 0.1rem solid black;
+    margin-top: 0.25rem;
+}
+
+.enterprise-forms-main{
+    width: 100%;
+    padding: 1rem;
+    position: relative;
+}
+
+.enterprise-forms__legend,
+.contact-form__legend{
+    background: black;
+    color: white;
+}
+
+.enterprise-forms__labels-box,
+.contact-form__labels-box,
+.device-form__labels-box{
+    width: 20rem;
+}
+
+.enterprise-forms__inputs-box,
+.contact-form__inputs-box,
+.device-form__inputs-box{
+    width: 80%;
+}
+
+.enterprise-forms__input,
+.contact-form__input,
+.device-form__input{
+    width: 100%;
+    border: 0;
+    margin-top: 0.3rem;
+    background: transparent;
+    border-bottom: 0.1rem solid black;
+}
+
+.contact-form__input{
+    margin-top: 0;
+}
+
+.client-form__radio-input-box{
+    margin-top: 0.5rem;
+}
+
+.client-form__radio{
+    width: 2rem;
+}
+
+.enterprise-forms__buttons-box,
+.contact-form__buttons-box,
+.device-form__buttons-box{
+    justify-content: space-between;
+}
+
+.contact-form__buttons-box,
+.enterprise-forms__buttons-box{
+    margin-bottom: 2rem;
+}
+
+.enterprise-forms__return-link,
+.enterprise-forms__edit-button,
+.enterprise-forms__delete-button,
+.contact-form__edit-button,
+.contact-form__delete-button,
+.device-form__return-link,
+.device-form__edit-button,
+.device-form__delete-button{
+    margin-top: 0;
+    border-radius: 1rem;
+}
+
+.enterprise-forms__return-link,
+.device-form__return-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.enterprise-forms__edit-button,
+.contact-form__edit-button,
+.device-form__edit-button{
+    background: green;
+}
+
+.enterprise-forms__delete-button,
+.contact-form__delete-button,
+.device-form__delete-button{
+    background: red;
+}
+
+.device-form-main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 1rem;
+}
+
+.device-form__select-input{
+    width: 100%;
+}
+
+.device-form__label:first-child{
+    margin-bottom: 2.7rem;
+}
+
+.device-form__select-input{
+    margin-bottom: 2rem;
+}
+
+.binnacles-filter-main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.binnacles-filter__filter-options-form{
+    width: 100%;
+    max-height: 30vh;
+    border: 0;
+    padding: 0.5rem;
+    border-bottom: 0.5rem solid cornflowerblue;
+}
+
+.binnacles-filter__filter-options-form,
+.left-piece__up-options,
+.left-piece__middle-options,
+.left-piece__down-options,
+.up-options__wrapper,
+.middle-options__wrapper,
+.down-options__date-inputs-box{
+    display: flex;
+    flex-direction: row;
+}
+
+.up-options__wrapper,
+.middle-options__wrapper{
+    width: 30%;
+}
+
+.filter-options-form__left-piece{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-options-form__right-piece{
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.left-piece__up-options,
+.left-piece__middle-options{
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.up-options__clientSelect-wrapper,
+.up-options__deviceSelect-wrapper,
+.up-options__enterpriseSelect-wrapper{
+    min-width: 8rem;
+}
+
+.up-options__clientSelect-wrapper,
+.up-options__deviceSelect-wrapper,
+.up-options__enterpriseSelect-wrapper,
+.up-options__serviceOrDevice-select,
+.up-options__estatus-select{
+    width: 80%;
+}
+
+.down-options__startedOrEnded-select{
+    width: 20%;
+}
+
+.down-options__date-input{
+    width: 40%;
+}
+
+.down-options__date-inputs-box{
+    width: 80%;
+    justify-content: space-between;
+}
+
+.binnacles-filter__binnacle-data-table-wrapper{
+    width: 100%;
+    max-height: 55vh;
+    height: 55vh;
+    overflow: scroll; 
+    padding: 1rem;
+}
+
+.binnacles-filter__binnacle-data-table{
+    width: 100%;
+    margin-top: 0.5rem;
+    border-collapse: collapse;
+    
+}
+
+.binnacles-filter__pagination-control-box{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-height: 15vh;
+    height: 15vh;
+    padding-top: 1rem;
+}
+
+.binnacle-data-table-wrapper__numkey-box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;    
+}
+
+.binnacle-data-table-wrapper__numkey-select{
+    width: 5rem;
+    height: 3rem;
+}
+
+.binnacle-data-table__theader-left-radius-box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0915BD;
+    border-radius: 1rem 0 0 0;
+    color: white;
+}
+
+.binnacle-data-table__theader-right-radius-box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0915BD;
+    border-radius: 0 1rem 0 0;
+    color: white;
+}
+
+.binnacle-data-table__regular-th{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0915BD;
+    color: white;
+}
+
+td{
+    border-bottom: 0.1rem solid black;
+    border-right: 0.1rem solid black;
+}
+
+td:last-child{
+    border-right: 0;
+}
+
+.binnacle-data-table__regular-td{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.binnacle-data-table__binn-link,
+.binnacle-data-table__binn-pdf-link,
+.binnacle-data-table__binn-edit-link{
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.binnacle-data-table__binn-pdf-link{
+    background: #F5B427;
+}
+
+.binnacle-data-table__binn-edit-link{
+    background: green;
+}    
+
+.binnacle-data-table__binn-delete-btn{
+    width: 100%;
+    height: 4rem;
+    background: red;
+}
+
+.binnacle-data-table__client-name-box,
+.binnacle-data-table__enterprise-name-box{
+    width: 100%;
+    text-align: center;
+}
+
+.binnacle-data-table__client-name-box{
+    border-bottom: 0.1rem solid black;
+}
+
+
+.binnacleInfoCanvas-main{
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}
+
+.binnacleInfoCanvas__binnacle-wrapper{
+    width: 100%;
+    max-height: 64vh;
+    overflow: scroll;
+}
+
+.binnacleInfoCanvas__binn-title-table,
+.binnacleInfoCanvas__client-table,
+.binnacleInfoCanvas__device-table,
+.binnacleInfoCanvas__binn-tecnician-table,
+.binnacleInfoCanvas__status-table,
+.binnacleInfoCanvas__binn-final-table{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+.info-column__enterprise-name{
+    font-weight: bolder;
+    font-style: italic;
+}
+
+.binn-title-table__info-column,
+.binn-title-table__fieldset-column{
+    border: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.binn-title-table__fieldset,
+.binnacleInfoCanvas__client-table-wrapper,
+.binnacleInfoCanvas__service-desc-wrapper,
+.binnacleInfoCanvas__device-table-wrapper,
+.activities-column__fieldset,
+.sign-column__fieldset,
+.binnacleInfoCanvas__hints-desc-wrapper,
+.price-column__fieldset{
+    width: 100%;
+    border: 0.4rem solid black;
+    border-radius: 1rem;
+}
+
+
+.binnacleInfoCanvas__hints-desc-wrapper,
+.binnacleInfoCanvas__service-desc-wrapper{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+
+.binnacleInfoCanvas__client-table-wrapper,
+.binnacleInfoCanvas__service-desc-wrapper,
+.binnacleInfoCanvas__device-table-wrapper,
+.activities-column__fieldset,
+.sign-column__fieldset,
+.binnacleInfoCanvas__hints-desc-wrapper,
+.price-column__fieldset{
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+
+.binn-title-table__legend,
+.client-table-wrapper__legend,
+.binnacleInfoCanvas__service-legend,
+.binnacleInfoCanvas__device-legend,
+.activities-column__legend,
+.sign-column__legend,
+.binnacleInfoCanvas__hints-legend,
+.sign-column__legend,
+.price-column__legend{
+    background: black;
+    color: white;
+}
+
+.client-table__label-column{
+    border: 0;
+    width: 15%;
+    vertical-align: bottom;
+}
+
+.device-table__label-column{
+    border: 0;
+    width: 10%;
+    vertical-align: bottom;
+}
+
+.client-table__field-column{
+    border: 0;
+    width: 35%;
+    border-bottom: 0.1rem solid black;
+    vertical-align: bottom;
+}
+
+.device-table__field-column{
+    border: 0;
+    width: 90%;
+    border-bottom: 0.1rem solid black;
+    vertical-align: bottom;
+}
+
+.binn-tecnician-table__activities-column{
+    border: 0;
+    width: 60%;
+    vertical-align: top;
+}
+
+.binn-tecnician-table__sign-column{
+    border: 0;
+    width: 40%;
+    vertical-align: top;
+}
+
+.sign-column__tech-sign,
+.sign-column__client-sign{
+    text-align: center;
+    border-top: 0.1rem solid black;
+}
+
+.binn-final-table__sign-column{
+    border: 0;
+    width: 30%;
+    vertical-align: top;
+}
+
+.binn-final-table__price-column{
+    border: 0;
+    width: 70%;
+    vertical-align: middle;
+}
+
+.status-table__responsable-column{
+    border: 0;
+    width: 80%;
+    border-bottom: 0.1rem solid black;
+}
+
+.status-table__status-column{
+    border: 0;
+    width: 20%;
+    border-bottom: 0.1rem solid black;
+}
+
+.binnacleInfoCanvas__pdf-btn-box{
+    width: 100%;
+    height: 14vh;
+    display: flex;
+    justify-content: center;
+    border-top: 0.5rem solid cornflowerblue;
+}
+
+.pdf-btn-box__link-box{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.price-column__input{
+    width: 100%;
+}
+
+.binnacleInfoCanvas__hints-input,
+.activities-column__input,
+.binnacleInfoCanvas__service-input{
+    width: 100%;
+    height: 12rem;
+    resize: none;
+}
+
+.binn-title-table__date-input{
+    width: 100%;
+    padding-right: 1rem;
+}
+
+.editSign-form{
+    width: 100%;
+    height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 6rem;
+}
+
+.edit-sign-fieldset__wrapper{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-sign__sign-img-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.without-rows__message,
+.without-type-rows__message{
+    width: 100%;
+    height: 63vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.without-type-rows__message{
+    height: 78vh;
+}
+
+.add-more-height{
+    height: 76vh;
+}
+
+.activation-background{
+    background: blue;
+}
+
+.put-center{
+    justify-content: center;
+}
+
+.user-return{
+    width: 50%;
+    height: 5rem;
+}
+
+.increse-width{
+    width: 100%;
+}
+/*------------------------------Admin styles----------------------------------*/
