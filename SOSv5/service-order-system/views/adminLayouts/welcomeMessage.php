@@ -44,13 +44,14 @@ sesiones y variables inicializadas por los controladores en sus métodos de vist
         <div class="message-box__message-box">
             Bienvenido al home del lado del administrador. Como podrá ver, su menú de navegación se encuentra en el lado izquierdo,
             sí minimiza la ventana del navegador o se encuentra usando el navegador de su móvil, el menú de navegación se activa presionando el
-            botón situado al lado derecho del logo de interpc en la parte de arriba de la aplicación web. Tiene opciones como crear usuarios
-            así como reestablecer sus contraseñas y la eliminación del usuario en cuestión (el botón de eliminación de usuario se encuentra en la opción
-            de "reestablecer contraseñas"). En "reporte de dispositivos" puede visualizar y descargar el PDF de la información de las empresas y sus respectivos dispositivos, también
-            puede editar la información de las empresas, así como la de los clientes vinculados a estas, de igual modo puede editar los dispositivos, así como eliminar
-            clientes, dispositivos y empresas, tenga en cuenta que el proceso de eliminación conlleva en hacer cambios críticos a la base de datos, por lo que será necesario
-            verificar su contraseña antes de eliminar. Finalmente, en "reporte de bitácoras" tiene opciones de filtrado para un fácil acceso a las bitácoras, puede visualizarlas dando
-            clic al número de folio, también tiene opciones como descargar el PDF de las bitácoras así como opciones de edición y eliminación.
+            botón situado al lado derecho del logo de interpc en la parte de arriba de la aplicación web. Tiene a su disposición todas las opciones 
+            disponibles de los técnicos, lo cual permite la creación y seguimiento de bitácoras, también tiene a su disposición opciones de 
+            configuración de usuarios y apartados para generar reportes pdf de dispositivos de una empresa en especifico o reportes de bitácoras. 
+            Ningún registro en esta aplicación web se puede eliminar, en opciones de edición de registros (y en reportes de bitácoras) se puede 
+            "desactivar/activar" registros, en el caso de registros como empresas, contactos, tipos y equipos si se desactivan, no serán visibles en 
+            las cajas de selección de los formularios "Nueva bitácora", "Crear contacto" y "Crear un equipo" (cajas de selección de filtrado en el caso de reportes de bitácoras), el administrador puede revertir la 
+            visibilidad de estos registros, los registros de usuarios por ejemplo, su desactivación es definitiva, la unica forma de volver activar 
+            a un usuario es via gestor de bases de datos 
         </div>
     </div>
     <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
