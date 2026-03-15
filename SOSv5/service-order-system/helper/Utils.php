@@ -1498,6 +1498,9 @@
                                 * dependiendo del id de la empresa que se pasó en el setter del objeto Empresas*/
                                 $enter_info = $enter_obj->getEnterpriseById();
                                 $enter_devices = $device_obj->getDevicesByEnterprise();
+                                $path = "../assets/img/logo.png";
+                                $data = file_get_contents($path);
+                                $logo_base64 = "data:image/png;base64,".base64_encode($data);
                             } catch (Exception $ex) {
                                 /*Si entra en el catch, quiere decir que PDO devolvió una excepción, en este caso, creamos un indice de $_SESSION 
                                  * llamado "deviceReportException" en el escribimos los posibles motivos del por qué no se pudo hacer la petición a la 
@@ -1558,6 +1561,30 @@
                                 header("Location: ".base_url."home/?homeController=error&homeAction=index");
                                 exit;
                             }
+
+                            $logo_path = "../assets/img/logo.png";
+                            $logo_file = file_get_contents($logo_path);
+                            $logo_base64 = "data:image/png;base64,".base64_encode($logo_file);
+
+                            $without_img_path = "../assets/img/no-image-icon-23494.png";
+                            $without_img_file = file_get_contents($without_img_path);
+                            $no_img_base64 = "data:image/png;base64,".base64_encode($without_img_file);
+
+                            ($binn_info["Estatus"] !== 'en proceso') ?
+                                $tech_sign_path = "../finishing/uploads/firmas/".$binn_info["Tecnico_firma"] : $tech_sign_path = null;
+                            ($binn_info["Estatus"] === 'finalizado') ?
+                                $cli_sign_path = "../finishing/uploads/firmas/".$binn_info["Firma_cliente"] : $cli_sign_path = null;    
+                            
+                            if(!empty($tech_sign_path)){
+                                ($tech_sign_file = file_get_contents($tech_sign_path)) ?
+                                $tech_base64 = "data:image/png;base64,".base64_encode($tech_sign_file) : $tech_base64 = null;
+                            }
+                            
+                            if(!empty($cli_sign_path)){
+                                ($cli_sign_file = file_get_contents($cli_sign_path)) ?
+                                $cli_base64 = "data:image/png;base64,".base64_encode($cli_sign_file) : $cli_base64 = null;
+                            }
+
                         } catch (Exception $ex) {
                             /*Si entra en el catch, quiere decir que PDO devolvió una excepción, en este caso, creamos un indice de $_SESSION 
                              * llamado "getBinnInfoEx" en el escribimos los posibles motivos del por qué no se pudo hacer la petición a la 

@@ -48,10 +48,10 @@ sesiones y variables inicializadas por los controladores en sus métodos de vist
             disponibles de los técnicos, lo cual permite la creación y seguimiento de bitácoras, también tiene a su disposición opciones de 
             configuración de usuarios y apartados para generar reportes pdf de dispositivos de una empresa en especifico o reportes de bitácoras. 
             Ningún registro en esta aplicación web se puede eliminar, en opciones de edición de registros (y en reportes de bitácoras) se puede 
-            "desactivar/activar" registros, en el caso de registros como empresas, contactos, tipos y equipos si se desactivan, no serán visibles en 
-            las cajas de selección de los formularios "Nueva bitácora", "Crear contacto" y "Crear un equipo" (cajas de selección de filtrado en el caso de reportes de bitácoras), el administrador puede revertir la 
-            visibilidad de estos registros, los registros de usuarios por ejemplo, su desactivación es definitiva, la unica forma de volver activar 
-            a un usuario es via gestor de bases de datos con la autorización del personal encargado de administrar las bases de datos de interpc. 
+            "desactivar/activar" registros, en el caso de registros como empresas, contactos, tipos y equipos, sí se desactivan, no serán visibles en 
+            las cajas de selección de los formularios "Nueva bitácora", "Crear contacto" y "Crear un equipo" o tambien en reportes de bitácoras (cajas de selección de filtrado), el administrador puede revertir la 
+            visibilidad de estos registros. Los registros de usuarios por ejemplo, su desactivación es definitiva, la única forma de volver a activar 
+            un usuario es via gestor de bases de datos con la autorización del personal encargado de administrar las bases de datos en la empresa. 
         </div>
     </div>
     <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 

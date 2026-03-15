@@ -1,10 +1,11 @@
 <?php if($_GET["homeAction"] === "generateBinnacleReport"):?>
 <?php ob_start();?>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <div style="width: 100%; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
     <table style="width: 100%;
     border-collapse: collapse;" cellspacing="0">
         <tr>
-            <td align="center" style="width: 15%; vertical-align: middle; border: 0;"><img src="<?= base_url;?>assets/img/logo.png" style="width: 100px;"/></td>
+            <td align="center" style="width: 15%; vertical-align: middle; border: 0;"><img src="<?=$logo_base64;?>" style="width: 100px;"/></td>
             <td style="border: 0;
                 text-align: center;
                 vertical-align: middle;">
@@ -185,7 +186,7 @@
                 <td style="border: 0;
                         width: 90%;
                         border-bottom: 1px solid black;
-                        vertical-align: bottom;"><?= $binn_info["Tipo"];?></td>
+                        vertical-align: bottom;"><?= ucfirst($binn_info["Tipo"]);?></td>
             </tr>
             <tr>
                 <td style="border: 0;
@@ -252,7 +253,7 @@
                             border-radius: 5px;">
                     <legend style="background: black;
                                     color: white;">TÉCNICO</legend>
-                    <img src="<?= (!empty($binn_info["Tecnico_firma"])) ? base_url.'finishing/uploads/firmas/'.$binn_info["Tecnico_firma"] : base_url.'assets/img/no-image-icon-23494.png';?>" style="width: 200px; height: 100px;"/>
+                    <img src="<?= (!empty($tech_base64)) ? $tech_base64 : $no_img_base64?>" style="width: 200px; height: 100px;"/>
                     <div style="text-align: center;
                                 border-top: 1px solid black;">
                         <?= $binn_info["Nombre"].' '.$binn_info["Apellidos"];?>
@@ -285,7 +286,7 @@
                             border-radius: 5px;">
                     <legend style="background: black;
                             color: white;">CONFORMIDAD</legend>
-                    <img src="<?= (!empty($binn_info["Firma_cliente"])) ? base_url.'finishing/uploads/firmas/'.$binn_info["Firma_cliente"] : base_url.'assets/img/no-image-icon-23494.png';?>" style="width: 200px; height: 100px;"/>
+                    <img src="<?= (!empty($cli_base64)) ? $cli_base64 : $no_img_base64?>" style="width: 200px; height: 100px;"/>
                     <div style="text-align: center;
                                 border-top: 1px solid black;">
                         <?= $binn_info["Nombre_completo"];?>
@@ -335,7 +336,6 @@ $html = ob_get_clean();
 $options = new Dompdf\Options();
 /*es importante inicializar el indice "isRemoteEnabled" en true para poder incluir imagenes de nuestro proyecto con la etiqueta img y el src poniendo la respectiva 
  * ruta de la imagen*/
-$options->set('isRemoteEnabled', true);
 // Forzar el uso de Imagick (que ya instalamos en el Dockerfile)
 $options->set('isPhpEnabled', true);
 $domPdf_obj = new Dompdf\Dompdf($options);

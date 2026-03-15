@@ -48,7 +48,7 @@ body{
 }
 
 .disabled{
-    background: gray !important;
+    background: var(--pop-up-window-background) !important;
 }
 
 .disabled > a{
@@ -73,11 +73,11 @@ body{
 
 .without-marginTop-red{
     margin-top: 0 !important;
-    background: red !important;
+    background: var(--error-color) !important;
 }
 
 .paintRed{
-    background: salmon !important;
+    background: var(--error-color) !important;
 }
 
 
@@ -113,7 +113,7 @@ body{
     z-index: 0;
     height: 100vh;
     width: 100vw;
-    background-color: #0e0031;
+    background-color: var(--color-primary);
 }
 
 .user-login{
@@ -177,7 +177,7 @@ i{
     cursor: pointer;
     width: 15rem;
     border: 0;
-    background: cornflowerblue;
+    background: var(--color-secondary);
     border-radius: 1rem;
     color: white;
 }
@@ -589,7 +589,7 @@ i{
     position: fixed;
     top: 0;
     left: 0;
-    background: grey;
+    background: var(--pop-up-window-background);
     opacity: 0.5;
 }
 
@@ -606,7 +606,7 @@ i{
 .binnacle-edit__info-window,
 .registration__info-window{
     z-index: 999;
-    width: 90%;
+    width: 75%;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -650,7 +650,7 @@ i{
 
 .invalidinput-box{
     width: 60%;
-    background: red;
+    background: var(--error-color);
     color: white;
     font-size: 1.5rem;
     margin-top: 0.5rem;
@@ -769,7 +769,7 @@ i{
     background: black;
     border: black;
     padding-top: 0.5rem;
-    border: 0.3rem solid cornflowerblue;
+    border: 0.3rem solid var(--color-secondary);
 }
 
 .mobile-btn__line{
@@ -796,7 +796,7 @@ i{
     right: -20rem;
     background: black;
     color: whitesmoke;
-    border-left: 0.5rem solid cornflowerblue;
+    border-left: 0.5rem solid var(--color-secondary);
     padding: 1rem;
     overflow-y: scroll;
     transition: all 800ms ease-in-out;
@@ -829,7 +829,7 @@ i{
 }
 
 .mobile-navbar__devicesReport__info-box{
-    border-top: 0.5rem solid cornflowerblue;
+    border-top: 0.5rem solid var(--color-secondary);
     padding-top: 2rem;
 }
 
@@ -856,7 +856,7 @@ i{
     height: 9rem;
     margin-top: 5.5rem;
     margin-bottom: 0;
-    border-top: 0.5rem solid cornflowerblue;
+    border-top: 0.5rem solid var(--color-secondary);
     transition: all 300ms ease-in-out;    
 }
 
@@ -872,12 +872,12 @@ i{
 .mobile-navbar__row-link:hover,
 .mobile-submenu__link:hover{
     border-radius: 0.5rem;
-    background: blue; 
+    background: var(--color-primary); 
 }
 
 .mobile-navbar__row-link-logout:hover{
     border-radius: 0.5rem;
-    background: red; 
+    background: var(--error-color); 
 }
 
 
@@ -903,7 +903,7 @@ i{
     background: black;
     border-radius: 16px 0px 0px 0px;
     color: white;
-    border-right: 0.5rem solid cornflowerblue;
+    border-right: 0.5rem solid var(--color-secondary);
 }
 
 .leftAside__linkList-wrapper{
@@ -933,7 +933,7 @@ i{
     justify-content: center;
     align-items: center;
     font-size: 2.4rem;
-    border-top: 0.5rem solid cornflowerblue;
+    border-top: 0.5rem solid var(--color-secondary);
     transition: all 300ms ease-in-out;
 }
 
@@ -987,11 +987,11 @@ i{
 .linkList__row-link:hover,
 .submenu-links__link:hover{
     border-radius: 1.5rem;
-    background: blue; 
+    background: var(--color-primary); 
 }
 
 .leftAside__logoutLink-wrapper:hover{
-    background: red;
+    background: var(--error-color);
 }
 
 .userform-main,
@@ -1111,7 +1111,7 @@ i{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #F5B427;
+    background: var(--pdf-button-color);
     margin-left: 2rem;
 }
 
@@ -1131,7 +1131,7 @@ i{
     flex-direction: row;
     align-items: center;
     padding: 1rem;
-    border-bottom: 0.5rem solid cornflowerblue;
+    border-bottom: 0.5rem solid var(--color-secondary);
     background: var(--background-color);
 }
 
@@ -1328,7 +1328,7 @@ i{
 .enterprise-forms__delete-button,
 .contact-form__delete-button,
 .device-form__delete-button{
-    background: red;
+    background: var(--error-color);
 }
 
 .device-form-main{
@@ -1363,7 +1363,7 @@ i{
     max-height: 30vh;
     border: 0;
     padding: 0.5rem;
-    border-bottom: 0.5rem solid cornflowerblue;
+    border-bottom: 0.5rem solid var(--color-secondary);
 }
 
 .binnacles-filter__filter-options-form,
@@ -1469,7 +1469,7 @@ i{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #0915BD;
+    background: var(--thead-color);
     border-radius: 1rem 0 0 0;
     color: white;
 }
@@ -1479,9 +1479,13 @@ i{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #0915BD;
+    background: var(--thead-color);
     border-radius: 0 1rem 0 0;
     color: white;
+}
+
+.binnacle-data-table__row:nth-of-type(even){
+    background-color: var(--even-trow-color);
 }
 
 .binnacle-data-table__regular-th{
@@ -1489,7 +1493,7 @@ i{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #0915BD;
+    background: var(--thead-color);
     color: white;
 }
 
@@ -1518,17 +1522,17 @@ td:last-child{
 }
 
 .binnacle-data-table__binn-pdf-link{
-    background: #F5B427;
+    background: var(--pdf-button-color);
 }
 
 .binnacle-data-table__binn-edit-link{
-    background: green;
+    background: var(--edit-button-color);
 }    
 
 .binnacle-data-table__binn-delete-btn{
     width: 100%;
     height: 4rem;
-    background: red;
+    background: var(--error-color);
 }
 
 .binnacle-data-table__client-name-box,
@@ -1696,7 +1700,7 @@ td:last-child{
     height: 14vh;
     display: flex;
     justify-content: center;
-    border-top: 0.5rem solid cornflowerblue;
+    border-top: 0.5rem solid var(--color-secondary);
 }
 
 .pdf-btn-box__link-box{
@@ -1764,7 +1768,7 @@ td:last-child{
 }
 
 .activation-background{
-    background: blue;
+    background: var(--color-primary);
 }
 
 .put-center{

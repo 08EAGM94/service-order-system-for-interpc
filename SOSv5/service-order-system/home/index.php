@@ -24,7 +24,7 @@ if(!empty($_GET["homeAction"])){
  * o sesiones de métodos estiaticos de la clase Utils que se invocaron antes de iniciar la semantica html, 
  * esto hace que PHP pueda considerar estos simbolos especiales en lugar de reemplazarlos 
  * por sus respectivos valores UNICODE*/
-//header('Content-Type: text/html; charset=utf-8');
+header('Content-Type: text/html; charset=utf-8');
 //----------------------------------------------------------------------------------------------------
 /*Esta sección está dedicada a la importación de dependencias, el archivo vendor/autoload.php es el 
  * unico autoload que importa dependencias "externas" (zebraPagination y domPDF), lo demás son clases pertenecientes a este proyecto, 

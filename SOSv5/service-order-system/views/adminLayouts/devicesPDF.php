@@ -1,10 +1,11 @@
 <?php ob_start();?>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <div style="width: 100%; font-family: Verdana, Arial, Helvetica, sans-serif;"> 
         <table cellspacing="0" style="width: 100%; margin-bottom: 20px;">
             <tr>
             
             <td style="width: 40%;">
-                <img src="<?= base_url;?>assets/img/logo.png" style="width: 90px;"/>
+                <img src="<?=$logo_base64;?>" style="width: 90px;"/>
             </td>
             
             <td style="width: 60%;">
@@ -69,7 +70,7 @@
         <table cellspacing="0" style="width: 100%; font-size: 13px;">
                 <tr>
                     <td style="width: 20%;">TIPO:</td>
-                    <td style="width: 80%; border-bottom: 1px solid black;"><?=$device['Tipo'];?></td>
+                    <td style="width: 80%; border-bottom: 1px solid black;"><?=ucfirst($device['Tipo']);?></td>
                 </tr>
                 <tr>
                     <td style="width: 20%;">MARCA:</td>
@@ -96,7 +97,6 @@ $html = ob_get_clean();
 $options = new Dompdf\Options();
 /*es importante inicializar el indice "isRemoteEnabled" en true para poder incluir imagenes de nuestro proyecto con la etiqueta img y el src poniendo la respectiva 
  * ruta de la imagen*/
-$options->set('isRemoteEnabled', true);
 // Forzar el uso de Imagick (que ya instalamos en el Dockerfile)
 $options->set('isPhpEnabled', true);
 $domPdf_obj = new Dompdf\Dompdf($options);

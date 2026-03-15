@@ -149,6 +149,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         /*el parametro row contendrá datos que php transformó a JSON gracias a json_encode, lo primero que se hace es
          * crear una constante el cual contendrá un elemento html de una fila de tabla "tr"*/
         const tableRow = document.createElement("tr");
+        tableRow.classList.add("binnacle-data-table__row");
         /*dentro de ese elemento tr se le añade elementos td gracias a innerHTML, esos td se contruyen gracias al 
          * acceso de datos del JSON pasado como argumento en la función, también se usa la constante BASE_URL para completar
          * las rutas url correspondientes, hay que aclarar que el controlador UserController en su metodo showBinnacle exige un

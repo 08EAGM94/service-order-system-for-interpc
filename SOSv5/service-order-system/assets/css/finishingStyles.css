@@ -13,13 +13,11 @@ elemento html en especifico.
 */
 :root{
     /*Variables*/
-    --header-text: #FFFFFF;
-    --gradient-white: #ebf8e1;
-    --color-secondary: #2F323D;
-    --color-primary: #0B134E;
-    --color-aside: #182546;
     --background-color: #F5F5F5;
-    --color-form-secondary: #A2AB8C;
+    --error-color: #C41414;
+    --clean-button-color: #1FBFBA;
+    --edit-button-color: #1AC940;
+    --pop-up-window-background: #E0E0E0;
 }
 
 .hidThis{
@@ -32,12 +30,12 @@ elemento html en especifico.
     display: flex;
     justify-content: center;
     align-items: center;
-    color: red;
+    color: var(--error-color);
 }
 
 .invalidinput-box{
     width: 60%;
-    background: red;
+    background: var(--error-color);
     color: white;
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
@@ -45,7 +43,7 @@ elemento html en especifico.
 
 .succeed-box{
     width: 60%;
-    background: green;
+    background: var(--edit-button-color);
     color: white;
     font-size: 1.5rem;
 }
@@ -303,15 +301,15 @@ body{
 }
 
 .buttons-box__button:nth-child(1){
-    background: red;
+    background: var(--error-color);
 }
 
 .buttons-box__button:nth-child(2){
-    background: cadetblue;
+    background: var(--clean-button-color);
 }
 
 .buttons-box__button:nth-child(3){
-    background: green;
+    background: var(--edit-button-color);
 }
 
 .binnacle-sign__window-background::before,
@@ -324,7 +322,7 @@ body{
     position: fixed;
     top: 0;
     left: 0;
-    background: grey;
+    background: var(--pop-up-window-background);
     opacity: 0.5;
     
 }
@@ -334,7 +332,7 @@ body{
 .binnacleremindedfields__form-window,
 .binnacleremindedfields__info-window{
     z-index: 999;
-    width: 90%;
+    width: 75%;
     position: fixed;
     display: flex;
     flex-direction: column;

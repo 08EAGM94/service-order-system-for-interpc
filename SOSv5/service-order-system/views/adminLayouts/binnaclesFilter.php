@@ -241,7 +241,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
 
             <tbody id="binnacleTbody">
                 <?php while($binn = $stmt_binns->fetch()):?>
-                <tr>
+                <tr class="binnacle-data-table__row">
                     <td class="binnacle-data-table__regular-td"><a class="binnacle-data-table__binn-link" href="<?= base_url;?>home/?homeController=user&homeAction=showBinnacle&homeId=<?=$binn["Id"];?>"><?=$binn["Id"];?></a></td>
                     <td class="binnacle-data-table__regular-td"><?=$binn["Nombre"]." ".$binn["Apellidos"];?></td>
                     <td>
