@@ -51,7 +51,7 @@ sesiones y variables inicializadas por los controladores en sus métodos de vist
             "desactivar/activar" registros, en el caso de registros como empresas, contactos, tipos y equipos si se desactivan, no serán visibles en 
             las cajas de selección de los formularios "Nueva bitácora", "Crear contacto" y "Crear un equipo" (cajas de selección de filtrado en el caso de reportes de bitácoras), el administrador puede revertir la 
             visibilidad de estos registros, los registros de usuarios por ejemplo, su desactivación es definitiva, la unica forma de volver activar 
-            a un usuario es via gestor de bases de datos 
+            a un usuario es via gestor de bases de datos con la autorización del personal encargado de administrar las bases de datos de interpc. 
         </div>
     </div>
     <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
