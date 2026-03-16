@@ -360,11 +360,11 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
             <td class="binn-title-table__info-column">
                 <strong>Bitacora de Visita a Clientes</strong><br/>
                 <span class="info-column__enterprise-name">INTERPC</span><br/>
-                FAOS7612268MA<br/>
-                Calle San Isidro #936 Fracc. San Roque<br/>
+                AAAA1234567BB<br/>
+                Calle Rio Lerma #111 Fracc. Las Estrellas<br/>
                 Irapuato, Gto.<br/>
-                4626249165<br/>
-                sfajardo@interpc.mx<br/>
+                1234567890<br/>
+                abcdefg@interpc.com<br/>
             </td>
             <td class="binn-title-table__fieldset-column">
                 <fieldset class="binn-title-table__fieldset">
@@ -567,11 +567,11 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
             <td class="binn-title-table__info-column">
                 <strong>Bitacora de Visita a Clientes</strong><br/>
                 <span class="info-column__enterprise-name">INTERPC</span><br/>
-                FAOS7612268MA<br/>
-                Calle San Isidro #936 Fracc. San Roque<br/>
+                AAAA1234567BB<br/>
+                Calle Rio Lerma #111 Fracc. Las Estrellas<br/>
                 Irapuato, Gto.<br/>
-                4626249165<br/>
-                sfajardo@interpc.mx<br/>
+                1234567890<br/>
+                abcdefg@interpc.com<br/>
             </td>
             <td class="binn-title-table__fieldset-column">
                 <fieldset class="binn-title-table__fieldset">
