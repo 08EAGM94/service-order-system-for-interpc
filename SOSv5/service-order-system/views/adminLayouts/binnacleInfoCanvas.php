@@ -12,11 +12,11 @@
                 <strong>Bitacora de Visita a Clientes</strong><br/>
                 <span style="font-weight: bolder;
                              font-style: italic;">INTERPC</span><br/>
-                FAOS7612268MA<br/>
-                Calle San Isidro #936 Fracc. San Roque<br/>
+                AAAA1234567BB<br/>
+                Calle Rio Lerma #111 Fracc. Las Estrellas<br/>
                 Irapuato, Gto.<br/>
-                4626249165<br/>
-                sfajardo@interpc.mx<br/>
+                1234567890<br/>
+                abcdefg@interpc.com<br/>
             </td>
             <td style="border: 0;
                 text-align: center;
