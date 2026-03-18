@@ -11,15 +11,15 @@
                 /*Variables*/
                 --header-text: #FFFFFF;
                 --gradient-white: #ebf8e1;
-                --color-primary: #0b134eae;
+                --color-primary: #04004D;
                 --color-secondary: #7497ED;
                 --thead-color: #0915BD;
                 --even-trow-color: #B5C7FF;
-                --background-color: #F5F5F5;
-                --pop-up-window-background: #e0e0e02b;
+                --background-colo+r: #F5F5F5;
+                --pop-up-window-background: #212121;
                 --error-color: #C41414;
                 --pdf-button-color: #F5B427;
-                --edit-button-color: #1ac940b5;
+                --edit-button-color: #008736;
                 --background-url: url("<?= base_url;?>assets/img/6075275.jpg");
             }
         </style>

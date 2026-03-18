@@ -872,7 +872,7 @@ i{
 .mobile-navbar__row-link:hover,
 .mobile-submenu__link:hover{
     border-radius: 0.5rem;
-    background: var(--color-primary); 
+    background: var(--thead-color); 
 }
 
 .mobile-navbar__row-link-logout:hover{
@@ -987,7 +987,7 @@ i{
 .linkList__row-link:hover,
 .submenu-links__link:hover{
     border-radius: 1.5rem;
-    background: var(--color-primary); 
+    background: var(--thead-color); 
 }
 
 .leftAside__logoutLink-wrapper:hover{
