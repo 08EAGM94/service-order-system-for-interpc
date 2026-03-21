@@ -17,6 +17,7 @@
 
 <div class="binnacleremindedfields__window-background hidThis" id="remindedBackWindow">
     <div class="binnacleremindedfields__info-window" id="remindedInfoWindow">
+        <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
         <div class="info-window__text-box"><h3>¿Estas seguro de cancelar definitivamente la bitacora?</h3></div>
         <div class="info-window__selectbuttons-box">
             <button class="selectbuttons-box__button" id="remindedYes" type="button">Si</button>

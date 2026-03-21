@@ -33,6 +33,7 @@
     <form class="edit-forms__type-form" action="<?= base_url;?>home/?homeController=user&homeAction=updateTypeInfo" method="Post">
         <div class="contact-edit__background hidThis">
             <div class="contact-edit__info-window">
+                <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
                 <div class="info-window__text-box"><h3>¿Está seguro de editar el tipo con ID <?=$type["Id"];?>?, verifique su contraseña antes de continuar</h3></div>
                 <input class="adminpwdfield" type="password" name="adminContrasena"/>
                 <div class="info-window__selectbuttons-box">

@@ -36,6 +36,11 @@ incluso en dispositivos móviles*/
 }
 
 @media (max-width: 914px){
+
+    .pop-up-window-icon__img {
+        width: 30%;
+    }
+
     .smallfieldsets__binnTitle{
         font-size: 0.8rem;
     }
@@ -46,6 +51,13 @@ incluso en dispositivos móviles*/
 }
 
 @media (max-width: 500px){
+
+    .binnacle-sign__info-window,
+    .binnacleremindedfields__form-window,
+    .binnacleremindedfields__info-window{
+        width: 80%;
+    }
+
     .smallfieldsets__idanddate-wrapper{
         width: 40%;
     }

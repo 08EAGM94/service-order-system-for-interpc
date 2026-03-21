@@ -51,6 +51,11 @@ incluso en dispositivos móviles
 }
 
 @media (max-width: 863px){
+
+    .pop-up-window-icon__img {
+        width: 30%;
+    }
+
     .devicesReport__labels-box{
         width: 25%;
     }
@@ -93,6 +98,9 @@ incluso en dispositivos móviles
 }
 
 @media (max-width: 644px){
+
+    
+
     .devicesReport__labels-box{
         width: 35%;
     }
@@ -128,6 +136,21 @@ incluso en dispositivos móviles
 }
 
 @media (max-width: 500px){
+
+    .binnacleremindedfields__info-window,
+    .userCreationFileds__info-window,
+    .userDelete__info-window,
+    .enter-or-client-delete__info-window,
+    .enable-or-disable__info-window,
+    .enter-edit__info-window,
+    .contact-edit__info-window,
+    .device-delete__info-window,
+    .device-edit__info-window,
+    .binnacle-delete__info-window,
+    .binnacle-edit__info-window,
+    .registration__info-window{
+        width: 80%;
+    }
     
     #deviceCancelBtn{
         font-size: 1rem;

@@ -1,6 +1,7 @@
 <!-- este div es una ventana emergente, en esta ocasión su elemento html relativo es el <body> para que el fondo de esta ventana cubra toda la vista-->
 <div class="binnacle-sign__window-background hidThis" id="backWindow">
     <div class="binnacle-sign__info-window" id="infoWindow">
+        <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
         <div class="info-window__text-box"><h3>¿Estas seguro de cancelar el progreso de esta bitácora?</h3></div>
         <div class="info-window__selectbuttons-box">
             <a class="selectbuttons-box__button ok" id="yes" href="<?= base_url; ?>finishing/?controller=form&action=resetActivitiesDescriptions&id=<?=$_GET["id"]?>">Si</a>

@@ -50,6 +50,7 @@ sesiones y variables inicializadas por los controladores en sus métodos de vist
     
     <div class="userDelete__window-background hidThis" id="userDeletebackWindow">
         <form class="userDelete__info-window" id="userDeleteinfoWindow" action="<?= base_url; ?>home/?homeController=user&homeAction=disableUser" method="POST">
+            <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
             <div class="info-window__text-box"><h3>¿Está seguro de desactivar este usuario?, este usuario ya no tendrá más acceso a la aplicación y no será 
                     visible en el apartado de "Configuración de usuarios", confirme su 
                     contraseña antes de continuar</h3></div>
@@ -67,6 +68,7 @@ sesiones y variables inicializadas por los controladores en sus métodos de vist
         <input type="hidden" value="<?=$user_info["Id"]?>" name="usuarioId"/>
         <div class="userCreationFileds__window-background hidThis" id="userCreationbackWindow">
             <div class="userCreationFileds__info-window" id="userCreationinfoWindow">
+                <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
                 <div class="info-window__text-box"><h3>Administrador, confirme su contraseña antes de continuar</h3></div>
                 <input class="adminpwdfield" type="password" name="adminContrasena"/>
                 <div class="info-window__selectbuttons-box">

@@ -551,6 +551,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <form action="<?= base_url;?>home/?homeController=user&homeAction=updateBinnacleInfo" method="POST">
     <div class="binnacle-edit__background hidThis" id="binnEditConfirmationBackground">
         <div class="binnacle-edit__info-window">
+            <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
             <div class="info-window__text-box"><h3>¿Está seguro de editar esta bitácora?, confirme su contraseña antes de continuar</h3></div>
             <input type="hidden" name="bitacoraId" value="<?= $binn_info["Id"];?>"/>
             <input type="hidden" name="estatus" value="<?= $binn_info["Estatus"];?>"/>

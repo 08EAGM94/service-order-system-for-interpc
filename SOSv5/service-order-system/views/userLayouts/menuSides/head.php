@@ -15,7 +15,7 @@
                 --color-secondary: #7497ED;
                 --thead-color: #0915BD;
                 --even-trow-color: #B5C7FF;
-                --background-colo+r: #F5F5F5;
+                --background-color: #F5F5F5;
                 --pop-up-window-background: #212121;
                 --error-color: #C41414;
                 --pdf-button-color: #F5B427;

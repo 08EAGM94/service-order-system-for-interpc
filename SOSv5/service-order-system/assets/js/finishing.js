@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () =>{
     
     const formBackWindow = document.querySelector("#formBackWindow");
     const remindedBackWindow = document.querySelector("#remindedBackWindow");
+    const remindedInfoWindow = document.querySelector(".binnacleremindedfields__info-window");
     const remindedYes = document.querySelector("#remindedYes");
     const remindedNo = document.querySelector("#remindedNo");
     const remindedCancelBtn = document.querySelector("#remindedCancelBtn");
@@ -234,8 +235,13 @@ document.addEventListener("DOMContentLoaded", () =>{
          se le agregará al fondo de la ventana emergente la clase "hidThis"*/
         consentCancelBtn.addEventListener("click", ()=>{
             backWindow.classList.remove("hidThis");
+            if(infoWindow.className.includes("activate-pop-out")) infoWindow.classList.remove("activate-pop-out");
+            infoWindow.classList.add("activate-pop-in");
             consentNo.addEventListener("click", () =>{
-                    backWindow.classList.add("hidThis");
+                infoWindow.classList.remove("activate-pop-in");
+                infoWindow.classList.add("activate-pop-out");
+                setTimeout(() => {backWindow.classList.add("hidThis");}, 200);
+                    
             });
         });
     }
@@ -254,6 +260,8 @@ document.addEventListener("DOMContentLoaded", () =>{
         confirmación de cancelación si se le da click al botón cancelar de la vista remindedfields.php*/
         remindedCancelBtn.addEventListener("click", ()=>{
             remindedBackWindow.classList.remove("hidThis");
+            if(remindedInfoWindow.className.includes("activate-pop-out")) remindedInfoWindow.classList.remove("activate-pop-out");
+            remindedInfoWindow.classList.add("activate-pop-in");
         })
         
         /*Esta gestión de evento, añade la clase de estilo "hidThis" al fondo de la ventana emergente de confirmación
@@ -267,7 +275,9 @@ document.addEventListener("DOMContentLoaded", () =>{
         /*Esta gestión de evento, añade la clase de estilo "hidThis" al fondo de la ventana de confirmación de 
          * cancelación al momento de dar click al botón "No"*/
         remindedNo.addEventListener("click", ()=>{
-                remindedBackWindow.classList.add("hidThis");
+            remindedInfoWindow.classList.remove("activate-pop-in");
+            remindedInfoWindow.classList.add("activate-pop-out");
+            setTimeout(() => {remindedBackWindow.classList.add("hidThis");}, 200);
         });
         
     }
@@ -325,20 +335,26 @@ document.addEventListener("DOMContentLoaded", () =>{
                  * "hidThis" al fondo de la ventana emergente del pad de firmas de confirmación de guardado 
                  * de firma*/
                 backWindow.classList.remove("hidThis");
+                if(infoWindow.className.includes("activate-pop-out")) infoWindow.classList.remove("activate-pop-out");
+                infoWindow.classList.add("activate-pop-in");
                 /*Después, se declaran constantes que contienen la creación de elementos html, en este caso "cajas"
                  * (div), textBox para añadir un h3 con el mensaje que va a leer el usuario y buttonsBox para darle al
                  * usuario opciones para dar click*/
+                const iconBox = document.createElement("div");
                 const textBox = document.createElement("div");
                 const buttonsBox = document.createElement("div");
                 /*A los elementos div creados se les añade clases de estilo existentes en el archivo finishingStyles.css*/
+                iconBox.classList.add("pop-up-window-icon");
                 textBox.classList.add("info-window__text-box");
                 buttonsBox.classList.add("info-window__selectbuttons-box");
                 /*A los elementos div creados se les añade contenido html gracias a la propiedad "innerHTML"*/
+                iconBox.innerHTML = `<img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/caution-sign_75243.png"/>`;
                 textBox.innerHTML = "<h3>¿Estas seguro de guardar la firma?</h3>";
                 buttonsBox.innerHTML = '<button class="selectbuttons-box__button" id="yes">Si</button>' +
                         '<button class="selectbuttons-box__button" id="no">No</button>';
                 /*Aqui se le añade en la ventana emergente de confirmación de guardado de firmas los elementos creados 
                  * y configurados*/
+                infoWindow.append(iconBox);
                 infoWindow.append(textBox);
                 infoWindow.append(buttonsBox);
                 
@@ -361,6 +377,7 @@ document.addEventListener("DOMContentLoaded", () =>{
                                 buttonsBox.classList.add("okCenter");
                                 /*se sobrescribe el contenido html de los elementos creados anteriormente 
                                  * (textBox y buttonBox)*/
+                                iconBox.innerHTML = `<img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/delete-button_8637533.png"/>`;
                                 textBox.innerHTML = `<h3>Debes de pintar tu firma antes de seguir</h3>`;
                                 buttonsBox.innerHTML = '<button class="selectbuttons-box__button" id="ok">OK</button>';
                                 /*se declara una constante donde se añade la referencia del elemento de la caja de botones*/
@@ -372,9 +389,15 @@ document.addEventListener("DOMContentLoaded", () =>{
                                         /*si se le da click al botón "OK" entonces el fondo de la ventana emergente se le aplica
                                          * la clase de estilo "hidThis", posteriormente, se elimina el contenido html de las constantes
                                          * textBox y buttonsBox, esto para evitar duplicado de elementos html en la pagina*/
-                                        backWindow.classList.add("hidThis");
-                                        textBox.remove();
-                                        buttonsBox.remove();
+                                        infoWindow.classList.remove("activate-pop-in");
+                                        infoWindow.classList.add("activate-pop-out");
+                                        setTimeout(() => {
+                                            backWindow.classList.add("hidThis");
+                                            iconBox.remove();
+                                            textBox.remove();
+                                            buttonsBox.remove();
+                                        }, 200);
+                                        
                                     }
                                 });
                             }    
@@ -382,15 +405,21 @@ document.addEventListener("DOMContentLoaded", () =>{
                         
                         if(clientCanvas != null){
                             if(isCanvasBlank(clientCanvas)){
-                                buttonsBox.classList.add("okCenter");  
+                                buttonsBox.classList.add("okCenter");
+                                iconBox.innerHTML = `<img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/delete-button_8637533.png"/>`;  
                                 textBox.innerHTML = `<h3>Debes de pintar la firma del cliente antes de seguir</h3>`;
                                 buttonsBox.innerHTML = '<button class="selectbuttons-box__button" id="ok">OK</button>';
                                 const okArea = infoWindow.querySelector(".info-window__selectbuttons-box");
                                 okArea.addEventListener("click", e =>{
                                     if(e.target.id === "ok"){
-                                        backWindow.classList.add("hidThis");
-                                        textBox.remove();
-                                        buttonsBox.remove();
+                                        infoWindow.classList.remove("activate-pop-in");
+                                        infoWindow.classList.add("activate-pop-out");
+                                        setTimeout(() => {
+                                            backWindow.classList.add("hidThis");
+                                            iconBox.remove();
+                                            textBox.remove();
+                                            buttonsBox.remove();
+                                        }, 200);
                                     }
                                 });
                             }
@@ -448,6 +477,7 @@ document.addEventListener("DOMContentLoaded", () =>{
                                  * y se le agrega un mensaje al usuario para notificar que la firma se guardó en la aplicación, primero se le coloca al elemento
                                  * de caja de botones la clase de estilo "okCenter"*/                                 
                                 buttonsBox.classList.add("okCenter");
+                                iconBox.innerHTML = `<img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/check_13526142.png"/>`;
                                 /*en la constante textBox se le modifica su contenido html con el texto que envió PHP*/
                                 textBox.innerHTML = `<h3>${txt}</h3>`;
                                 /*en la contante buttonsBox se le modifica su contenido html dependiendo de la evaluación del operador ternario, si el pad de
@@ -475,13 +505,19 @@ document.addEventListener("DOMContentLoaded", () =>{
                                          * FormData*/
                                         (technicianCanvas != null) ? formData.delete(`${(binnId != null) ? "techSign" : "newTechSign"}`) :
                                                 formData.delete("cliSign");
-                                        /*Después, se le agrega al elemento del fondo de la ventana emergente la clase de estilo "hidThis" para ocultar la ventana
-                                         * emergente en la vista del usuario*/
-                                        backWindow.classList.add("hidThis");
-                                        /*Finalmente, se eliminan los elementos html que contienen las constantes textBox y buttonBox para evitar duplicados
-                                         * innecesarios en el documento html*/
-                                        textBox.remove();
-                                        buttonsBox.remove();
+                                        infoWindow.classList.remove("activate-pop-in");
+                                        infoWindow.classList.add("activate-pop-out");
+                                        setTimeout(() => {
+                                            /*Después, se le agrega al elemento del fondo de la ventana emergente la clase de estilo "hidThis" para ocultar la ventana
+                                            * emergente en la vista del usuario*/
+                                            backWindow.classList.add("hidThis");
+                                            /*Finalmente, se eliminan los elementos html que contienen las constantes textBox y buttonBox para evitar duplicados
+                                            * innecesarios en el documento html*/
+                                            iconBox.remove();
+                                            textBox.remove();
+                                            buttonsBox.remove();
+                                        }, 200);        
+                                        
                                     }
                                 });
                             })
@@ -491,6 +527,7 @@ document.addEventListener("DOMContentLoaded", () =>{
                                 buttonsBox.classList.add("okCenter");
                                 /*se modifican los elementos html que contienen las constantes textBox y buttonsBox, el primero con el mensaje del error y el
                                  * segundo se añade un elemento html button*/
+                                iconBox.innerHTML = `<img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/delete-button_8637533.png"/>`;
                                 textBox.innerHTML = `<h3>${error}</h3>`;
                                 buttonsBox.innerHTML = '<button class="selectbuttons-box__button" id="ok">OK</button>';
                                 /*Se declara una constante donde va a contener la caja de botones del contexto en el que estamos*/
@@ -504,13 +541,18 @@ document.addEventListener("DOMContentLoaded", () =>{
                                          * FormData*/
                                         (technicianCanvas != null) ? formData.delete(`${(binnId != null) ? "techSign" : "newTechSign"}`) :
                                                 formData.delete("cliSign");
-                                        /*Después, se le agrega al elemento del fondo de la ventana emergente la clase de estilo "hidThis" para ocultar la ventana
-                                         * emergente en la vista del usuario*/
-                                        backWindow.classList.add("hidThis");
-                                        /*Finalmente, se eliminan los elementos html que contienen las constantes textBox y buttonBox para evitar duplicados
-                                         * innecesarios en el documento html*/
-                                        textBox.remove();
-                                        buttonsBox.remove();
+                                        infoWindow.classList.remove("activate-pop-in");
+                                        infoWindow.classList.add("activate-pop-out");
+                                        setTimeout(() => {
+                                            /*Después, se le agrega al elemento del fondo de la ventana emergente la clase de estilo "hidThis" para ocultar la ventana
+                                            * emergente en la vista del usuario*/
+                                            backWindow.classList.add("hidThis");
+                                            /*Finalmente, se eliminan los elementos html que contienen las constantes textBox y buttonBox para evitar duplicados
+                                            * innecesarios en el documento html*/
+                                            iconBox.remove();
+                                            textBox.remove();
+                                            buttonsBox.remove();
+                                        }, 200); 
                                     }
                                 });
                             });
@@ -519,26 +561,40 @@ document.addEventListener("DOMContentLoaded", () =>{
                     }else if(e.target.id === "no"){
                         /*Si se dio click al botón "No" en la ventana emergente de confirmación de guardado de firma, entonces lo primero que se hace es ocultar
                          * la ventana emergente de la vista del cliente con la clase de estilo "hidThis"*/
-                        backWindow.classList.add("hidThis");
-                        /*Finalmente, se eliminan los elementos html que contienen las constantes textBox y buttonBox para evitar duplicados
-                         * innecesarios en el documento html*/
-                        textBox.remove();
-                        buttonsBox.remove();
+                        infoWindow.classList.remove("activate-pop-in");
+                        infoWindow.classList.add("activate-pop-out");
+                        setTimeout(() => {
+                            /*Después, se le agrega al elemento del fondo de la ventana emergente la clase de estilo "hidThis" para ocultar la ventana
+                            * emergente en la vista del usuario*/
+                            backWindow.classList.add("hidThis");
+                            /*Finalmente, se eliminan los elementos html que contienen las constantes textBox y buttonBox para evitar duplicados
+                            * innecesarios en el documento html*/
+                            iconBox.remove();
+                            textBox.remove();
+                            buttonsBox.remove();
+                        }, 200);
                     }
                 });
             }else if(e.target.id === "cancelButton"){
-                /*si se da click al botón de cancelar en cualquier pad de firma, entonces lo primero que se hace es mostrar la ventana emergente 
-                 * al usuario, en este caso le quitamos la clase "hidThis" al fondo de la ventana emergente*/
+                /*Si se dio click al botón "Cancelar" en el pad de firma, entonces lo primero que se hace es quitarle al elemento del fondo de la ventana emergente la clase de estilo "hidThis" para mostrar la ventana emergente, posteriormente, se modifica el contenido de esta ventana emergente para mostrar un mensaje
+                 * al usuario y darle opciones de "Si" o "No" para regresar a la vista anterior del formulario (consentimiento de actividades)*/
                 backWindow.classList.remove("hidThis");
-                /*Se crea elementos div los cuales estarán contenidas en las constantes textBox y buttonsBox*/
+                if(infoWindow.className.includes("activate-pop-out")) infoWindow.classList.remove("activate-pop-out");
+                infoWindow.classList.add("activate-pop-in");
+                /*Después, se declaran constantes que contienen la creación de elementos html, en este caso "cajas"
+                 * (div), textBox para añadir un h3 con el mensaje que va a leer el usuario y buttonsBox para darle al
+                 * usuario opciones para dar click*/
+                const iconBox = document.createElement("div");
                 const textBox = document.createElement("div");
                 const buttonsBox = document.createElement("div");
-                /*a cada elemento div se le coloca respectivamente sus clases de estilo cuyo bloques estan contenidos en el archivo finishingStyles.css*/
+                /*A los elementos div creados se les añade clases de estilo existentes en el archivo finishingStyles.css*/
+                iconBox.classList.add("pop-up-window-icon");
                 textBox.classList.add("info-window__text-box");
                 buttonsBox.classList.add("info-window__selectbuttons-box");
                 /*después se le añade a cada div elementos html gracias a innerHTML, textBox se le añade un texto que podrá ser leído por el usuario
                  * y buttonsBox el cual tendrá un link que enviará al usuario a la vista de conformidad de actividades o a la vista de editar firma y 
                  * un botón de negativa "No"*/
+                iconBox.innerHTML = `<img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/caution-sign_75243.png"/>`;
                 textBox.innerHTML = (binnId != null) ? "<h3>¿quieres regresar a la parte de conformidad de actividades?</h3>" : 
                         '<h3>¿quieres regresar al apartado de "Editar firmas"?</h3>';
                 buttonsBox.innerHTML = (binnId != null) ? '<a class="selectbuttons-box__button ok" id="ok"' +
@@ -549,6 +605,7 @@ document.addEventListener("DOMContentLoaded", () =>{
                         '<button class="selectbuttons-box__button" id="no">No</button>';
                 /*todo el html que generamos y que están contenidos en sus respectivas constantes se añadirán al elemento de la ventana emergente el cual
                  * está contenida en la constante infoWindow*/
+                infoWindow.append(iconBox);
                 infoWindow.append(textBox);
                 infoWindow.append(buttonsBox);
                 /*se declara una constante el cual contendrá la caja de botones que creamos en este contexto con la clase de estilo del elemento que contiene
@@ -561,15 +618,23 @@ document.addEventListener("DOMContentLoaded", () =>{
                        backWindow.classList.add("hidThis");
                        /*Finalmente, se eliminan los elementos html que contienen las constantes textBox y buttonBox para evitar duplicados
                          * innecesarios en el documento html*/
+                       iconBox.remove();
                        textBox.remove();
                        buttonsBox.remove();
                    }else if(e.target.id === "no"){
                        /*si se dio click al botón "No" entonces se oculta la ventana emergente aplicando al fondo de esta la clase de estilo "hidThis"*/
-                       backWindow.classList.add("hidThis");
-                       /*Finalmente, se eliminan los elementos html que contienen las constantes textBox y buttonBox para evitar duplicados
-                         * innecesarios en el documento html*/
-                       textBox.remove();
-                       buttonsBox.remove();
+                        infoWindow.classList.remove("activate-pop-in");
+                        infoWindow.classList.add("activate-pop-out");
+                        setTimeout(() => {
+                            /*Después, se le agrega al elemento del fondo de la ventana emergente la clase de estilo "hidThis" para ocultar la ventana
+                            * emergente en la vista del usuario*/
+                            backWindow.classList.add("hidThis");
+                            /*Finalmente, se eliminan los elementos html que contienen las constantes textBox y buttonBox para evitar duplicados
+                            * innecesarios en el documento html*/
+                            iconBox.remove();
+                            textBox.remove();
+                            buttonsBox.remove();
+                        }, 200);
                    } 
                 });
             }

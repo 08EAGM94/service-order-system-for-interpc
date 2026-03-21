@@ -25,6 +25,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <form class="newDeviceForm" action="<?= base_url;?>home/?homeController=user&homeAction=insertDevice" method="POST">
         <div class="registration__window-background hidThis" id="backWindow">
             <div class="registration__info-window" id="infoWindow">
+                <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
                 <div class="info-window__text-box"><h3>¿Estas seguro de registrar este equipo?, la empresa y el tipo de equipo no se podrán cambiar después</h3></div>
                 <div class="info-window__selectbuttons-box">
                     <input class="selectbuttons-box__button" id="yes" type="submit" value="Si"/>

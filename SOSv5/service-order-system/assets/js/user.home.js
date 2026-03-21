@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const newTypeForm = document.querySelector(".newTypeForm");
     const newDeviceForm = document.querySelector(".newDeviceForm");
     
-    const userMainsWrapper = document.querySelector(".user-mains-wrapper");
     const activityChoice1 = document.querySelector("#activityChoice1");
     const activityChoice2 = document.querySelector("#activityChoice2");    
     const serviceBox = document.querySelector("#serviceBox");    
@@ -77,7 +76,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const mobileCancelBtn = document.querySelector("#mobileCancelBtn");
     const numkeyBox = document.querySelector("#numkeyBox");
     const userCreationbackWindow = document.querySelector("#userCreationbackWindow");
+    const userCreationinfoWindow = document.querySelector(".userCreationFileds__info-window");
     const userCreationNiseSubmit = document.querySelector("#userCreationNiseSubmit");
+    const userDeleteinfoWindow = document.querySelector("#userDeleteinfoWindow");
     const userCreationCancel = document.querySelector("#userCreationCancel");
     const usersSelect = document.querySelector("#usersSelect");
     const userDeleteNiseSubmit = document.querySelector("#userDeleteNiseSubmit");
@@ -86,6 +87,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const editEnterSelect = document.querySelector("#editEnterSelect");
     const entersSelect = document.querySelector("#entersSelect");
     const enterpriseFormsMain = document.querySelector("#enterpriseFormsMain");
+    const enterEditInfoWindow = document.querySelector(".enter-edit__info-window");
     const enterOrClientDeletebackWindow = document.querySelector("#enterOrClientDeletebackWindow");
     const enterDeleteButton = document.querySelector(".enterprise-forms__delete-button");
     const deleteContactBtns = document.querySelectorAll(".contact-form__delete-button");
@@ -111,6 +113,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const editBinnacleBtn = document.querySelector("#editBinnacleBtn");
     const editBinnUserSelect = document.querySelector("#editBinnUserSelect");
     const binnEditConfirmationBackground =  document.querySelector("#binnEditConfirmationBackground");
+    const binnEditConfirmationInfoWindow = document.querySelector(".binnacle-edit__info-window");
     const deviceReportPdfBtn = document.querySelector(".devicesReport__pdf-button");
     const binnPdfBtns = document.querySelectorAll(".binnacle-data-table__binn-pdf-link");
     //--------------------------------------------------------------------------
@@ -554,8 +557,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
          * de estilo "hidThis" para ocultar esta ventana emergente al usuario*/
         niseSubmit.addEventListener("click", ()=>{
             backWindow.classList.remove("hidThis");
+            if(infoWindow.className.includes("activate-pop-out")) infoWindow.classList.remove("activate-pop-out");
+            infoWindow.classList.add("activate-pop-in");
             no.addEventListener("click", () =>{
-               backWindow.classList.add("hidThis");
+               infoWindow.classList.remove("activate-pop-in");
+               infoWindow.classList.add("activate-pop-out");
+               setTimeout(() =>{backWindow.classList.add("hidThis");}, 200); 
+               
             });
         });
     }
@@ -925,8 +933,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
          * de estilo "hidThis" para ocultar esta ventana emergente al usuario*/
         niseSubmit.addEventListener("click", ()=>{
             backWindow.classList.remove("hidThis");
+            if(infoWindow.className.includes("activate-pop-out")) infoWindow.classList.remove("activate-pop-out");
+            infoWindow.classList.add("activate-pop-in");
             no.addEventListener("click", () =>{
-               backWindow.classList.add("hidThis");
+               infoWindow.classList.remove("activate-pop-in");
+               infoWindow.classList.add("activate-pop-out");
+               setTimeout(() =>{backWindow.classList.add("hidThis");}, 200); 
+               
             });
         });
         
@@ -969,8 +982,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
          * de estilo "hidThis" para ocultar esta ventana emergente al usuario*/
         niseSubmit.addEventListener("click", ()=>{
             backWindow.classList.remove("hidThis");
+            if(infoWindow.className.includes("activate-pop-out")) infoWindow.classList.remove("activate-pop-out");
+            infoWindow.classList.add("activate-pop-in");
             no.addEventListener("click", () =>{
-               backWindow.classList.add("hidThis");
+                infoWindow.classList.remove("activate-pop-in");
+                infoWindow.classList.add("activate-pop-out"); 
+                setTimeout(() => {backWindow.classList.add("hidThis");}, 200);
             });
         });
     }
@@ -1001,8 +1018,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
          * de estilo "hidThis" para ocultar esta ventana emergente al usuario*/
          niseSubmit.addEventListener("click", ()=>{
             backWindow.classList.remove("hidThis");
+            if(infoWindow.className.includes("activate-pop-out")) infoWindow.classList.remove("activate-pop-out");
+            infoWindow.classList.add("activate-pop-in");
             no.addEventListener("click", () =>{
-               backWindow.classList.add("hidThis");
+                infoWindow.classList.remove("activate-pop-in");
+                infoWindow.classList.add("activate-pop-out");
+                setTimeout(() => {backWindow.classList.add("hidThis");}, 200); 
             });
         });
     }
@@ -1066,13 +1087,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
        
        
        if(userCreationNiseSubmit != null){
-           /*userCreationNiseSubmit el cual contiene un elemento html propio de la vista 
+            
+            /*userCreationNiseSubmit el cual contiene un elemento html propio de la vista 
             * userInsertForm.php, si su valor no es nulo, entonces se aplica un evento
             * click para este elemento, al dar click, al fondo de la ventana emergente de esta
             * vista se le quitará la clase de estilo "hidThis" para mostrar esta ventana emergente
             * al usuario*/
            userCreationNiseSubmit.addEventListener("click", ()=>{
-               userCreationbackWindow.classList.remove("hidThis");
+                userCreationbackWindow.classList.remove("hidThis");
+                if(userCreationinfoWindow.className.includes("activate-pop-out")) userCreationinfoWindow.classList.remove("activate-pop-out");
+                userCreationinfoWindow.classList.add("activate-pop-in");
            });
        }
        
@@ -1083,7 +1107,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
             * vista se le agregará la clase de estilo "hidThis" para ocultar esta ventana
             * emergente al usuario*/
            userCreationCancel.addEventListener("click", ()=>{
-               userCreationbackWindow.classList.add("hidThis");
+                userCreationinfoWindow.classList.remove("activate-pop-in");
+                userCreationinfoWindow.classList.add("activate-pop-out");
+                setTimeout(() => {userCreationbackWindow.classList.add("hidThis");}, 200);
            });
        }
        
@@ -1095,6 +1121,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
             * emergente al usuario*/
            userDeleteNiseSubmit.addEventListener("click", ()=>{
                userDeletebackWindow.classList.remove("hidThis");
+                if(userDeleteinfoWindow.className.includes("activate-pop-out")) userDeleteinfoWindow.classList.remove("activate-pop-out");
+                userDeleteinfoWindow.classList.add("activate-pop-in");
            });
        }
        
@@ -1105,7 +1133,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
             * vista se le agregará la clase de estilo "hidThis" para ocultar esta ventana
             * emergente al usuario*/
            userDeleteCancel.addEventListener("click", ()=>{
-               userDeletebackWindow.classList.add("hidThis");
+               userDeleteinfoWindow.classList.remove("activate-pop-in");
+               userDeleteinfoWindow.classList.add("activate-pop-out");
+               setTimeout(() => {userDeletebackWindow.classList.add("hidThis");}, 200);
            });
        }
        
@@ -1304,10 +1334,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     /*Al dar click al botón eliminar se quita la clase de estilo "hidThis" al fondo de la ventana emergente de
                      * confirmación de eliminación de empresa*/
                     enterOrClientDeletebackWindow.classList.remove("hidThis");
+                    
                     /*la ventana emergente en este caso es un formulario, los datos del formulario se van a procesar dentro del metodo enableOrDisableEnterprise
                      * del controlador UserController*/
                     enterOrClientDeletebackWindow.innerHTML = `
                         <form class="enter-or-client-delete__info-window" action="${BASE_URL}home/?homeController=user&homeAction=enableOrDisableEnterprise" method="POST">
+                            <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/caution-sign_75243.png"/></div>
                             <div class="info-window__text-box"><h3>¿Está seguro de ${(enterDeleteButton.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} esta empresa?, 
                                             este registro ${(enterDeleteButton.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
                                             en la caja de selección de los formularios de "Nueva bitácora", "Crear contacto", "Crear un equipo" y la caja de selección 
@@ -1320,17 +1352,24 @@ document.addEventListener("DOMContentLoaded", ()=>{
                             </div>
                         </form>
                     `;
+                    
                     /*Se selecciona los elementos html generados en este contexto, el botón "Cancelar" en la constante cancelDeleteBtn
                      * y la ventana emergente que en este caso es un formulario a la constante deleteFormWindow*/
                     const cancelDeleteBtn = enterOrClientDeletebackWindow.querySelector(".selectbuttons-box__cancel-delete-button");
                     const deleteFormWindow = enterOrClientDeletebackWindow.querySelector(".enter-or-client-delete__info-window");
+                    deleteFormWindow.classList.add("activate-pop-in");
                     cancelDeleteBtn.addEventListener("click", ()=>{
-                        /*Si se da click al botón cancelar, entonces se utiliza la constante deleteFormWindow para eliminar su contenido
-                         * html gracias a remove() esto para evitar duplicaciones innecesarias de elementos html en el DOM*/
-                        deleteFormWindow.remove();
-                        /*finalmente se le agrega al fondo de la ventana emergente la clase de estilo "hidThis" para ocultar esta ventana
-                         * al usuario*/
-                        enterOrClientDeletebackWindow.classList.add("hidThis");
+                        deleteFormWindow.classList.remove("activate-pop-in");
+                        deleteFormWindow.classList.add("activate-pop-out");
+                        setTimeout(() => {
+                            /*Si se da click al botón cancelar, entonces se utiliza la constante deleteFormWindow para eliminar su contenido
+                            * html gracias a remove() esto para evitar duplicaciones innecesarias de elementos html en el DOM*/
+                            deleteFormWindow.remove();
+                            /*finalmente se le agrega al fondo de la ventana emergente la clase de estilo "hidThis" para ocultar esta ventana
+                            * al usuario*/
+                            enterOrClientDeletebackWindow.classList.add("hidThis");
+                        }, 200);
+                        
                     });
                 });
                 /*enterpriseEditBtn contiene el elemento html botón "Guardar" dentro de la edición de la empresa*/
@@ -1338,12 +1377,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     /*Si se da click al botón "Guardar", entonces se le quita la clase de estilo "hidThis" al fondo de la
                      * ventana emergente de confirmación de edición de empresa para que el usuario pueda ver esta ventana*/
                     enterpriseEditConfirmationBackground.classList.remove("hidThis");
+                    if(enterEditInfoWindow.className.includes("activate-pop-out")) enterEditInfoWindow.classList.remove("activate-pop-out");
+                    enterEditInfoWindow.classList.add("activate-pop-in");
                 });
 
                 enterpriseEditeCancelBtn.addEventListener("click", ()=>{
+                    enterEditInfoWindow.classList.remove("activate-pop-in");
+                    enterEditInfoWindow.classList.add("activate-pop-out");
                     /*Si el usuario da click al botón "Cancelar", entonces se le agrega la clase de estilo "hidThis" al fondo de la
                      * ventana emergente para ocultarselo al usuario*/
-                    enterpriseEditConfirmationBackground.classList.add("hidThis");
+                    setTimeout(() => {enterpriseEditConfirmationBackground.classList.add("hidThis");}, 200);
+                    
                 });
             }
             if(deleteContactBtns != null){
@@ -1364,6 +1408,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         * tipo "hidden", estos datos los procesará el metodo enableOrDisableContact del controlador UserController*/
                        enterOrClientDeletebackWindow.innerHTML = `
                             <form class="enter-or-client-delete__info-window" action="${BASE_URL}home/?homeController=user&homeAction=enableOrDisableContact" method="POST">
+                                <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/caution-sign_75243.png"/></div>
                                 <div class="info-window__text-box"><h3>¿Está seguro de ${(deleteBtn.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} el contacto 
                                         con Id ${deleteBtn.dataset.id}?, este registro ${(deleteBtn.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
                                         en la caja de selección del formulario de "Nueva bitácora" y la caja de selección 
@@ -1380,13 +1425,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
                          * y la ventana emergente que en este caso es un formulario a la constante contactDeleteFormWindow*/    
                         const contactDeleteCancelBtn = enterOrClientDeletebackWindow.querySelector(".selectbuttons-box__cancel-delete-button");
                         const contactDeleteFormWindow = enterOrClientDeletebackWindow.querySelector(".enter-or-client-delete__info-window");
+                        contactDeleteFormWindow.classList.add("activate-pop-in");
                         contactDeleteCancelBtn.addEventListener("click", ()=>{
-                            /*Si se da click al botón cancelar, entonces se utiliza la constante contactDeleteFormWindow para eliminar su contenido
-                             * html gracias a remove() esto para evitar duplicaciones innecesarias de elementos html en el DOM*/
-                            contactDeleteFormWindow.remove();
-                            /*finalmente se le agrega al fondo de la ventana emergente la clase de estilo "hidThis" para ocultar esta ventana
-                             * al usuario*/
-                            enterOrClientDeletebackWindow.classList.add("hidThis");
+                            contactDeleteFormWindow.classList.remove("activate-pop-in");
+                            contactDeleteFormWindow.classList.add("activate-pop-out");
+                            setTimeout(() => {
+                                /*Si se da click al botón cancelar, entonces se utiliza la constante contactDeleteFormWindow para eliminar su contenido
+                                * html gracias a remove() esto para evitar duplicaciones innecesarias de elementos html en el DOM*/
+                                contactDeleteFormWindow.remove();
+                                /*finalmente se le agrega al fondo de la ventana emergente la clase de estilo "hidThis" para ocultar esta ventana
+                                * al usuario*/
+                                enterOrClientDeletebackWindow.classList.add("hidThis");
+                            }, 200);
+                            
                         });
                    }); 
                 });
@@ -1405,13 +1456,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
                        * el formulario del cliente (contacto) cuyo botón "Guardar" esta contenido en ese formulario (el respectivo formulario es el 
                        * elemento más cercano del botón que se está manejando en el forEach), ese formulario va a estar contenido en la constante
                        * parentForm*/ 
-                      const parentForm = editBtn.closest(".enterprise-forms__contact-form");
-                      /*una vez delcarado parentForm entonces lo utilizamos para acceder al elemento html de la ventana emergente de confirmación de
-                       * edición de cliente (contacto), ese elemento estará contenido en la constante editConfirmationWindow*/
-                      const editConfirmationWindow = parentForm.querySelector(".contact-edit__background");
-                      /*Después, al fondo de la ventana emergente se le quita la clase de estilo "hidThis" para mostrarle al usuario la ventana
-                       * emergente de confirmación de edición de cliente (contacto) en cuestión*/
-                      editConfirmationWindow.classList.remove("hidThis");
+                        const parentForm = editBtn.closest(".enterprise-forms__contact-form");
+                        /*una vez delcarado parentForm entonces lo utilizamos para acceder al elemento html de la ventana emergente de confirmación de
+                        * edición de cliente (contacto), ese elemento estará contenido en la constante editConfirmationWindow*/
+                        const editConfirmationWindow = parentForm.querySelector(".contact-edit__background");
+                        const editConfirmationInfoWindow = editConfirmationWindow.querySelector(".contact-edit__info-window");
+                        /*Después, al fondo de la ventana emergente se le quita la clase de estilo "hidThis" para mostrarle al usuario la ventana
+                        * emergente de confirmación de edición de cliente (contacto) en cuestión*/
+                        editConfirmationWindow.classList.remove("hidThis");
+                        if(editConfirmationInfoWindow.className.includes("activate-pop-out")) editConfirmationInfoWindow.classList.remove("activate-pop-out");
+                        editConfirmationInfoWindow.classList.add("activate-pop-in");
                    }); 
                 });
                 /*Se recorre todos los botones "Cancelar" de las ventanas emergentes de confirmación de edición de contacto generadas en 
@@ -1427,9 +1481,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
                        * (la respectiva estructura de ventana emergente de confirmación de edición de contacto es el elemento más cercano del botón que 
                        * se está manejando en el forEach), esa estructura de ventana emergente va a estar contenida en la constante parentWindow*/
                        const parentWindow = cancelBtn.closest(".contact-edit__background");
+                       const parentInfoWindow = parentWindow.querySelector(".contact-edit__info-window");
                        /*Después, al fondo de la ventana emergente se le agrega la clase de estilo "hidThis" para ocultarle al usuario la ventana
                        * emergente de confirmación de edición de cliente (contacto) en cuestión*/
-                       parentWindow.classList.add("hidThis");
+                        parentInfoWindow.classList.remove("activate-pop-in");
+                        parentInfoWindow.classList.add("activate-pop-out");
+                        setTimeout(() => {parentWindow.classList.add("hidThis");}, 200);
+                        
                    });
                 });
             }
@@ -1458,6 +1516,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         * inputs tipo "hidden", estos datos los procesará el metodo enableOrDisableType del controlador UserController*/
                        enableOrDisablebackWindow.innerHTML = `
                             <form class="enable-or-disable__info-window" action="${BASE_URL}home/?homeController=user&homeAction=enableOrDisableType" method="POST">
+                                <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/caution-sign_75243.png"/></div>
                                 <div class="info-window__text-box"><h3>¿Está seguro de ${(deleteBtn.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} el tipo 
                                         con Id ${deleteBtn.dataset.id}?, este registro ${(deleteBtn.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
                                         en la caja de selección del formulario de "Crear un equipo"</h3></div>
@@ -1473,13 +1532,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
                          * y la ventana emergente que en este caso es un formulario a la constante typeDeleteFormWindow*/    
                         const typeDeleteCancelBtn = enableOrDisablebackWindow.querySelector(".selectbuttons-box__cancel-delete-button");
                         const typeDeleteFormWindow = enableOrDisablebackWindow.querySelector(".enable-or-disable__info-window");
+                        typeDeleteFormWindow.classList.add("activate-pop-in");
                         typeDeleteCancelBtn.addEventListener("click", ()=>{
-                            /*Si se da click al botón cancelar, entonces se utiliza la constante clientDeleteFormWindow para eliminar su contenido
-                             * html gracias a remove() esto para evitar duplicaciones innecesarias de elementos html en el DOM*/
-                            typeDeleteFormWindow.remove();
-                            /*finalmente se le agrega al fondo de la ventana emergente la clase de estilo "hidThis" para ocultar esta ventana
-                             * al usuario*/
-                            enableOrDisablebackWindow.classList.add("hidThis");
+                            typeDeleteFormWindow.classList.remove("activate-pop-in");
+                            typeDeleteFormWindow.classList.add("activate-pop-out");
+                            setTimeout(() => {
+                                /*Si se da click al botón cancelar, entonces se utiliza la constante clientDeleteFormWindow para eliminar su contenido
+                                * html gracias a remove() esto para evitar duplicaciones innecesarias de elementos html en el DOM*/
+                                typeDeleteFormWindow.remove();
+                                /*finalmente se le agrega al fondo de la ventana emergente la clase de estilo "hidThis" para ocultar esta ventana
+                                * al usuario*/
+                                enableOrDisablebackWindow.classList.add("hidThis");
+                            }, 200);
+                            
                         });
                    }); 
                 });
@@ -1502,9 +1567,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
                       /*una vez delcarado parentForm entonces lo utilizamos para acceder al elemento html de la ventana emergente de confirmación de
                        * edición, ese elemento estará contenido en la constante editConfirmationWindow*/
                       const editConfirmationWindow = parentForm.querySelector(".contact-edit__background");
+                      const editConfirmationInfoWindow = editConfirmationWindow.querySelector(".contact-edit__info-window");
                       /*Después, al fondo de la ventana emergente se le quita la clase de estilo "hidThis" para mostrarle al usuario la ventana
                        * emergente de confirmación de edición en cuestión*/
                       editConfirmationWindow.classList.remove("hidThis");
+                      if(editConfirmationInfoWindow.className.includes("activate-pop-out")) editConfirmationInfoWindow.classList.remove("activate-pop-out");
+                      editConfirmationInfoWindow.classList.add("activate-pop-in");
                    }); 
                 });
                 /*Se recorre todos los botones "Cancelar" de las ventanas emergentes de confirmación de edición de tipos generadas en 
@@ -1520,9 +1588,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
                        * (la respectiva estructura de ventana emergente de confirmación de edición de tipo es el elemento más cercano del botón que 
                        * se está manejando en el forEach), esa estructura de ventana emergente va a estar contenida en la constante parentWindow*/
                        const parentWindow = cancelBtn.closest(".contact-edit__background");
+                       const parentInfoWindow = parentWindow.querySelector(".contact-edit__info-window");
+                       parentInfoWindow.classList.remove("activate-pop-in");
+                       parentInfoWindow.classList.add("activate-pop-out");
                        /*Después, al fondo de la ventana emergente se le agrega la clase de estilo "hidThis" para ocultarle al usuario la ventana
                        * emergente de confirmación de edición en cuestión*/
-                       parentWindow.classList.add("hidThis");
+                       setTimeout(() => {parentWindow.classList.add("hidThis");}, 200);
+                       
                    });
                 });
             }
@@ -1551,6 +1623,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         * input tipo "hidden", estos datos los procesará el metodo enableOrDisableType del controlador UserController*/
                        enableOrDisablebackWindow.innerHTML = `
                             <form class="enable-or-disable__info-window" action="${BASE_URL}home/?homeController=user&homeAction=enableOrDisableDevice" method="POST">
+                                <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/caution-sign_75243.png"/></div>
                                 <div class="info-window__text-box"><h3>¿Está seguro de ${(deleteBtn.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} el equipo 
                                         con Id ${deleteBtn.dataset.id}?, este registro ${(deleteBtn.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
                                         en la caja de selección de equipo del formulario de "Nueva bitácora" y en los filtros de "Reportes de bitácoras"</h3></div>
@@ -1566,13 +1639,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
                          * y la ventana emergente que en este caso es un formulario a la constante deviceDeleteFormWindow*/    
                         const deviceDeleteCancelBtn = enableOrDisablebackWindow.querySelector(".selectbuttons-box__cancel-delete-button");
                         const deviceDeleteFormWindow = enableOrDisablebackWindow.querySelector(".enable-or-disable__info-window");
+                        deviceDeleteFormWindow.classList.add("activate-pop-in");
                         deviceDeleteCancelBtn.addEventListener("click", ()=>{
-                            /*Si se da click al botón cancelar, entonces se utiliza la constante clientDeleteFormWindow para eliminar su contenido
-                             * html gracias a remove() esto para evitar duplicaciones innecesarias de elementos html en el DOM*/
-                            deviceDeleteFormWindow.remove();
-                            /*finalmente se le agrega al fondo de la ventana emergente la clase de estilo "hidThis" para ocultar esta ventana
-                             * al usuario*/
-                            enableOrDisablebackWindow.classList.add("hidThis");
+                            deviceDeleteFormWindow.classList.remove("activate-pop-in");
+                            deviceDeleteFormWindow.classList.add("activate-pop-out");
+                            setTimeout(() => {
+                                /*Si se da click al botón cancelar, entonces se utiliza la constante clientDeleteFormWindow para eliminar su contenido
+                                * html gracias a remove() esto para evitar duplicaciones innecesarias de elementos html en el DOM*/
+                                deviceDeleteFormWindow.remove();
+                                /*finalmente se le agrega al fondo de la ventana emergente la clase de estilo "hidThis" para ocultar esta ventana
+                                * al usuario*/
+                                enableOrDisablebackWindow.classList.add("hidThis");
+                            }, 200);
+                            
                         });
                    }); 
                 });
@@ -1595,9 +1674,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
                       /*una vez delcarado parentForm entonces lo utilizamos para acceder al elemento html de la ventana emergente de confirmación de
                        * edición, ese elemento estará contenido en la constante editConfirmationWindow*/
                       const editConfirmationWindow = parentForm.querySelector(".contact-edit__background");
+                      const editConfirmationInfoWindow = editConfirmationWindow.querySelector(".contact-edit__info-window");
                       /*Después, al fondo de la ventana emergente se le quita la clase de estilo "hidThis" para mostrarle al usuario la ventana
                        * emergente de confirmación de edición en cuestión*/
                       editConfirmationWindow.classList.remove("hidThis");
+                      if(editConfirmationInfoWindow.className.includes("activate-pop-out")) editConfirmationInfoWindow.classList.remove("activate-pop-out");
+                      editConfirmationInfoWindow.classList.add("activate-pop-in");
                    }); 
                 });
                 /*Se recorre todos los botones "Cancelar" de las ventanas emergentes de confirmación de edición de equipos generadas en 
@@ -1612,10 +1694,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
                        * el fondo de la ventana emergente de confirmación de edición cuyo botón "Cancelar" esta contenido en esa estructura de ventana 
                        * (la respectiva estructura de ventana emergente de confirmación de edición de equipo es el elemento más cercano del botón que 
                        * se está manejando en el forEach), esa estructura de ventana emergente va a estar contenida en la constante parentWindow*/
-                       const parentWindow = cancelBtn.closest(".contact-edit__background");
+                        const parentWindow = cancelBtn.closest(".contact-edit__background");
+                        const parentInfoWindow = parentWindow.querySelector(".contact-edit__info-window");
+                        parentInfoWindow.classList.remove("activate-pop-in");
+                        parentInfoWindow.classList.add("activate-pop-out");
                        /*Después, al fondo de la ventana emergente se le agrega la clase de estilo "hidThis" para ocultarle al usuario la ventana
                        * emergente de confirmación de edición en cuestión*/
-                       parentWindow.classList.add("hidThis");
+                        setTimeout(() => {parentWindow.classList.add("hidThis");}, 200);
                    });
                 });
             }
@@ -1795,30 +1880,37 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                      * el metodo enableOrDisableBinn del controlador UserController*/
                                     binnDeletebackWindow.innerHTML = `
                                         <form class="binnacle-delete__info-window" action="${BASE_URL}home/?homeController=user&homeAction=enableOrDisableBinn" method="POST">
-                                                <div class="info-window__text-box"><h3>¿Está seguro de ${(delBtn.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} la bitácora 
-                                                        con Id ${delBtn.dataset.id}?, este registro ${(delBtn.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
-                                                        en el apartado de "Reportes de bitácoras" al menos que se seleccione 
-                                                        ${(delBtn.dataset.visibility === "ENABLED") ? 'Desactivado' : 'Activado'} en la caja de selección de "Visible" en la busqueda</h3></div>
-                                                <input type="hidden" value="${delBtn.dataset.id}" name="bitacoraId"/>
-                                                <input type="hidden" value="${(delBtn.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
-                                                <div class="info-window__selectbuttons-box">
-                                                   <input class="selectbuttons-box__button" type="submit" value="${(delBtn.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
-                                                   <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
-                                                </div>
-                                            </form>
+                                            <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/caution-sign_75243.png"/></div>
+                                            <div class="info-window__text-box"><h3>¿Está seguro de ${(delBtn.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} la bitácora 
+                                                    con Id ${delBtn.dataset.id}?, este registro ${(delBtn.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
+                                                    en el apartado de "Reportes de bitácoras" al menos que se seleccione 
+                                                    ${(delBtn.dataset.visibility === "ENABLED") ? 'Desactivado' : 'Activado'} en la caja de selección de "Visible" en la busqueda</h3></div>
+                                            <input type="hidden" value="${delBtn.dataset.id}" name="bitacoraId"/>
+                                            <input type="hidden" value="${(delBtn.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
+                                            <div class="info-window__selectbuttons-box">
+                                                <input class="selectbuttons-box__button" type="submit" value="${(delBtn.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
+                                                <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
+                                            </div>
+                                        </form>
                                     `;
                                     /*Después de cambiar el contenido html de binnDeletebackWindow, entonces toca seleccionar el contenido creado en 
                                      * este contexto, esto es seleccionar la ventana emergente y agregarla en la constante binnDelWindow y el botón
                                      * "Cancelar" el cual se agrega en la constante binnDelCancelBtn*/
                                     const binnDelWindow = binnDeletebackWindow.querySelector(".binnacle-delete__info-window");
                                     const binnDelCancelBtn = binnDeletebackWindow.querySelector(".selectbuttons-box__cancel-delete-button");
+                                    binnDelWindow.classList.add("activate-pop-in");
                                     binnDelCancelBtn.addEventListener("click", ()=>{
-                                        /*Al dar click al botón "Cancelar" lo primero que se hace es agregarle al fondo de la ventana emergente
-                                         * la clase de estilo "hidThis" esto para ocultar la ventana al usuario*/
-                                        binnDeletebackWindow.classList.add("hidThis");
-                                        /*Finalmente es elimina el contenido de la ventana con remove(), esto para evitar duplicaciones innecesarias de elementos
-                                         * html en el DOM*/
+                                        binnDelWindow.classList.remove("activate-pop-in");
+                                        binnDelWindow.classList.add("activate-pop-out");
+                                        setTimeout(() => {
+                                            /*Al dar click al botón "Cancelar" lo primero que se hace es agregarle al fondo de la ventana emergente
+                                            * la clase de estilo "hidThis" esto para ocultar la ventana al usuario*/
+                                            binnDeletebackWindow.classList.add("hidThis");
+                                            /*Finalmente es elimina el contenido de la ventana con remove(), esto para evitar duplicaciones innecesarias de elementos
+                                            * html en el DOM*/
                                         binnDelWindow.remove();
+                                        }, 200);
+                                        
                                     });
                                 });
                             });
@@ -1848,30 +1940,37 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                      * el metodo enableOrDisableBinn del controlador UserController*/
                     binnDeletebackWindow.innerHTML = `
                         <form class="binnacle-delete__info-window" action="${BASE_URL}home/?homeController=user&homeAction=enableOrDisableBinn" method="POST">
-                                <div class="info-window__text-box"><h3>¿Está seguro de ${(delBtn.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} la bitácora 
-                                        con Id ${delBtn.dataset.id}?, este registro ${(delBtn.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
-                                        en el apartado de "Reportes de bitácoras" a menos que se seleccione 
-                                        ${(delBtn.dataset.visibility === "ENABLED") ? '"Desactivado"' : '"Activado"'} en la caja de selección de "Visible:" en el filtrado</h3></div>
-                                <input type="hidden" value="${delBtn.dataset.id}" name="bitacoraId"/>
-                                <input type="hidden" value="${(delBtn.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
-                                <div class="info-window__selectbuttons-box">
-                                   <input class="selectbuttons-box__button" type="submit" value="${(delBtn.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
-                                   <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
-                                </div>
-                            </form>
+                            <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/caution-sign_75243.png"/></div>
+                            <div class="info-window__text-box"><h3>¿Está seguro de ${(delBtn.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} la bitácora 
+                                    con Id ${delBtn.dataset.id}?, este registro ${(delBtn.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
+                                    en el apartado de "Reportes de bitácoras" a menos que se seleccione 
+                                    ${(delBtn.dataset.visibility === "ENABLED") ? '"Desactivado"' : '"Activado"'} en la caja de selección de "Visible:" en el filtrado</h3></div>
+                            <input type="hidden" value="${delBtn.dataset.id}" name="bitacoraId"/>
+                            <input type="hidden" value="${(delBtn.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
+                            <div class="info-window__selectbuttons-box">
+                                <input class="selectbuttons-box__button" type="submit" value="${(delBtn.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
+                                <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
+                            </div>
+                        </form>
                     `;
                     /*Después de cambiar el contenido html de binnDeletebackWindow, entonces toca seleccionar el contenido creado en 
                      * este contexto, esto es seleccionar la ventana emergente y agregarla en la constante binnDelWindow y el botón
                      * "Cancelar" el cual se agrega en la constante binnDelCancelBtn*/
                     const binnDelWindow = binnDeletebackWindow.querySelector(".binnacle-delete__info-window");
                     const binnDelCancelBtn = binnDeletebackWindow.querySelector(".selectbuttons-box__cancel-delete-button");
+                    binnDelWindow.classList.add("activate-pop-in");
                     binnDelCancelBtn.addEventListener("click", ()=>{
-                        /*Al dar click al botón "Cancelar" lo primero que se hace es agregarle al fondo de la ventana emergente
-                         * la clase de estilo "hidThis" esto para ocultar la ventana al usuario*/
-                        binnDeletebackWindow.classList.add("hidThis");
-                        /*Finalmente es elimina el contenido de la ventana con remove(), esto para evitar duplicaciones innecesarias de elementos
-                         * html en el DOM*/
+                        binnDelWindow.classList.remove("activate-pop-in");
+                        binnDelWindow.classList.add("activate-pop-out");
+                        setTimeout(() => {
+                            /*Al dar click al botón "Cancelar" lo primero que se hace es agregarle al fondo de la ventana emergente
+                            * la clase de estilo "hidThis" esto para ocultar la ventana al usuario*/
+                            binnDeletebackWindow.classList.add("hidThis");
+                            /*Finalmente es elimina el contenido de la ventana con remove(), esto para evitar duplicaciones innecesarias de elementos
+                            * html en el DOM*/
                         binnDelWindow.remove();
+                        }, 200);
+                        
                     });
                 });
             });
@@ -1906,12 +2005,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
              * de bitácora la clase de estilo "hidThis", esto para mostrarle al usuario la ventana*/
             editBinnacleBtn.addEventListener("click", ()=>{
                 binnEditConfirmationBackground.classList.remove("hidThis");
+                if(binnEditConfirmationInfoWindow.className.includes("activate-pop-out")) binnEditConfirmationInfoWindow.classList.remove("activate-pop-out");
+                binnEditConfirmationInfoWindow.classList.add("activate-pop-in");
             });
             
             /*Si se da click al botón "Cancelar" entonces se le agrega al fondo de la ventana emergente de confirmación de edición
              * de bitácora la clase de estilo "hidThis", esto para ocultarle al usuario la ventana*/
             binnEditCancelBtn.addEventListener("click", ()=>{
-                binnEditConfirmationBackground.classList.add("hidThis");
+                binnEditConfirmationInfoWindow.classList.remove("activate-pop-in");
+                binnEditConfirmationInfoWindow.classList.add("activate-pop-out");
+                setTimeout(() => {binnEditConfirmationBackground.classList.add("hidThis");}, 200);
             });
         }
         

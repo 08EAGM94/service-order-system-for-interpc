@@ -46,6 +46,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
         
         <div class="userCreationFileds__window-background hidThis" id="userCreationbackWindow">
             <div class="userCreationFileds__info-window" id="userCreationinfoWindow">
+                <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
                 <div class="info-window__text-box"><h3>Administrador, confirme su contraseña antes de continuar</h3></div>
                 <input class="adminpwdfield" type="password" name="adminContrasena"/>
                 <div class="info-window__selectbuttons-box">
