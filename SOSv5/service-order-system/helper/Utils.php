@@ -1226,7 +1226,7 @@
                 
                 if(!empty($bitacoraId)){
                     if(preg_match('/[A-Za-z]+/', $bitacoraId) ||
-                        preg_match('/[!@#$%^&*(),.?":{}|<>]+/', $bitacoraId)){
+                        preg_match('/[=!@#$%^&*(),.?":{}|<>]+/', $bitacoraId)){
                         $errors["bitacoraId"] = "Eres un pillín, no le muevas a lo prohibido...";
                     }
                 }else{
@@ -1235,7 +1235,7 @@
                 
                 if(!empty($estatus)){
                     if(preg_match('/[0-9]+/', $estatus) ||
-                        preg_match('/[!@#$%^&*(),.?":{}|<>]+/', $estatus)){
+                        preg_match('/[=!@#$%^&*(),.?":{}|<>]+/', $estatus)){
                         $errors["estatus"] = "Eres un pillín, no le muevas a lo prohibido...";
                     }
                     if($estatus !== "en proceso"       && 
@@ -1269,7 +1269,7 @@
                         $errors["usuario"] = "Eres un pillín, no le muevas a lo prohibido...";
                     }else{
                         if(preg_match('/[A-Za-z]+/', $globalarr["usuario"]) ||
-                            preg_match('/[!@#$%^&*(),.?":{}|<>]+/', $globalarr["usuario"])){
+                            preg_match('/[=!@#$%^&*(),.?":{}|<>]+/', $globalarr["usuario"])){
                             $errors["usuario"] = "Eres un pillín, no le muevas a lo prohibido...";
                         }
                     }
@@ -1279,8 +1279,8 @@
                     if(trim($globalarr["servicio"]) === ""){
                          $errors["servicio"] = "El servicio no puede estar vacío...";
                     }else{
-                        if(preg_match('/[<>]+/', $globalarr["servicio"])){
-                            $errors["servicio"] = 'Su descripción de servicio tiene símbolos no válidos, ejemplo: <>';
+                        if(preg_match('/[<>=]+/', $globalarr["servicio"])){
+                            $errors["servicio"] = 'Su descripción de servicio tiene símbolos no válidos, ejemplo: <> o =';
                         }
                     }
                 }
@@ -1289,8 +1289,8 @@
                     if(trim($globalarr["seHizo"]) === ""){
                         $errors["servicio"] = "El campo actividades realizadas no puede estar vacío...";
                     }else{
-                        if(preg_match('/[<>]+/', $globalarr["seHizo"])){
-                            $errors["seHizo"] = 'Su descripción de actividades realizadas tiene símbolos no válidos, ejemplo: <>';
+                        if(preg_match('/[<>=]+/', $globalarr["seHizo"])){
+                            $errors["seHizo"] = 'Su descripción de actividades realizadas tiene símbolos no válidos, ejemplo: <> o =';
                         }
                     }
                 }
@@ -1299,15 +1299,15 @@
                     if(trim($globalarr["motivoCancelacion"]) === ""){
                         $errors["motivoCancelacion"] = "El campo motivo de cancelación no puede estar vacío...";
                     }else{
-                        if(preg_match('/[<>]+/', $globalarr["motivoCancelacion"])){
-                            $errors["motivoCancelacion"] = 'Su descripción de motivo de cancelación tiene símbolos no válidos, ejemplo: <>';
+                        if(preg_match('/[<>=]+/', $globalarr["motivoCancelacion"])){
+                            $errors["motivoCancelacion"] = 'Su descripción de motivo de cancelación tiene símbolos no válidos, ejemplo: <> o =';
                         }
                     }
                 }
                 
                 if(isset($globalarr["observaciones"])){
-                    if(preg_match('/[<>]+/', $globalarr["observaciones"])){
-                            $errors["observaciones"] = 'Su descripción de observaciones tiene símbolos no válidos, ejemplo: <>';
+                    if(preg_match('/[<>=]+/', $globalarr["observaciones"])){
+                            $errors["observaciones"] = 'Su descripción de observaciones tiene símbolos no válidos, ejemplo: <> o =';
                     }
                 }
 
