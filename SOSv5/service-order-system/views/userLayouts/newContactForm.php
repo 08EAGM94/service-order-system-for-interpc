@@ -5,28 +5,23 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->
-    <?php if(!empty($_SESSION["insertContactSucceed"])):?>
-    <div class="succeed-box"><?=$_SESSION["insertContactSucceed"];?></div>
+    <?php if (!empty($_SESSION["success"])): ?>
+        <div class="succeed-box"><?= $_SESSION["success"]; ?></div>
     <?php endif; ?>
     
-        
-    <?php if(!empty($_SESSION["getInfoForSelectException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["getInfoForSelectException"];?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["contactWithEnterIdInsertionException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["contactWithEnterIdInsertionException"];?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["contactTotalInsertionException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["contactTotalInsertionException"];?></div>
-    <?php endif; ?>
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
+        <?php endforeach;?>
+    <?php endif;?>
     
-    <?php if(!empty($_SESSION["contactFormErr"])):?>
-        <?php foreach($_SESSION["contactFormErr"] as $err):?>
-            <div class="invalidinput-box"><?=$err;?></div>
-        <?php endforeach;?>    
+    <?php if(!empty($_SESSION["errors"])):?>
+        <?php foreach($_SESSION["errors"] as $err):?>
+            <div class="invalidinput-box"><?=$err?></div>
+        <?php endforeach;?>
     <?php endif;?>
             
-    <form class="newContactForm" action="<?= base_url;?>home/?homeController=user&homeAction=insertContact" method="POST">
+    <form class="newContactForm" action="<?= base_url;?>home/?homeController=contact&homeAction=insertContact" method="POST">
         <div class="registration__window-background hidThis" id="backWindow">
             <div class="registration__info-window" id="infoWindow">
                 <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
@@ -141,4 +136,4 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
 </main>
 <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
 sesiones de mensajes de errores, excepciones y de exito en un proceso -->
-<?php Utils::unsetFlagsSessions();?>
+<?php Utils::unsetFlagsSessions();

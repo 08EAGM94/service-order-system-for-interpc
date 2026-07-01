@@ -22,23 +22,13 @@ header('Content-Type: text/html; charset=utf-8');
 /*Esta sección está dedicada a la importación de dependencias, todas son clases pertenecientes a este proyecto, 
  * nuestro autoload principal puede importar cualquier clase de la carpeta models (la carpeta con más 
  * clases en este proyecto), clases que representan las tablas de la base de datos de esta aplicación web.*/    
-    require_once '../config/DataBaseMssql.php';
-    require_once '../autoload.php';
     require_once '../config/params.php';
-    require_once '../helper/Utils.php';
-    //es aqui donde tambien se importan los controladores principales de este index para gestionar 
-    //las acciones del usuario en el formulario extendido de una bitácora
-    require_once '../controllers/ErrorController.php';
-    require_once '../controllers/FormController.php';
+    require_once '../vendor/autoload.php';
 //---------------------------------------------------------------------------------------------------    
 /*Hay algunos métodos estáticos de la clase Utils como estos que necesitan ser invocados antes de cualquier 
  * elemento html, para más información de estos métodos estaticos abra el archivo Utils.php de la carpeta helper*/    
-    Utils::putSessionWithVerify();
-    Utils::sessionLifetime();
-    Utils::saveSignaturesFiles();
-    Utils::updateUserWithSignature();
-    Utils::setDataSelectionForSigns();
-
+    $container = FinishingContainerFactory::build();
+    FinishingUtils::setUtils($container);
 /*Se importa una vista donde inicia la semantica html, el archivo head.php indica que es HTML5, abre la etiqueta 
  * <html> y la etiqueta <head> donde se coloca estilos css y scripts de JavaScript para la funcionalidad del lado 
  * del cliente, finalmente se abre la etiqueta <body>*/    
@@ -55,14 +45,14 @@ header('Content-Type: text/html; charset=utf-8');
  * con el string "Controller", al poner esto en class_exists la función podrá devolver un true si están estas posibilidades: 
  * (ErrorController o FormController) ya que estas clases si están en este archivo, por el contrario class_exists devolverá un 
  * false si se anota en la clave "controller" algo diferente de "error" o "form" o si directamente la clave no tiene un valor*/    
-    if(!empty($_GET["controller"]) && class_exists(ucfirst($_GET["controller"])."Controller")){
+    if((!empty($_GET["controller"]) && $_GET["controller"] === "followupform") && class_exists(ucfirst($_GET["controller"])."Controller")){
         /*si entra en el bloque true de este if quiere decir que el indice "controller" tiene los valores "error" o "form", por 
          * lo que se guarda el nombre del controlador en cuestión en la variable $controllerName usando la misma técnica usada en 
          * la función class_exists*/
         $controllerName = ucfirst($_GET["controller"])."Controller";
         /*Se utiliza la variable $controllerName el cual contiene el nombre del controlador en cuastión para crear una instancia 
          * de esa clase*/
-        $controlador = new $controllerName();
+        $controlador = $container->get($controllerName);
         
         /*se efectua otro if pero ahora evaluando la clave "action", si esta existe y si su valor (nombre del método en 
          * cuestión) existe en la clase del controlador, si este if da true, entonces se utiliza la clave "action" para guardar 
@@ -74,13 +64,13 @@ header('Content-Type: text/html; charset=utf-8');
             $action = $_GET["action"];
             $controlador->$action();
         }else{
-            Utils::showError();
+            Utils::showError($container);
         }
     }else{
         /*Se necesita una tercer clave "id" del GET para poder acceder a la vista por defecto de este index (la clave "id" lo proporcionan 
          * los elementos link de la vista de seguimiento de bitácoras del index de home followUp.php), por lo tanto, si no se 
          * anota ningun parametro get en la url, entonces la vista "por defecto" de este index será el mensaje "LA PÁGINA QUE BUSCAS NO EXISTE"*/
-        Utils::showError();
+        Utils::showError($container);
     }
     
     /*Finalmente se importa la vista html footer.php para poner fin a la semantica html (se cierra la etiqueta <body> y <html>)*/

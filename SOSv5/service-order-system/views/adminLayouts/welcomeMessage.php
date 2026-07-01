@@ -6,36 +6,11 @@ sesiones y variables inicializadas por los controladores en sus métodos de vist
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->
-    <?php if(!empty($_SESSION["identitySessionUpdateEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["identitySessionUpdateEx"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["remindedOrConsentReportEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["remindedOrConsentReportEx"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["followUpQueryEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["followUpQueryEx"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["followUpNumRowsEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["followUpNumRowsEx"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["paginationArrException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["paginationArrException"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["clientArrayException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["clientArrayException"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["enterpriseArrayException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["enterpriseArrayException"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["deviceArrayException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["deviceArrayException"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["typeArrayException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["typeArrayException"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["unlinkTechSignEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["unlinkTechSignEx"]?></div>
-    <?php endif; ?>
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
+        <?php endforeach;?>
+    <?php endif;?>
     
     
     <div class="welcome-message__message-box">
@@ -54,12 +29,12 @@ sesiones y variables inicializadas por los controladores en sus métodos de vist
             un usuario es via gestor de bases de datos con la autorización del personal encargado de administrar las bases de datos en la empresa. 
         </div>
     </div>
-    <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
-sesiones de mensajes de errores, excepciones y de exito en un proceso -->
-    <?php Utils::unsetFlagsSessions();?>
-    <!-- Este tipo de vista se usa tambien como comodín para poder eliminar las sesiones generadas por otros procesos, para más información sobre estos métodos estaticos, 
-consulta el archivo Utils.php-->
-    <?php Utils::unsetFormSessions();?>
-    <?php Utils::unsetBinnFilterSessions();?>
-    <?php Utils::unsetIdSessionsOfSearchForms();?>
 </main>
+<!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
+sesiones de mensajes de errores, excepciones y de exito en un proceso -->
+<?php Utils::unsetFlagsSessions();?>
+<!-- Este tipo de vista se usa tambien como comodín para poder eliminar las sesiones generadas por otros procesos, para más información sobre estos métodos estaticos, 
+consulta el archivo Utils.php-->
+<?php Utils::unsetFormSessions();?>
+<?php Utils::unsetBinnFilterSession();?>
+<?php Utils::unsetSearchFormsIdSession();

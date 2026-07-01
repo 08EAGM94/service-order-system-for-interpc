@@ -20,33 +20,24 @@ sesiones y variables inicializadas por los controladores en sus métodos de vist
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->
-    <?php if (!empty($_SESSION["userPWDSucceed"])): ?>
-        <div class="succeed-box"><?= $_SESSION["userPWDSucceed"]; ?></div>
+    <?php if (!empty($_SESSION["success"])): ?>
+        <div class="succeed-box"><?= $_SESSION["success"]; ?></div>
     <?php endif; ?>
-    <?php if (!empty($_SESSION["disableUserSuccess"])): ?>
-        <div class="succeed-box"><?= $_SESSION["disableUserSuccess"]; ?></div>
-    <?php endif; ?>
-        
-
-    <?php if (!empty($_SESSION["gettingUsersException"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["gettingUsersException"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["userInfoException"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["userInfoException"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["disableUserEx"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["disableUserEx"]; ?></div>
-    <?php endif; ?>    
-     
-        
-    <?php if(!empty($_SESSION["userPWDErr"])):?>
-        <?php foreach($_SESSION["userPWDErr"] as $err):?>
-            <div class="invalidinput-box"><?= $err;?></div>
+    
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
+        <?php endforeach;?>
+    <?php endif;?>
+    
+    <?php if(!empty($_SESSION["errors"])):?>
+        <?php foreach($_SESSION["errors"] as $err):?>
+            <div class="invalidinput-box"><?=$err?></div>
         <?php endforeach;?>
     <?php endif;?>
             
     
-    <?php if(!empty($_SESSION["userNewPwd_userId"])): ?>
+    <?php if(!empty($_SESSION["idSession"]["userNewPwd_userId"]) && sizeof($user_info) > 0): ?>
     
     <div class="userDelete__window-background hidThis" id="userDeletebackWindow">
         <form class="userDelete__info-window" id="userDeleteinfoWindow" action="<?= base_url; ?>home/?homeController=user&homeAction=disableUser" method="POST">
@@ -54,7 +45,7 @@ sesiones y variables inicializadas por los controladores en sus métodos de vist
             <div class="info-window__text-box"><h3>¿Está seguro de desactivar este usuario?, este usuario ya no tendrá más acceso a la aplicación y no será 
                     visible en el apartado de "Configuración de usuarios", confirme su 
                     contraseña antes de continuar</h3></div>
-            <input type="hidden" value="<?=$_SESSION["userNewPwd_userId"]?>" name="usuarioId"/>
+            <input type="hidden" value="<?=$_SESSION["idSession"]["userNewPwd_userId"]?>" name="usuarioId"/>
             <input type="hidden" value="DISABLED" name="visibilidad"/>
             <input class="adminpwdfield" type="password" name="adminContrasena"/>
             <div class="info-window__selectbuttons-box">
@@ -134,4 +125,4 @@ sesiones y variables inicializadas por los controladores en sus métodos de vist
 </main>
 <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
 sesiones de mensajes de errores, excepciones y de exito en un proceso -->
-<?php Utils::unsetFlagsSessions();?>
+<?php Utils::unsetFlagsSessions();

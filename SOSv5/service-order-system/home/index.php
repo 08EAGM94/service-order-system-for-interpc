@@ -30,29 +30,23 @@ header('Content-Type: text/html; charset=utf-8');
  * unico autoload que importa dependencias "externas" (zebraPagination y domPDF), lo demás son clases pertenecientes a este proyecto, 
  * nuestro autoload principal puede importar cualquier clase de la carpeta models (la carpeta con más 
  * clases en este proyecto), clases que representan las tablas de la base de datos de esta aplicación web.*/
-    require_once '../config/DataBaseMssql.php';
-    require_once '../autoload.php';
-    require_once '../vendor/autoload.php';
     require_once '../config/params.php';
-    require_once '../helper/Utils.php';
+    require_once '../vendor/autoload.php';
+    
     //es aqui donde tambien se importan los controladores principales de este index para gestionar 
     //las acciones del usuario en la aplicación web
-    require_once '../controllers/ErrorController.php';
-    require_once '../controllers/UserController.php';
 //---------------------------------------------------------------------------------------------------    
 /*Hay algunos métodos estáticos de la clase Utils como estos que necesitan ser invocados antes de cualquier 
  * elemento html, para más información de estos métodos estaticos abra el archivo Utils.php de la carpeta helper*/    
-    Utils::putSessionWithVerify();
-    Utils::sessionLifetime();
-    Utils::reportPdfGenerator();
-    Utils::ajaxProcedure();
+    $container = HomeContainerFactory::build();
+    HomeUtils::setUtils($container);
     
 /*Se importa una vista donde inicia la semantica html, el archivo head.php indica que es HTML5, abre la etiqueta 
  * <html> y la etiqueta <head> donde se coloca estilos css y scripts de JavaScript para la funcionalidad del lado 
  * del cliente, finalmente se abre la etiqueta <body>*/
     require_once '../views/userLayouts/menuSides/head.php';
 //este método estatico sigue la semantica html agregando un elemento <header> al body, en este caso un banner de bienvenida
-     Utils::generateWelcomeBanner();
+    Utils::generateWelcomeBanner();
 
 /*Esta aplicación web funciona con paramentros GET en el url del navegador, hay dos claves en el GET, "homeController" el 
  * cual necesita como valor el nombre parcial del controlador, en este caso "error" o "user" y la clave "homeAction" el cual 
@@ -72,7 +66,7 @@ header('Content-Type: text/html; charset=utf-8');
         $controllerName = ucfirst($_GET["homeController"]) . "Controller";
         /*Se utiliza la variable $controllerName el cual contiene el nombre del controlador en cuastión para crear una instancia 
          * de esa clase*/
-        $controlador = new $controllerName();
+        $controlador = $container->get($controllerName);
         
         /*se efectua otro if pero ahora evaluando la clave "homeAction", si esta existe y si su valor (nombre del método en 
          * cuestión) existe en la clase del controlador, si este if da true, entonces se utiliza la clave "homeAction" para guardar 
@@ -86,13 +80,13 @@ header('Content-Type: text/html; charset=utf-8');
             $controlador->$action();
             
         } else {
-            Utils::showError();
+            Utils::showError($container);
         }
     } else {
         /*si se anota en la clave "homeController" algo diferente a "error" o "user" o si la clave no tiene un valor entonces 
          * entra en el bloque false, en el se utiliza el método estatico defaultUserPage para cargar la vista por defecto de 
          * este index,*/
-        Utils::defaultUserPage();
+        Utils::defaultHomePage($container);
     }
     
     /*en esta zona se genera el html de navegación, el método estático setAsideWithVerify genera el menú lateral del administrador y en 

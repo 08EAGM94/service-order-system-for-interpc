@@ -43,7 +43,7 @@
         <script>const BASE_URL = "<?=base_url;?>";</script>
         <script defer src="<?= base_url; ?>assets/js/jquery-3.7.1.min.js"></script>
         <script defer src="<?= base_url; ?>assets/js/select2.min.js"></script>
-        <script src="<?= base_url; ?>assets/js/user.home.js"></script>
+        <script type="module" src="<?= base_url; ?>assets/js/home.js"></script>
         <?php endif; ?>
         <title><?=(empty($_SESSION["identity"])) ? "S.O.S Login" : "S.O.S"?></title>
     </head>

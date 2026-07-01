@@ -6,20 +6,22 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->
-    <?php if(!empty($_SESSION["insertTypeSucceed"])):?>
-    <div class="succeed-box"><?=$_SESSION["insertTypeSucceed"]?></div>
+    <?php if (!empty($_SESSION["success"])): ?>
+        <div class="succeed-box"><?= $_SESSION["success"]; ?></div>
     <?php endif; ?>
     
-    <?php if(!empty($_SESSION["typeInsertionException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["typeInsertionException"];?></div>
-    <?php endif; ?>
-    
-    <?php if(!empty($_SESSION["typeFormErr"])):?>
-        <?php foreach($_SESSION["typeFormErr"] as $err):?>
-            <div class="invalidinput-box"><?=$err;?></div>
-        <?php endforeach;?>    
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
+        <?php endforeach;?>
     <?php endif;?>
-    <form class="newTypeForm" action="<?= base_url;?>home/?homeController=user&homeAction=insertType" method="POST">
+    
+    <?php if(!empty($_SESSION["errors"])):?>
+        <?php foreach($_SESSION["errors"] as $err):?>
+            <div class="invalidinput-box"><?=$err?></div>
+        <?php endforeach;?>
+    <?php endif;?>
+    <form class="newTypeForm" action="<?= base_url;?>home/?homeController=type&homeAction=insertType" method="POST">
         <div class="registration__window-background hidThis" id="backWindow">
             <div class="registration__info-window" id="infoWindow">
                 <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
@@ -55,4 +57,4 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
 </main>
 <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
 sesiones de mensajes de errores, excepciones y de exito en un proceso -->
-<?php Utils::unsetFlagsSessions();?>
+<?php Utils::unsetFlagsSessions();

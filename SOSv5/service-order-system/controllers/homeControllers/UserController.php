@@ -22,8 +22,7 @@ class UserController{
         if(!empty($_SESSION["identity"])){
             $_SESSION['LAST_ACTIVITY'] = time();
 
-            $get_params = "";
-            NewUtils::setIdSession();
+            Utils::setIdSession();
 
             try{
                 if(!empty($_SESSION["isAdmin"]))
@@ -53,6 +52,8 @@ class UserController{
                         }
                     }
                 }
+            }catch(WrongObjectException $ex){
+                $_SESSION["exceptions"]["wrongObjectEx"] = $ex->getMessage();
             }catch(EntityException $ex){
                 $_SESSION["exceptions"]["entitiesEx"] = $ex->getMessage();
             }catch(Exception $ex){
@@ -62,7 +63,6 @@ class UserController{
                 $user_info = [];                
             }finally{
                 require_once '../views/userLayouts/editSign.php';
-                exit;
             }
 
         }else{
@@ -76,18 +76,19 @@ class UserController{
         if(!empty($_SESSION["identity"]) && !empty($_SESSION["isAdmin"])){
             $_SESSION['LAST_ACTIVITY'] = time();
             
-            $get_params = "";
-            NewUtils::setIdSession();
+            Utils::setIdSession();
 
             try{
 
                 $users = $this->usrService->getAllInfo();
 
-                if(!empty($_SESSION["userNewPwd_userId"])){
-                    $this->usrDTO->user_id = $_SESSION["userNewPwd_userId"];
+                if(!empty($_SESSION["idSession"]["userNewPwd_userId"])){
+                    $this->usrDTO->user_id = $_SESSION["idSession"]["userNewPwd_userId"];
                     $user_info = $this->usrService->getInfo($this->usrDTO);
                 }
                 
+            }catch(WrongObjectException $ex){
+                $_SESSION["exceptions"]["wrongObjectEx"] = $ex->getMessage();
             }catch(EntityException $ex){
                 $_SESSION["exceptions"]["entitiesEx"] = $ex->getMessage(); 
             }catch(Exception $ex){
@@ -119,7 +120,6 @@ class UserController{
                 if(sizeof($errorArr) === 0){
                     
                     $possible_user = $this->usrParticularSrv->login($this->usrDTO);
-                    
                     (empty($possible_user["loginFailed"])) ?
                         $_SESSION["identity"] = $possible_user :
                         $_SESSION["errors"] = $possible_user;
@@ -130,12 +130,14 @@ class UserController{
                     $_SESSION["errors"] = $errorArr;
                 }
 
+            }catch(WrongObjectException $ex){
+                $_SESSION["exceptions"]["wrongObjectEx"] = $ex->getMessage();
             }catch(UnknownInDataBaseException $ex){
                 $_SESSION["exceptions"]["unknownInDB"] = $ex->getMessage();
             }catch(EntityException $ex){
                 $_SESSION["exceptions"]["entitiesEx"] = $ex->getMessage();
             }catch(Exception $ex){
-                $_SESSION["exceptions"]["withoutConnextion"] = "Se ha cortado la conexión a la base de datos";
+                $_SESSION["exceptions"]["withoutConnextion"] = "Se ha cortado la conexión a la base de datos". $ex;
             }finally{
                 header("Location: ".base_url."home/");
                 exit;
@@ -170,12 +172,12 @@ class UserController{
             $this->usrDTO->conf_pwd = $_POST["confContrasena"];
             $this->usrDTO->privilegio = $_POST["privilegio"];
             $this->usrDTO->admin_pwd = $_POST["adminContrasena"];
-            $errorArr = UserVerifications::verifyingLogin($this->usrDTO);
+            $errorArr = UserVerifications::verifyingInsertion($this->usrDTO);
 
             try{
                 
                 if(empty($errorArr["adminContrasena"]))
-                    $isRejection = NewUtils::setAdminVerification($this->usrDTO, $this->usrParticularSrv);
+                    $isRejection = Utils::setAdminVerification($this->usrDTO, $this->usrParticularSrv);
                 if(sizeof($isRejection) > 0)
                     $errorArr = $isRejection;
 
@@ -183,6 +185,10 @@ class UserController{
                     $this->usrService->insertInfo($this->usrDTO) :
                     $_SESSION["errors"] = $errorArr;
 
+                if(empty($_SESSION["errors"]))
+                    $_SESSION["success"] = "El usuario ha sido creado con éxito";
+            }catch(WrongObjectException $ex){
+                $_SESSION["exceptions"]["wrongObjectEx"] = $ex->getMessage();
             }catch(UnknownInDataBaseException $ex){
                 $_SESSION["exceptions"]["unknownInDB"] = $ex->getMessage();
             }catch(EntityException $ex){
@@ -190,7 +196,7 @@ class UserController{
             }catch(Exception $ex){
                 $_SESSION["exceptions"]["userDataException"] = "Acción fallida, probable nombre de usuario existente en la base de datos o falta de conexión a la base de datos";
             }finally{
-                header("Location: ".base_url."home/?homeController=user&homeAction=createUser");
+                header("Location: ".base_url."home/?homeController=user&homeAction=index");
                 exit;
             }
 
@@ -211,7 +217,7 @@ class UserController{
 
             try{
                 if(empty($errorArr["adminContrasena"]))
-                    $isRejection = NewUtils::setAdminVerification($this->usrDTO, $this->usrParticularSrv);
+                    $isRejection = Utils::setAdminVerification($this->usrDTO, $this->usrParticularSrv);
                 if(sizeof($isRejection) > 0)
                     $errorArr = $isRejection;
 
@@ -220,8 +226,10 @@ class UserController{
                     $_SESSION["errors"] = $errorArr;
 
                 if(empty($_SESSION["errors"]))
-                    $_SESSION["success"]["userPWDSucceed"] = "La contraseña se reestableció "
+                    $_SESSION["success"] = "La contraseña se reestableció "
                             . "con éxito";    
+            }catch(WrongObjectException $ex){
+                $_SESSION["exceptions"]["wrongObjectEx"] = $ex->getMessage();
             }catch(UnknownInDataBaseException $ex){
                 $_SESSION["exceptions"]["unknownInDB"] = $ex->getMessage();
             }catch(EntityException $ex){
@@ -250,7 +258,7 @@ class UserController{
 
             try{
                 if(empty($errorArr["adminContrasena"]))
-                    $isRejection = NewUtils::setAdminVerification($this->usrDTO, $this->usrParticularSrv);
+                    $isRejection = Utils::setAdminVerification($this->usrDTO, $this->usrParticularSrv);
                 if(sizeof($isRejection) > 0)
                     $errorArr = $isRejection;
 
@@ -259,9 +267,11 @@ class UserController{
                     $_SESSION["errors"] = $errorArr;
                 
                 if(empty($_SESSION["errors"])){
-                    $_SESSION["success"]["disableUserSuccess"] = "Se desactivó al usuario con éxito".
+                    $_SESSION["success"] = "Se desactivó al usuario con éxito";
                     $_SESSION["idSession"]["userNewPwd_userId"] = false;
                 }    
+            }catch(WrongObjectException $ex){
+                $_SESSION["exceptions"]["wrongObjectEx"] = $ex->getMessage();
             }catch(UnknownInDataBaseException $ex){
                 $_SESSION["exceptions"]["unknownInDB"] = $ex->getMessage();
             }catch(AutomaticValueException $ex){

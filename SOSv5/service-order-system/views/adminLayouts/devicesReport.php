@@ -4,14 +4,14 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
 <main class="devicesReport-main">
     
     <div class="searchForm-wrapper">
-        <form class="searchForm" action="<?= base_url;?>home/?homeController=user&homeAction=devicesReport" method="POST">
+        <form class="searchForm" action="<?= base_url;?>home/?homeController=device&homeAction=devicesReport" method="POST">
             <div class="searchEntersForm__elterSelect-wrapper">
                 <select class="js-example-placeholder-single" name="empresas" id="entersSelect">
                     <option></option>
                     <?php if (sizeof($enters) > 0): ?>
                         <?php foreach ($enters as $enter): ?>
-                            <?php if(!empty($_SESSION["devicesReport_enterId"])):?>
-                            <option value="<?= $enter["Id"]; ?>" <?= ($_SESSION["devicesReport_enterId"] === $enter["Id"]) ? 'selected' : '';?>><?= $enter["Nombre_comercial"]; ?> - <?= (!empty($enter["Razon_social"])) ? $enter["Razon_social"] : ''; ?></option>
+                            <?php if(!empty($_SESSION["idSession"]["devicesReport_enterId"])):?>
+                            <option value="<?= $enter["Id"]; ?>" <?= ($_SESSION["idSession"]["devicesReport_enterId"] === $enter["Id"]) ? 'selected' : '';?>><?= $enter["Nombre_comercial"]; ?> - <?= (!empty($enter["Razon_social"])) ? $enter["Razon_social"] : ''; ?></option>
                             <?php else:?>
                             <option value="<?= $enter["Id"]; ?>"><?= $enter["Nombre_comercial"]; ?> - <?= (!empty($enter["Razon_social"])) ? $enter["Razon_social"] : ''; ?></option>
                             <?php endif;?>
@@ -21,9 +21,9 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
             </div>
 
             <input class="devicesReport__submit" type="submit" value="Buscar"/>
-            <?php if(!empty($_SESSION["devicesReport_enterId"])):?>
+            <?php if(!empty($_SESSION["idSession"]["devicesReport_enterId"])):?>
                 <?php if(sizeof($enter_devices) > 0):?> 
-            <a class="devicesReport__pdf-button" href="<?=base_url;?>home/?homeController=user&homeAction=generateDevicesReport">PDF</a>
+            <a class="devicesReport__pdf-button" href="<?=base_url;?>home/?homeController=device&homeAction=generateDevicesReport">PDF</a>
                 <?php endif;?>
             <?php endif;?>
         </form>
@@ -32,21 +32,14 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->   
-    <?php if (!empty($_SESSION["num_of_devicesEx"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["num_of_devicesEx"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["gettingEntersException"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["gettingEntersException"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["deviceReportException"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["deviceReportException"]; ?></div>
-    <?php endif; ?>     
-    <?php if (!empty($_SESSION["enterpriseInfoException"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["enterpriseInfoException"]; ?></div>
-    <?php endif; ?>
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
+        <?php endforeach;?>
+    <?php endif;?>
    
         
-    <?php if(!empty($_SESSION["devicesReport_enterId"])):?>
+    <?php if(!empty($_SESSION["idSession"]["devicesReport_enterId"])):?>
         <?php if(sizeof($enter_devices) > 0):?>    
     <div class="devicesReport__info-box" id="devicesReportInfoBox">
         
@@ -134,4 +127,4 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
 </main>
 <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
 sesiones de mensajes de errores, excepciones y de exito en un proceso -->  
-<?php Utils::unsetFlagsSessions();?>
+<?php Utils::unsetFlagsSessions();

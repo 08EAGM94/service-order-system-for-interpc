@@ -3,35 +3,26 @@
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->
-    <?php if (!empty($_SESSION["updateTypeSucceed"])): ?>
-        <div class="succeed-box"><?= $_SESSION["updateTypeSucceed"]; ?></div>
+    <?php if (!empty($_SESSION["success"])): ?>
+        <div class="succeed-box"><?= $_SESSION["success"]; ?></div>
     <?php endif; ?>
-    <?php if (!empty($_SESSION["disableTypeSuccess"])): ?>
-        <div class="succeed-box"><?= $_SESSION["disableTypeSuccess"]; ?></div>
-    <?php endif; ?>    
-        
-    <?php if (!empty($_SESSION["updateTypeException"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["updateTypeException"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["disableTypeEx"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["disableTypeEx"]; ?></div>
-    <?php endif; ?>     
     
-    <?php if(!empty($_SESSION["updateTypeInfoErr"])):?>
-        <?php foreach($_SESSION["updateTypeInfoErr"] as $err):?>
-            <div class="invalidinput-box"><?= $err;?></div>
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
         <?php endforeach;?>
     <?php endif;?>
-    <?php if(!empty($_SESSION["disableTypeErr"])):?>
-        <?php foreach($_SESSION["disableTypeErr"] as $err):?>
-            <div class="invalidinput-box"><?= $err;?></div>
+    
+    <?php if(!empty($_SESSION["errors"])):?>
+        <?php foreach($_SESSION["errors"] as $err):?>
+            <div class="invalidinput-box"><?=$err?></div>
         <?php endforeach;?>
     <?php endif;?>        
         
     <?php if(sizeof($types_arr) > 0):?>
     <?php foreach ($types_arr as $type):?>
-    <form class="edit-forms__type-form" action="<?= base_url;?>home/?homeController=user&homeAction=updateTypeInfo" method="Post">
-        <div class="contact-edit__background hidThis">
+    <form class="edit-forms__type-form" action="<?= base_url;?>home/?homeController=type&homeAction=updateTypeInfo" method="Post">
+        <div class="edit__background hidThis">
             <div class="contact-edit__info-window">
                 <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
                 <div class="info-window__text-box"><h3>¿Está seguro de editar el tipo con ID <?=$type["Id"];?>?, verifique su contraseña antes de continuar</h3></div>
@@ -70,4 +61,4 @@
 </main>
 <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
 sesiones de mensajes de errores, excepciones y de exito en un proceso -->        
-<?php Utils::unsetFlagsSessions();?>
+<?php Utils::unsetFlagsSessions();

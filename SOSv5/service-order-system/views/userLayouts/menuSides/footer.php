@@ -13,34 +13,34 @@ ir despues de cualquier vista generada por controladores, si no se hace, PHP arr
     <div class="mobile-navbar__body">
         <nav class="mobile-navbar__nav">
             <ul class="mobile-navbar__linkList">
-                <li class="mobile-navbar__row"><a class="mobile-navbar__row-link" href="<?= base_url;?>home/?homeController=user&homeAction=newbinnacle">Nueva Bitácora</a></li>
-                <li class="mobile-navbar__row"><a class="mobile-navbar__row-link" href="<?= base_url;?>home/?homeController=user&homeAction=followuplist">Seguimiento de Bitácoras</a></li>
+                <li class="mobile-navbar__row"><a class="mobile-navbar__row-link" href="<?= base_url;?>home/?homeController=binnacle&homeAction=index">Nueva Bitácora</a></li>
+                <li class="mobile-navbar__row"><a class="mobile-navbar__row-link" href="<?= base_url;?>home/?homeController=binnacle&homeAction=followuplist">Seguimiento de Bitácoras</a></li>
                 <li class="mobile-navbar__row">
                     <a class="mobile-navbar__row-link" href="#">Crear registros <div class="mobile-navbar__icon-wrapper"><i class="fa-solid fa-chevron-down" style="top: 1.5rem;"></i></div></a>
                     <ul class="mobile-submenu__linkList">
-                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=user&homeAction=newcontact">Crear contacto</a></li>
-                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=user&homeAction=newdevicetype">Crear tipo de equipo</a></li>
-                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=user&homeAction=newdevice">Crear un equipo</a></li>    
+                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=contact&homeAction=newcontact">Crear contacto</a></li>
+                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=type&homeAction=newdevicetype">Crear tipo de equipo</a></li>
+                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=device&homeAction=newdevice">Crear un equipo</a></li>    
                     </ul>
                 </li>
                 <li class="mobile-navbar__row">
                     <a class="mobile-navbar__row-link" href="#">Editar registros <div class="mobile-navbar__icon-wrapper"><i class="fa-solid fa-chevron-down" style="top: 1.5rem;"></i></div></a>
                     <ul class="mobile-submenu__linkList">
-                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=user&homeAction=editEnterprise">Editar empresa y sus contactos</a></li>
-                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=user&homeAction=editTypes">Editar tipos de equipo</a></li>
-                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=user&homeAction=editDevice">Editar equipos de una empresa</a></li>    
+                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=enterprise&homeAction=index">Editar empresa y sus contactos</a></li>
+                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=type&homeAction=editTypes">Editar tipos de equipo</a></li>
+                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=device&homeAction=editDevice">Editar equipos de una empresa</a></li>    
                     </ul>
                 </li>
                 <li class="mobile-navbar__row">
                     <a class="mobile-navbar__row-link" href="#" style="padding-right: 1rem;">Configuración de Usuarios <div class="mobile-navbar__icon-wrapper"><i class="fa-solid fa-chevron-down" style="top: 1.5rem;"></i></div></a>
                     <ul class="mobile-submenu__linkList">
-                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=user&homeAction=createUser">Crear Usuario</a></li>
+                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=user&homeAction=index">Crear Usuario</a></li>
                         <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=user&homeAction=userNewPassword">Reestablecer contraseñas</a></li>
                         <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=user&homeAction=editSign">Editar firmas</a></li>    
                     </ul>
                 </li>
-                <li class="mobile-navbar__row"><a class="mobile-navbar__row-link" href="<?= base_url;?>home/?homeController=user&homeAction=devicesReport">Reportes de Dispositivos</a></li>
-                <li class="mobile-navbar__row"><a class="mobile-navbar__row-link" href="<?= base_url;?>home/?homeController=user&homeAction=binnaclesReport">Reportes de Bitácoras</a></li>
+                <li class="mobile-navbar__row"><a class="mobile-navbar__row-link" href="<?= base_url;?>home/?homeController=device&homeAction=devicesReport">Reportes de Dispositivos</a></li>
+                <li class="mobile-navbar__row"><a class="mobile-navbar__row-link" href="<?= base_url;?>home/?homeController=binnacle&homeAction=binnaclesReport">Reportes de Bitácoras</a></li>
                 <li class="mobile-navbar__row"><a class="mobile-navbar__row-link-logout" href="<?= base_url;?>home/?homeController=user&homeAction=logout">Salir de la aplicación</a></li>
             </ul>
         </nav>

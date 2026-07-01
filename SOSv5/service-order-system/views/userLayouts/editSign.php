@@ -15,9 +15,9 @@
             <input class="userform__submit without-marginTop" type="submit" value="Buscar"/>
         </form>
         </div>
-        <?php if(!empty($_SESSION["userSign_userId"])):?>
+        <?php if(!empty($_SESSION["idSession"]["userSign_userId"])):?>
         <?php if(!empty($user_info["Firma"])):?>
-        <form class="editSign-form" action="<?= base_url;?>finishing/?controller=form&action=techsign" method="POST">
+        <form class="editSign-form" action="<?= base_url;?>finishing/?controller=followupform&action=techsign" method="POST">
             <div class="edit-sign-fieldset__wrapper">
                 <fieldset class="sign-column__fieldset less-width">
                             <legend class="sign-column__legend">TÉCNICO</legend>
@@ -50,7 +50,7 @@
     <?php if($_SESSION["identity"]["Privilegio"] === "user"):?>
     
     <?php if(!empty($_SESSION["identity"]["Firma"])):?>
-    <form class="editSign-form add-more-height" action="<?= base_url;?>finishing/?controller=form&action=techsign" method="POST">
+    <form class="editSign-form add-more-height" action="<?= base_url;?>finishing/?controller=followupform&action=techsign" method="POST">
         <div class="edit-sign-fieldset__wrapper">
             <fieldset class="sign-column__fieldset">
                         <legend class="sign-column__legend">TÉCNICO</legend>
@@ -84,4 +84,4 @@
     <?php endif;?>
     
 </main>
-<?php Utils::unsetFormSessions();?>
+<?php Utils::unsetFormSessions();

@@ -1,3 +1,4 @@
 sosv5.code-workspace
 **/nbproject/
 **/vendor/
+**/node_modules

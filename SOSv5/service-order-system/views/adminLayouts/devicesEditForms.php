@@ -6,44 +6,31 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->
-    <?php if (!empty($_SESSION["updateDeviceInfoSucceed"])): ?>
-        <div class="succeed-box"><?= $_SESSION["updateDeviceInfoSucceed"]; ?></div>
+    <?php if (!empty($_SESSION["success"])): ?>
+        <div class="succeed-box"><?= $_SESSION["success"]; ?></div>
     <?php endif; ?>
-    <?php if (!empty($_SESSION["disableDeviceSuccess"])): ?>
-        <div class="succeed-box"><?= $_SESSION["disableDeviceSuccess"]; ?></div>
-    <?php endif; ?>    
     
-        
-    <?php if (!empty($_SESSION["editDeviceGetInfoEx"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["editDeviceGetInfoEx"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["updateDeviceInfoEx"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["updateDeviceInfoEx"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["disableDeviceEx"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["disableDeviceEx"]; ?></div>
-    <?php endif; ?>
-  
-    <?php if(!empty($_SESSION["disableDeviceErr"])):?>
-        <?php foreach($_SESSION["disableDeviceErr"] as $err):?>
-            <div class="invalidinput-box"><?= $err;?></div>
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
         <?php endforeach;?>
-    <?php endif;?>    
-    <?php if(!empty($_SESSION["updateDeviceInfoErr"])):?>
-        <?php foreach($_SESSION["updateDeviceInfoErr"] as $err):?>
-            <div class="invalidinput-box"><?= $err;?></div>
+    <?php endif;?>
+    
+    <?php if(!empty($_SESSION["errors"])):?>
+        <?php foreach($_SESSION["errors"] as $err):?>
+            <div class="invalidinput-box"><?=$err?></div>
         <?php endforeach;?>
     <?php endif;?>
     
     <div class="searchForm-wrapper">
-        <form class="searchForm" action="<?= base_url; ?>home/?homeController=user&homeAction=editDevice" method="POST">
+        <form class="searchForm" action="<?= base_url; ?>home/?homeController=device&homeAction=editDevice" method="POST">
             <div class="searchForm__select-wrapper">
                 <select class="js-example-placeholder-single editDevicesEnterSelect" name="empresas">
                     <option></option>
                     <?php if (sizeof($enterprises) > 0): ?>
                         <?php foreach ($enterprises as $ent): ?>
-                            <?php if(!empty($_SESSION["devicesEdit_enterId"])):?>
-                            <option value="<?= $ent["Id"] ?>" <?= ($_SESSION["devicesEdit_enterId"] === $ent["Id"]) ? 'selected' : '';?>><?= $ent["Nombre_comercial"] ?> - <?= $ent["Razon_social"] ?></option>
+                            <?php if(!empty($_SESSION["idSession"]["devicesEdit_enterId"])):?>
+                            <option value="<?= $ent["Id"] ?>" <?= ($_SESSION["idSession"]["devicesEdit_enterId"] === $ent["Id"]) ? 'selected' : '';?>><?= $ent["Nombre_comercial"] ?> - <?= $ent["Razon_social"] ?></option>
                             <?php else:?>
                             <option value="<?= $ent["Id"] ?>"><?= $ent["Nombre_comercial"] ?> - <?= $ent["Razon_social"] ?></option>
                             <?php endif;?>
@@ -55,10 +42,10 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
         </form>
     </div>        
         
-    <?php if(!empty($_SESSION["devicesEdit_enterId"])):?>
+    <?php if(!empty($_SESSION["idSession"]["devicesEdit_enterId"])):?>
     <?php if(sizeof($devices_arr) > 0):?>        
     <?php foreach($devices_arr as $device):?>        
-    <form class="device-form__form" action="<?= base_url;?>home/?homeController=user&homeAction=updateDeviceInfo" method="POST">
+    <form class="device-form__form" action="<?= base_url;?>home/?homeController=device&homeAction=updateDeviceInfo" method="POST">
         <div class="contact-edit__background hidThis">
             <div class="contact-edit__info-window">
                 <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
@@ -82,7 +69,16 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
                 <label class="device-form__label" for="numeroInventario">No.INVENTARIO:</label>
             </div>
             <div class="device-form__inputs-box">
-                <input class="device-form__input" style="margin-bottom: 2.7rem;" type="text" value="<?= ucfirst($device['Tipo'])?>" disabled=""/>    
+                <div class="device-form__input" style="margin-bottom: 1.8rem;">
+                <select class="js-example-placeholder-single typeSelect" name="tipos">
+                    <option></option>
+                    <?php if (sizeof($types_arr) > 0): ?>
+                        <?php foreach ($types_arr as $typ): ?>
+                            <option value="<?= $typ["Id"] ?>" <?= ($device['Tipo_id'] === $typ["Id"]) ? 'selected' : '';?>><?=$typ["Tipo"]?></option>
+                        <?php endforeach; ?>
+                    <?php endif; ?>      
+                </select>
+                </div>    
                 <input class="device-form__input" type="text" name="marca" id="marca" value="<?=$device['Marca']?>"/>
                 <input class="device-form__input" type="text" name="modelo" id="modelo" value="<?=$device['Modelo']?>"/>
                 <input class="device-form__input" type="text" name="ns" id="ns" value="<?=$device['Numero_serie']?>"/>
@@ -107,4 +103,4 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
 </main>
 <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
 sesiones de mensajes de errores, excepciones y de exito en un proceso -->        
-<?php Utils::unsetFlagsSessions();?>
+<?php Utils::unsetFlagsSessions();
