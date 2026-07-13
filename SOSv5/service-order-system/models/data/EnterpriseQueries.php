@@ -2,10 +2,13 @@
 
 class EnterpriseQueries{
 
-    private $db, $model, $contactModel;
+    private $db, $model, $contactModel, $db_class;
 
+    public function __construct($msDatabase){
+        $this->db_class = $msDatabase;
+    }
     public function setConnection(){
-        $this->db = DataBaseMssql::getConnection();
+        $this->db = $this->db_class->getConnection();
     }
     public function closeConnection(){
         $this->db = null;

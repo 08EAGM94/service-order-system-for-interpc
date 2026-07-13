@@ -59,8 +59,12 @@ class UserController{
             }catch(Exception $ex){
                 $_SESSION["exceptions"]["gettingUsersException"] = "No se pudo hacer comprobaciones necesarias ".
                 "para la edición de firma, posible corte de conexión a la base de datos";
-                $users = [];
-                $user_info = [];                
+
+                if(!empty($_SESSION["isAdmin"])){
+                    $users = [];
+                    $user_info = [];
+                }
+                                
             }finally{
                 require_once '../views/userLayouts/editSign.php';
             }
@@ -151,13 +155,9 @@ class UserController{
 
     public function logout(){
         
-        if(!empty($_SESSION["identity"])){
-            
-            unset($_SESSION["identity"]);
-            session_destroy();
-            header("Location: ". base_url."home/");
-            exit;
-        }
+        if(!empty($_SESSION["identity"]))
+            session_unset();
+        
         header("Location: ". base_url."home/");
         exit;
     }

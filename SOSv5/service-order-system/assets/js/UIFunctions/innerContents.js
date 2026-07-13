@@ -17,14 +17,14 @@ function generateTableRow (row){
     const tableRow = document.createElement("tr");
     tableRow.classList.add("binnacle-data-table__row");
     tableRow.innerHTML = `
-        <td class="binnacle-data-table__regular-td"><a class="binnacle-data-table__binn-link" href="${BASE_URL}home/?homeController=binnacle&homeAction=showBinnacle&homeId=${row.Id}">${row.Id}</a></td>
+        <td class="binnacle-data-table__regular-td"><a class="binnacle-data-table__binn-link generated-link" href="${BASE_URL}home/?homeController=binnacle&homeAction=showBinnacle&homeId=${row.Id}">${row.Id}</a></td>
         <td class="binnacle-data-table__regular-td">${row.Nombre} ${row.Apellidos}</td>
         <td>
             <div class="binnacle-data-table__client-name-box">${row.Nombre_completo}</div>
             <div class="binnacle-data-table__enterprise-name-box">${row.Nombre_comercial}</div>
         </td>
-        <td class="binnacle-data-table__regular-td"><a class="binnacle-data-table__binn-pdf-link" href="${BASE_URL}home/?homeController=binnacle&homeAction=generateBinnacleReport&homeId=${row.Id}">PDF</a></td>
-        <td class="binnacle-data-table__regular-td"><a class="binnacle-data-table__binn-edit-link" href="${BASE_URL}home/?homeController=binnacle&homeAction=editBinnacle&homeId=${row.Id}">Editar</a></td>
+        <td class="binnacle-data-table__regular-td"><a class="binnacle-data-table__binn-pdf-link generated-link" href="${BASE_URL}home/?homeController=binnacle&homeAction=generateBinnacleReport&homeId=${row.Id}">PDF</a></td>
+        <td class="binnacle-data-table__regular-td"><a class="binnacle-data-table__binn-edit-link generated-link" href="${BASE_URL}home/?homeController=binnacle&homeAction=editBinnacle&homeId=${row.Id}">Editar</a></td>
         <td class="binnacle-data-table__regular-td"><button class="binnacle-data-table__binn-delete-btn ${(row.Visibilidad === "ENABLED") ? "" : 
                         "activation-background"}" type="button" data-id="${row.Id}" 
                         data-visibility="${row.Visibilidad}">${(row.Visibilidad === "ENABLED") ? "Desactivar" : "Activar"}</button></td>
@@ -477,8 +477,8 @@ function enterOrContactSwitchWindow(target, button){
                                 este registro ${(button.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
                                 en la caja de selección de los formularios de "Nueva bitácora", "Crear contacto", "Crear un equipo" y la caja de selección 
                                 de empresas en los filtros de "Reportes de bitácoras"</h3></div>
-                <input type="hidden" value="${button.dataset.id}" name="empresaId"/>
-                <input type="hidden" value="${(button.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
+                <input type="hidden" value="${button.dataset.id}" class="empresa-id" name="empresaId"/>
+                <input type="hidden" value="${(button.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" class="visibilidad" name="visibilidad"/>
                 <div class="info-window__selectbuttons-box">
                     <input class="selectbuttons-box__button" type="submit" value="${(button.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
                     <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
@@ -493,8 +493,8 @@ function enterOrContactSwitchWindow(target, button){
                         con Id ${button.dataset.id}?, este registro ${(button.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
                         en la caja de selección del formulario de "Nueva bitácora" y la caja de selección 
                             de contactos en los filtros de "Reportes de bitácoras"</h3></div>
-                <input type="hidden" value="${button.dataset.id}" name="contactoId"/>
-                <input type="hidden" value="${(button.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
+                <input type="hidden" value="${button.dataset.id}" class="contacto-id" name="contactoId"/>
+                <input type="hidden" value="${(button.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" class="visibilidad" name="visibilidad"/>
                 <div class="info-window__selectbuttons-box">
                     <input class="selectbuttons-box__button" type="submit" value="${(button.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
                     <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
@@ -513,8 +513,8 @@ function typeSwitchWindow(button){
                     <div class="info-window__text-box"><h3>¿Está seguro de ${(button.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} el tipo 
                             con Id ${button.dataset.id}?, este registro ${(button.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
                             en la caja de selección del formulario de "Crear un equipo"</h3></div>
-                    <input type="hidden" value="${button.dataset.id}" name="tipoId"/>
-                    <input type="hidden" value="${(button.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
+                    <input type="hidden" value="${button.dataset.id}" class="tipo-id" name="tipoId"/>
+                    <input type="hidden" value="${(button.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" class="visibilidad" name="visibilidad"/>
                     <div class="info-window__selectbuttons-box">
                         <input class="selectbuttons-box__button" type="submit" value="${(button.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
                         <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
@@ -530,8 +530,8 @@ function deviceSwitchWindow(button){
                     <div class="info-window__text-box"><h3>¿Está seguro de ${(button.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} el equipo 
                             con Id ${button.dataset.id}?, este registro ${(button.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
                             en la caja de selección de equipo del formulario de "Nueva bitácora" y en los filtros de "Reportes de bitácoras"</h3></div>
-                    <input type="hidden" value="${button.dataset.id}" name="equipoId"/>
-                    <input type="hidden" value="${(button.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
+                    <input type="hidden" value="${button.dataset.id}" class="equipo-id" name="equipoId"/>
+                    <input type="hidden" value="${(button.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" class="visibilidad" name="visibilidad"/>
                     <div class="info-window__selectbuttons-box">
                         <input class="selectbuttons-box__button" type="submit" value="${(button.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
                         <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
@@ -548,8 +548,8 @@ function binnsSwitchWindow(button){
                             con Id ${button.dataset.id}?, este registro ${(button.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
                             en el apartado de "Reportes de bitácoras" al menos que se seleccione 
                             ${(button.dataset.visibility === "ENABLED") ? 'Desactivado' : 'Activado'} en la caja de selección de "Visible" en la busqueda</h3></div>
-                    <input type="hidden" value="${button.dataset.id}" name="bitacoraId"/>
-                    <input type="hidden" value="${(button.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
+                    <input type="hidden" value="${button.dataset.id}" class="bitacora-id" name="bitacoraId"/>
+                    <input type="hidden" value="${(button.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" class="visibilidad" name="visibilidad"/>
                     <div class="info-window__selectbuttons-box">
                         <input class="selectbuttons-box__button" type="submit" value="${(button.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
                         <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
@@ -557,7 +557,7 @@ function binnsSwitchWindow(button){
                 </form>
             `;
 }
-/*
+
 export {generateLinks, 
         generateTableRow, 
         dataManagmentProcedure, 
@@ -568,14 +568,14 @@ export {generateLinks,
         typeSwitchWindow,
         deviceSwitchWindow,
         binnsSwitchWindow};
-*/
-module.exports = {generateLinks, 
-        generateTableRow, 
-        dataManagmentProcedure, 
-        resetDeviceFields,
-        resetDeviceSelect,
-        resetContactFields,
-        enterOrContactSwitchWindow,
-        typeSwitchWindow,
-        deviceSwitchWindow,
-        binnsSwitchWindow}; 
+
+// module.exports = {generateLinks, 
+//         generateTableRow, 
+//         dataManagmentProcedure, 
+//         resetDeviceFields,
+//         resetDeviceSelect,
+//         resetContactFields,
+//         enterOrContactSwitchWindow,
+//         typeSwitchWindow,
+//         deviceSwitchWindow,
+//         binnsSwitchWindow};

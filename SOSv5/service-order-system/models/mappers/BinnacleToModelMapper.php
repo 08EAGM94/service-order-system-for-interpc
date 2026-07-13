@@ -15,10 +15,10 @@ class BinnacleToModelMapper implements IMapper{
             (method_exists($obj, 'getMonto')) ? $obj->getMonto() : $obj->monto,
             (method_exists($obj, 'getActividadesRealizadas')) ? $obj->getActividadesRealizadas() : $obj->Actividades_realizadas,
             (method_exists($obj, 'getObservaciones')) ? $obj->getObservaciones() : $obj->observaciones,
-            (method_exists($obj, 'getFirmaCliente')) ? $obj->getFirmaCliente() : $obj->inicio,
-            (method_exists($obj, 'getEstatus')) ? $obj->getEstatus() : $obj->fin,
-            (method_exists($obj, 'getInicio')) ? $obj->getInicio() : $obj->estatus,
-            (method_exists($obj, 'getFin')) ? $obj->getFin() : $obj->firma_cliente,
+            (method_exists($obj, 'getFirmaCliente')) ? $obj->getFirmaCliente() : $obj->firma_cliente,
+            (method_exists($obj, 'getEstatus')) ? $obj->getEstatus() : $obj->estatus,
+            (method_exists($obj, 'getInicio')) ? $obj->getInicio() : $obj->inicio,
+            (method_exists($obj, 'getFin')) ? $obj->getFin() : $obj->fin,
             (property_exists($obj, 'visibilidad')) ? $obj->visibilidad : null
         );
     }

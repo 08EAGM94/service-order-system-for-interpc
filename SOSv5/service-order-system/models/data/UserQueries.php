@@ -2,10 +2,13 @@
 
 class UserQueries{
 
-    public $db, $model;
+    private $db, $model, $db_class;
 
+    public function __construct($msDatabase){
+        $this->db_class = $msDatabase;
+    }
     public function setConnection(){
-        $this->db = DataBaseMssql::getConnection();
+        $this->db = $this->db_class->getConnection();
     }
     public function closeConnection(){
         $this->db = null;
@@ -36,7 +39,7 @@ class UserQueries{
         $sql = "UPDATE Usuarios SET Firma = :frm WHERE Id = :id;";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
-            'frm' => trim($this->model->firma),
+            'frm' => (isset($this->model->firma)) ? trim($this->model->firma) : $this->model->firma,
             'id'  => $this->model->id
         ]);
     }

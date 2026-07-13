@@ -16,7 +16,7 @@ class FollowupformController{
                 $this->binnDTO->binnacle_id = $_GET["id"];
                 $this->binnDTO->usuario_id = $_SESSION["identity"]["Id"];
                 $info = $this->binnService->getInfo($this->binnDTO);
-
+                Utils::isAuthorizedBinnacle($info);
                 (!empty($info["Actividades_realizadas"])) ?
                         $info_verified = '../views/finishingLayouts/consentInfo.php' :
                         $info_verified = '../views/finishingLayouts/remindedfields.php';
@@ -26,22 +26,19 @@ class FollowupformController{
                 $_SESSION["exceptions"]["unKnownEx"] = $ex->getMessage();
             }catch(EntityException $ex){
                 $_SESSION["exceptions"]["entitiesEx"] = $ex->getMessage();
+            }catch(UnauthorizedDataException $ex){
+                $_SESSION["exceptions"]["unauthorizedEx"] = $ex->getMessage();
             }catch(Exception $ex){
                 $_SESSION["exceptions"]["remindedOrConsentReportEx"] = "No se logró obtener "
                                 ."la información necesaria para el seguimiento de "
                                 ."bitácoras, se cortó la conexión a la base de datos.";                    
             }finally{
-                if(!empty($_SESSION["exceptions"]["unKnownEx"])){
-                    header("Location: ".base_url."home/?homeController=error&homeAction=index");
-                    exit;        
-                }
 
-                if(!empty($_SESSION["exceptions"]["entitiesEx"]) ||
-                    !empty($_SESSION["exceptions"]["remindedOrConsentReportEx"])){
+                if(!empty($_SESSION["exceptions"])){
                     header("Location: ".base_url."home/");
                     exit;        
                 }
-
+                           
                 require_once $info_verified;                
             }
                 

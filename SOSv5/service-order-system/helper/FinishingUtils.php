@@ -7,9 +7,9 @@ class FinishingUtils{
         Utils::sessionLifetime();
         Utils::saveSignaturesFiles();
         Utils::updateUserWithSignature(
-            $container->get('usrDTO'),
-            $container->get('usrSignService'),
-            $container->get('usrService')
+            $container->make('usrDTO'),
+            $container->make('usrSignService'),
+            $container->make('usrService')
         );
         Utils::setDataSelectionForSigns();
     }

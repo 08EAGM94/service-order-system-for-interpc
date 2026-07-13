@@ -6,22 +6,22 @@ class HomeUtils{
         Utils::putSessionWithVerify();
         Utils::sessionLifetime();
         Utils::reportPdfGenerator(
-            $container->get('dceDTO'),
-            $container->get('enterDTO'),
-            $container->get('binnDTO'),
-            $container->get('dceService'),
-            $container->get('enterService'),
-            $container->get('binnService')
+            $container->make('dceDTO'),
+            $container->make('enterDTO'),
+            $container->make('binnDTO'),
+            $container->make('dceService'),
+            $container->make('enterService'),
+            $container->make('binnService')
         );
         Utils::ajaxProcedure(
-            $container->get('contDTO'),
-            $container->get('dceDTO'),
-            $container->get('enterDTO'),
-            $container->get('binnDTO'),
-            $container->get('contService'),
-            $container->get('dceService'),
-            $container->get('enterService'),
-            $container->get('binnService')
+            $container->make('contDTO'),
+            $container->make('dceDTO'),
+            $container->make('enterDTO'),
+            $container->make('binnDTO'),
+            $container->make('contService'),
+            $container->make('dceService'),
+            $container->make('enterService'),
+            $container->make('binnService')
         );
     }
 }

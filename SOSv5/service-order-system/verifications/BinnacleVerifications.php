@@ -9,9 +9,9 @@ class BinnacleVerifications{
             null;
         $tipoActividades = (!empty($dto->actividad)) ? $dto->actividad :
             null;
-        $servicio = (!empty(trim($dto->servicio))) ? trim($dto->servicio) :
+        $servicio = (!empty($dto->servicio)) ? trim($dto->servicio) :
             null;
-        $equipos = (!empty(trim($dto->equipo_id))) ? trim($dto->equipo_id) :
+        $equipos = (!empty($dto->equipo_id)) ? trim($dto->equipo_id) :
             null;
         
         if(!empty($userId)){

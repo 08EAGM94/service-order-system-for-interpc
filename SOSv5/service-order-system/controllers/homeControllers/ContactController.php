@@ -49,7 +49,7 @@ class ContactController{
                     $this->contDTO->nombre_completo = $_POST["contacto"];
                     $errorsArr = ContactVerifications::verifyingInsertion($this->contDTO);
 
-                    (sizeof($errorsArr) === 0) ? $this->contService->insertInfo($this->contDTO) :
+                    (sizeof($errorsArr) === 0) ? $this->contService->insertChild($this->contDTO) :
                         $_SESSION["errors"] = $errorsArr;
                     
                     if(empty($_SESSION["errors"]))

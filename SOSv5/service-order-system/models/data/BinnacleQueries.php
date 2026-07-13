@@ -2,14 +2,15 @@
 
 class BinnacleQueries{
 
-    private $db, $model, $pagination;
+    private $db, $model, $pagination, $db_type, $db_class;
 
-    public function __construct($pagination = null){
-        
+    public function __construct($msDatabase, $pagination = null){
+        $this->db_type = get_class($msDatabase);
+        $this->db_class = $msDatabase;
         $this->pagination = $pagination;
     }
     public function setConnection(){
-        $this->db = DataBaseMssql::getConnection();
+        $this->db = $this->db_class->getConnection();
     }
     public function closeConnection(){
         $this->db = null;
@@ -22,7 +23,7 @@ class BinnacleQueries{
 
     public function insertBinnacle(){
         $sql = "INSERT INTO Bitacoras VALUES( :ui, :ci, :se, :ei, :mo, :ar, "
-                .":ob, FORMAT(GETDATE(), 'yyyy-MM-dd'), :fi, 'en proceso', :fc, 'ENABLED' );";
+                .":ob, FORMAT(GETDATE(), 'yyyy-MM-dd'), :fi, :sts, :fc, 'ENABLED' );";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             "ui" => $this->model->usuario_id, 
@@ -33,6 +34,7 @@ class BinnacleQueries{
             "ar" => $this->model->Actividades_realizadas, 
             "ob" => $this->model->observaciones, 
             "fi" => $this->model->fin,
+            "sts" => ($this->db_type === "DatabaseMssqlTest" && isset($this->model->estatus)) ? $this->model->estatus : "en proceso",
             "fc" => $this->model->firma_cliente
         ]);
     }
@@ -244,7 +246,7 @@ class BinnacleQueries{
         }
         $result = $stmt->fetch();
 
-        if(sizeof($result) === 0)
+        if(empty($result))
             throw new UnknownInDataBaseException("El id insertado de la bitácora no existe en la base de datos");
 
         return $result;
@@ -316,7 +318,7 @@ class BinnacleQueries{
         /*Los campos del formulario de edición de una bitácora pueden variar dependiendo del estatus, updateBinnacleInfo contiene bloques if evaluando si la 
          * propiedad privada estatus es igual a uno de los 4 estatus que puede tener una bitácora, dentro de los if se crea un string sql utilizando propiedades 
          * privadas para establecer los valores de los campos del registro de la tabla Bitacoras a cambiar (tanto la propiedad privada estatus y las otras posibles 
-         * propiedades a utilizar se inicializan en el constructor de la clase cuando se crea una instancia de esta)*/
+         * propiedades a utilizar son pertenecientes a la propiedad $model setteado por el método setModel en el repositorio de bitácoras)*/
         $current_params = [];
         
         if($this->model->estatus === "en proceso"){

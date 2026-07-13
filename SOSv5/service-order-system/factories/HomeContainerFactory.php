@@ -32,128 +32,145 @@ class HomeContainerFactory{
             'typModelMapper' => DI\factory(function(){return new TypeToModelMapper();}),
             'usrModelMapper' => DI\factory(function(){return new UserToModelMapper();}),
 
+            'SOSv6Database' => DI\factory(function(){return new DataBaseMssql();}),
             'pagination' => DI\factory(function(){return new Zebra_Pagination();}),
 
             'binnQueries' => DI\factory(function($c){
+                $db = $c->get('SOSv6Database');
                 $pagination = $c->get('pagination');
-                return new BinnacleQueries($pagination);
+                return new BinnacleQueries($db, $pagination);
             }),
-            'contQueries' => DI\factory(function(){return new ContactQueries();}),
-            'dceQueries' => DI\factory(function(){return new DeviceQueries();}),
-            'enterQueries' => DI\factory(function(){return new EnterpriseQueries();}),
-            'typQueries' => DI\factory(function(){return new TypeQueries();}),
-            'usrQueries' => DI\factory(function(){return new UserQueries();}),
+            'contQueries' => DI\factory(function($c){
+                $db = $c->get('SOSv6Database');
+                return new ContactQueries($db);
+            }),
+            'dceQueries' => DI\factory(function($c){
+                $db = $c->get('SOSv6Database');
+                return new DeviceQueries($db);
+            }),
+            'enterQueries' => DI\factory(function($c){
+                $db = $c->get('SOSv6Database');
+                return new EnterpriseQueries($db);
+            }),
+            'typQueries' => DI\factory(function($c){
+                $db = $c->get('SOSv6Database');
+                return new TypeQueries($db);
+            }),
+            'usrQueries' => DI\factory(function($c){
+                $db = $c->get('SOSv6Database');
+                return new UserQueries($db);
+            }),
 
             'binnRepository' => DI\factory(function($c){
-                $queries = $c->get('binnQueries');
-                $mapperModel = $c->get('binnModelMapper');
+                $queries = $c->make('binnQueries');
+                $mapperModel = $c->make('binnModelMapper');
                 return new BinnacleRepository($queries, $mapperModel);
             }),
             'contRepository' => DI\factory(function($c){
-                $queries = $c->get('contQueries');
-                $mapperModel = $c->get('contModelMapper');
+                $queries = $c->make('contQueries');
+                $mapperModel = $c->make('contModelMapper');
                 return new ContactRepository($queries, $mapperModel);
             }),
             'dceRepository' => DI\factory(function($c){
-                $queries = $c->get('dceQueries');
-                $mapperModel = $c->get('dceModelMapper');
+                $queries = $c->make('dceQueries');
+                $mapperModel = $c->make('dceModelMapper');
                 return new DeviceRepository($queries, $mapperModel);
             }),
             'enterRepository' => DI\factory(function($c){
-                $queries = $c->get('enterQueries');
-                $enterMapperModel = $c->get('enterModelMapper');
-                $contMapperModel = $c->get('contModelMapper');
+                $queries = $c->make('enterQueries');
+                $enterMapperModel = $c->make('enterModelMapper');
+                $contMapperModel = $c->make('contModelMapper');
                 return new EnterpriseRepository($queries, $enterMapperModel, $contMapperModel);
             }),
             'typRepository' => DI\factory(function($c){
-                $queries = $c->get('typQueries');
-                $mapperModel = $c->get('typModelMapper');
+                $queries = $c->make('typQueries');
+                $mapperModel = $c->make('typModelMapper');
                 return new TypeRepository($queries, $mapperModel);
             }),
             'usrRepository' => DI\factory(function($c){
-                $queries = $c->get('usrQueries');
-                $mapperModel = $c->get('usrModelMapper');
+                $queries = $c->make('usrQueries');
+                $mapperModel = $c->make('usrModelMapper');
                 return new UserRepository($queries, $mapperModel);
             }),
 
 
             'binnService' => DI\factory(function($c){
-                $repository = $c->get('binnRepository');
-                $mapperEntity = $c->get('binnEntityMapper');
-                $mapperModel = $c->get('binnModelMapper');
+                $repository = $c->make('binnRepository');
+                $mapperEntity = $c->make('binnEntityMapper');
+                $mapperModel = $c->make('binnModelMapper');
                 return new CommonService($repository, $mapperEntity, $mapperModel);
             }),
             'enterService' => DI\factory(function($c){
-                $repository = $c->get('enterRepository');
-                $mapperEntity = $c->get('enterEntityMapper');
-                $mapperEntity2 = $c->get('contEntityMapper');
-                $mapperModel = $c->get('enterModelMapper');
+                $repository = $c->make('enterRepository');
+                $mapperEntity = $c->make('enterEntityMapper');
+                $mapperEntity2 = $c->make('contEntityMapper');
+                $mapperModel = $c->make('enterModelMapper');
                 return new CommonService($repository, $mapperEntity, $mapperModel, $mapperEntity2);
             }),
             'typService' => DI\factory(function($c){
-                $repository = $c->get('typRepository');
-                $mapperEntity = $c->get('typEntityMapper');
-                $mapperModel = $c->get('typModelMapper');
+                $repository = $c->make('typRepository');
+                $mapperEntity = $c->make('typEntityMapper');
+                $mapperModel = $c->make('typModelMapper');
                 return new CommonService($repository, $mapperEntity, $mapperModel);
             }),
             'usrService' => DI\factory(function($c){
-                $repository = $c->get('usrRepository');
-                $mapperEntity = $c->get('usrEntityMapper');
-                $mapperModel = $c->get('usrModelMapper');
+                $repository = $c->make('usrRepository');
+                $mapperEntity = $c->make('usrEntityMapper');
+                $mapperModel = $c->make('usrModelMapper');
                 return new CommonService($repository, $mapperEntity, $mapperModel);
             }),
             'contService' => DI\factory(function($c){
-                $repository = $c->get('contRepository');
-                $mapperEntity = $c->get('contEntityMapper');
-                $mapperModel = $c->get('contModelMapper');
+                $repository = $c->make('contRepository');
+                $mapperEntity = $c->make('contEntityMapper');
+                $mapperModel = $c->make('contModelMapper');
                 return new EnterpriseChildrenService($repository, $mapperEntity, $mapperModel);
             }),
             'dceService' => DI\factory(function($c){
-                $repository = $c->get('dceRepository');
-                $mapperEntity = $c->get('dceEntityMapper');
-                $mapperModel = $c->get('dceModelMapper');
+                $repository = $c->make('dceRepository');
+                $mapperEntity = $c->make('dceEntityMapper');
+                $mapperModel = $c->make('dceModelMapper');
                 return new EnterpriseChildrenService($repository, $mapperEntity, $mapperModel);
             }),
 
 
             'contSelectSrv' => DI\factory(function($c){
-                $repository = $c->get('contRepository');
+                $repository = $c->make('contRepository');
                 return new SelectService($repository);
             }),
             'enterSelectSrv' => DI\factory(function($c){
-                $repository = $c->get('enterRepository');
+                $repository = $c->make('enterRepository');
                 return new SelectService($repository);
             }),
             'typSelectSrv' => DI\factory(function($c){
-                $repository = $c->get('typRepository');
+                $repository = $c->make('typRepository');
                 return new SelectService($repository);
             }),
 
 
             'usrSignService' => DI\factory(function($c){
-                $repository = $c->get('usrRepository');
-                $mapperEntity = $c->get('usrEntityMapper');
+                $repository = $c->make('usrRepository');
+                $mapperEntity = $c->make('usrEntityMapper');
                 return new SignatureService($repository, $mapperEntity);
             }),
             'usrParticularSrv' => DI\factory(function($c){
-                $repository = $c->get('usrRepository');
-                $mapperEntity = $c->get('usrEntityMapper');
+                $repository = $c->make('usrRepository');
+                $mapperEntity = $c->make('usrEntityMapper');
                 return new UserService($repository, $mapperEntity);
             }),
             'binnParticularSrv' => DI\factory(function($c){
-                $repository = $c->get('binnRepository');
-                $mapperEntity = $c->get('binnEntityMapper');
+                $repository = $c->make('binnRepository');
+                $mapperEntity = $c->make('binnEntityMapper');
                 return new BinnacleService($repository, $mapperEntity);
             }),
 
 
             'BinnacleController' => DI\factory(function($c){
-                $binnDTO = $c->get('binnDTO');
-                $usrDTO = $c->get('usrDTO');
-                $enterSelectSrv = $c->get('enterSelectSrv');
-                $binnService = $c->get('binnService');
-                $usrService = $c->get('usrService');
-                $usrParticularSrv = $c->get('usrParticularSrv');
+                $binnDTO = $c->make('binnDTO');
+                $usrDTO = $c->make('usrDTO');
+                $enterSelectSrv = $c->make('enterSelectSrv');
+                $binnService = $c->make('binnService');
+                $usrService = $c->make('usrService');
+                $usrParticularSrv = $c->make('usrParticularSrv');
                 return new BinnacleController(
                     $binnDTO,
                     $usrDTO,
@@ -164,13 +181,13 @@ class HomeContainerFactory{
                 );
             }),
             'ContactController' => DI\factory(function($c){
-                $contDTO = $c->get('contDTO');
-                $usrDTO = $c->get('usrDTO');
-                $enterDTO = $c->get('enterDTO');
-                $enterSelectSrv = $c->get('enterSelectSrv');
-                $contService = $c->get('contService');
-                $enterService = $c->get('enterService');
-                $usrParticularSrv = $c->get('usrParticularSrv');
+                $contDTO = $c->make('contDTO');
+                $usrDTO = $c->make('usrDTO');
+                $enterDTO = $c->make('enterDTO');
+                $enterSelectSrv = $c->make('enterSelectSrv');
+                $contService = $c->make('contService');
+                $enterService = $c->make('enterService');
+                $usrParticularSrv = $c->make('usrParticularSrv');
                 return new ContactController(
                     $contDTO, 
                     $usrDTO, 
@@ -182,15 +199,15 @@ class HomeContainerFactory{
                 );
             }),
             'DeviceController' => DI\factory(function($c){
-                $enterDTO = $c->get('enterDTO');
-                $dceDTO = $c->get('dceDTO');
-                $usrDTO = $c->get('usrDTO');
-                $typService = $c->get('typService');
-                $typSelectSrv = $c->get('typSelectSrv');
-                $enterSelectSrv = $c->get('enterSelectSrv');
-                $enterService = $c->get('enterService');
-                $dceService = $c->get('dceService');
-                $usrParticularSrv = $c->get('usrParticularSrv');
+                $enterDTO = $c->make('enterDTO');
+                $dceDTO = $c->make('dceDTO');
+                $usrDTO = $c->make('usrDTO');
+                $typService = $c->make('typService');
+                $typSelectSrv = $c->make('typSelectSrv');
+                $enterSelectSrv = $c->make('enterSelectSrv');
+                $enterService = $c->make('enterService');
+                $dceService = $c->make('dceService');
+                $usrParticularSrv = $c->make('usrParticularSrv');
                 return new DeviceController(
                     $enterDTO, 
                     $dceDTO, 
@@ -204,12 +221,12 @@ class HomeContainerFactory{
                 );
             }),
             'EnterpriseController' => DI\factory(function($c){
-                $contDTO = $c->get('contDTO');
-                $enterDTO = $c->get('enterDTO');
-                $usrDTO = $c->get('usrDTO');
-                $contService = $c->get('contService');
-                $enterService = $c->get('enterService');
-                $usrParticularSrv = $c->get('usrParticularSrv');
+                $contDTO = $c->make('contDTO');
+                $enterDTO = $c->make('enterDTO');
+                $usrDTO = $c->make('usrDTO');
+                $contService = $c->make('contService');
+                $enterService = $c->make('enterService');
+                $usrParticularSrv = $c->make('usrParticularSrv');
                 return new EnterpriseController(
                     $contDTO, 
                     $enterDTO, 
@@ -220,10 +237,10 @@ class HomeContainerFactory{
                 );
             }),
             'TypeController' => DI\factory(function($c){
-                $typDTO = $c->get('typDTO');
-                $usrDTO = $c->get('usrDTO');
-                $typService = $c->get('typService');
-                $usrParticularSrv = $c->get('usrParticularSrv');
+                $typDTO = $c->make('typDTO');
+                $usrDTO = $c->make('usrDTO');
+                $typService = $c->make('typService');
+                $usrParticularSrv = $c->make('usrParticularSrv');
                 return new TypeController(
                     $typDTO, 
                     $usrDTO, 
@@ -232,10 +249,10 @@ class HomeContainerFactory{
                 );
             }),
             'UserController' => DI\factory(function($c){
-                $usrDTO = $c->get('usrDTO');
-                $usrService = $c->get('usrService');
-                $usrSignService = $c->get('usrSignService');
-                $usrParticularSrv = $c->get('usrParticularSrv');
+                $usrDTO = $c->make('usrDTO');
+                $usrService = $c->make('usrService');
+                $usrSignService = $c->make('usrSignService');
+                $usrParticularSrv = $c->make('usrParticularSrv');
                 return new UserController(
                     $usrDTO, 
                     $usrService, 

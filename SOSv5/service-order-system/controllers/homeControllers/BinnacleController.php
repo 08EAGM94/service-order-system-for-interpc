@@ -80,8 +80,8 @@ class BinnacleController{
             
             $binn_pagination = [];
             try{
-                $empresas = $this->enterSelectSrv->getInfoForSelects();
                 Utils::setBinnFilterSessions($this->binnDTO);
+                $empresas = $this->enterSelectSrv->getInfoForSelects();
 
                 if(!empty($_SESSION["binnFilterSession"])){
                     (!empty($_SESSION["jsondecoded"]["binnsReportNumKey"])) ?
@@ -196,12 +196,12 @@ class BinnacleController{
     }
     public function binninsertion(){
         if(!empty($_SESSION["identity"]) && sizeof($_POST) > 0){
-            
+
             $this->binnDTO->usuario_id = $_POST["userId"];
             $this->binnDTO->contacto_id = $_POST["contactos"];
-            $this->binnDTO->actividad = $_POST["tipoActividades"];
-            $this->binnDTO->servicio = (!empty($_POST["servicio"])) ? $_POST["servicio"] : '';
-            $this->binnDTO->equipo_id = (!empty($_POST["equipos"])) ? $_POST["equipos"] : '';
+            $this->binnDTO->actividad = (isset($_POST["tipoActividades"])) ? $_POST["tipoActividades"] : false;
+            $this->binnDTO->servicio = (!empty($_POST["servicio"])) ? $_POST["servicio"] : null;
+            $this->binnDTO->equipo_id = (!empty($_POST["equipos"])) ? $_POST["equipos"] : null;
             $errorArr = BinnacleVerifications::verifyingInsertion($this->binnDTO);
             
             try{
@@ -262,6 +262,8 @@ class BinnacleController{
                        $_SESSION["success"] = "Se logró editar la bitácora con éxito";
             }catch(WrongObjectException $ex){
                 $_SESSION["exceptions"]["wrongObjectEx"] = $ex->getMessage();
+            }catch(UnknownInDataBaseException $ex){
+                $_SESSION["exceptions"]["unKnownEx"] = $ex->getMessage();
             }catch(EntityException $ex){
                 $_SESSION["exceptions"]["entitiesEx"] = $ex->getMessage();
             }catch(Exception $ex){

@@ -1,8 +1,9 @@
 <?php
-class DataBaseMssql{
+
+class DatabaseMssqlTest{
     public function getConnection(){
             $db = new PDO("sqlsrv:server=".getenv("SQL_SERVER").";"
-                ."Database=".getenv("SQL_DATABASE")
+                ."Database=".getenv("SQL_TEST_DATABASE")
                 .";Encrypt=yes;TrustServerCertificate=true", getenv("SQL_USER"), 
                 getenv("SQL_PASSWORD"),
                 [

@@ -457,28 +457,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
              * cancelDevice
             cancelDevice.addEventListener("click", () => {
                 si se da click al botón de "Cancelar selección" del dispositivo, entonces se "resetea" los campos del "formulario" de dispositivo
-                deviceFormTbody.innerHTML = `
-                                    <tr>
-                                        <td class="device-form-table__label-column">TIPO:</td>
-                                        <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="device-form-table__label-column">MARCA:</td>
-                                        <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="device-form-table__label-column">MODELO:</td>
-                                        <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="device-form-table__label-column">N.S:</td>
-                                        <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="device-form-table__label-column">NO.INVENTARIO:</td>
-                                        <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                    </tr>                                
-                `;
+                deviceFormTbody.innerHTML = resetDeviceFields();
 
                 se quita cualquier valor que haya tenido
                  * el select de dispositivo activando su placeholder
@@ -651,28 +630,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             if(enterpriseIdSelected !== ""){
                 
                 tambien se "resetea" los campos del "formulario" de equipo
-                deviceFormTbody.innerHTML = `
-                                <tr>
-                                    <td class="device-form-table__label-column">TIPO:</td>
-                                    <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                </tr>
-                                <tr>
-                                    <td class="device-form-table__label-column">MARCA:</td>
-                                    <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                </tr>
-                                <tr>
-                                    <td class="device-form-table__label-column">MODELO:</td>
-                                    <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                </tr>
-                                <tr>
-                                    <td class="device-form-table__label-column">N.S:</td>
-                                    <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                </tr>
-                                <tr>
-                                    <td class="device-form-table__label-column">NO.INVENTARIO:</td>
-                                    <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                </tr>                                
-                `;
+                deviceFormTbody.innerHTML = resetDeviceFields();
                 ya realizado las posteriores configuraciones en el DOM ahora toca hacer una comunicación asincrona
                  * con PHP, JS va a enviar el Id de la empresa como valor de la propiedad "enterpriseId"  
                 fetch(BASE_URL + "home/?homeController=user&homeAction=newbinnacle", {
@@ -706,111 +664,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
             se "resetea" los inputs del "formulario" del cliente (contacto), inputs contenidos en el elemento
              * html que contiene la constante contactFormTbody
             
-            contactFormTbody.innerHTML = `
-                <tr>
-                    <td class="contact-form-table__label-column">QUIÉN SOLICITA:</td>
-                    <td class="contact-form-table__input-column">
-                        <select class="js-example-placeholder-single" name="contactos" id="firstFormContactSelect">
-                             <option></option>
-                        </select>
-                    </td>
-                    <td class="contact-form-table__label-column">TELÉFONOS:</td>
-                    <td class="contact-form-table__input-column">
-                       <div class="inputs-box__input"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="contact-form-table__label-column">NOMBRE COMERCIAL:</td>
-                    <td class="contact-form-table__input-column">
-                        <div class="inputs-box__input"></div>
-                    </td>
-                    <td class="contact-form-table__label-column">HORARIO:</td>
-                    <td class="contact-form-table__input-column">
-                        <div class="inputs-box__input"></div>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td class="contact-form-table__label-column">RAZÓN SOCIAL:</td>
-                    <td class="contact-form-table__input-column">
-                        <div class="inputs-box__input"></div>
-                    </td>
-                    <td class="contact-form-table__label-column">ATENCIÓN:</td>
-                    <td class="contact-form-table__input-column">
-                        <div class="inputs-box__input"></div>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td class="contact-form-table__label-column">CALLE Y NÚMERO:</td>
-                    <td class="contact-form-table__input-column">
-                        <div class="inputs-box__input"></div>
-                    </td>
-                    <td class="contact-form-table__label-column">COLONIA:</td>
-                    <td class="contact-form-table__input-column">
-                        <div class="inputs-box__input"></div>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td class="contact-form-table__label-column">ENTRE CALLES:</td>
-                    <td class="contact-form-table__input-column">
-                        <div class="inputs-box__input"></div>
-                    </td>
-                    <td class="contact-form-table__label-column">LOCALIDAD:</td>
-                    <td class="contact-form-table__input-column">
-                        <div class="inputs-box__input"></div>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td class="contact-form-table__label-column">DIRIGIRSE CON:</td>
-                    <td class="contact-form-table__input-column">
-                        <div class="inputs-box__input"></div>
-                    </td>
-                    <td class="contact-form-table__label-column">EMAIL:</td>
-                    <td class="contact-form-table__input-column">
-                        <div class="inputs-box__input"></div>
-                    </td>
-                </tr>
-            `    
+            contactFormTbody.innerHTML = resetContactFields(e.target.id);    
             de igual forma, se "resetea" los campos de equipos*
-            deviceSelectTbody.innerHTML = `
-                <tr>
-                    <td class="device-select-table__label-column" valign="middle">EQUIPO:</td>
-                    <td class="device-select-table__select-column">
-                        <select class="js-example-placeholder-single" name="equipos" id="firstFormDeviceSelect">
-                            <option></option>
-                        </select>
-                    </td>
-                    <td class="device-select-table__button-column">
-                        <button class="binnacle-form__button" type="button" id="firstFormCancelDeviceSelectBtn">Cancelar selección</button>  
-                    </td>
-                </tr>
-            `;
+            deviceSelectTbody.innerHTML = resetDeviceSelect();
             
-            deviceFormTbody.innerHTML = `
-                                <tr>
-                                    <td class="device-form-table__label-column">TIPO:</td>
-                                    <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                </tr>
-                                <tr>
-                                    <td class="device-form-table__label-column">MARCA:</td>
-                                    <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                </tr>
-                                <tr>
-                                    <td class="device-form-table__label-column">MODELO:</td>
-                                    <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                </tr>
-                                <tr>
-                                    <td class="device-form-table__label-column">N.S:</td>
-                                    <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                </tr>
-                                <tr>
-                                    <td class="device-form-table__label-column">NO.INVENTARIO:</td>
-                                    <td class="device-form-table__input-column"><div class="inputs-box__input"></div></td>
-                                </tr>                                
-            `;
+            deviceFormTbody.innerHTML = resetDeviceFields();
             Finalmente se "limpia" el select de empresas, esto es
              * procurar que no tenga ningun valor seleccionado
             $(firstFormenterprisesSelect).val("").trigger("change");
@@ -1332,21 +1190,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     
                     la ventana emergente en este caso es un formulario, los datos del formulario se van a procesar dentro del metodo enableOrDisableEnterprise
                      * del controlador UserController
-                    enterOrClientDeletebackWindow.innerHTML = `
-                        <form class="enter-or-client-delete__info-window" action="${BASE_URL}home/?homeController=user&homeAction=enableOrDisableEnterprise" method="POST">
-                            <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/caution-sign_75243.png"/></div>
-                            <div class="info-window__text-box"><h3>¿Está seguro de ${(enterDeleteButton.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} esta empresa?, 
-                                            este registro ${(enterDeleteButton.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
-                                            en la caja de selección de los formularios de "Nueva bitácora", "Crear contacto", "Crear un equipo" y la caja de selección 
-                                            de empresas en los filtros de "Reportes de bitácoras"</h3></div>
-                            <input type="hidden" value="${enterDeleteButton.dataset.id}" name="empresaId"/>
-                            <input type="hidden" value="${(enterDeleteButton.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
-                            <div class="info-window__selectbuttons-box">
-                               <input class="selectbuttons-box__button" type="submit" value="${(enterDeleteButton.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
-                               <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
-                            </div>
-                        </form>
-                    `;
+                    enterOrClientDeletebackWindow.innerHTML = enterOrContactSwitchWindow(e.target.classList[0], deleteBtn);
                     
                     Se selecciona los elementos html generados en este contexto, el botón "Cancelar" en la constante cancelDeleteBtn
                      * y la ventana emergente que en este caso es un formulario a la constante deleteFormWindow
@@ -1401,21 +1245,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         * de edición de empresas enterAndContactsForms.php, osease que PHP se encarga de llenar los dataset), entonces se accede al dataset para
                         * incluir en el formulario el id del cliente a desactivar/activar, el id del contacto y la visibilidad se alojan en sus respectivos inputs 
                         * tipo "hidden", estos datos los procesará el metodo enableOrDisableContact del controlador UserController
-                       enterOrClientDeletebackWindow.innerHTML = `
-                            <form class="enter-or-client-delete__info-window" action="${BASE_URL}home/?homeController=user&homeAction=enableOrDisableContact" method="POST">
-                                <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/caution-sign_75243.png"/></div>
-                                <div class="info-window__text-box"><h3>¿Está seguro de ${(deleteBtn.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} el contacto 
-                                        con Id ${deleteBtn.dataset.id}?, este registro ${(deleteBtn.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
-                                        en la caja de selección del formulario de "Nueva bitácora" y la caja de selección 
-                                            de contactos en los filtros de "Reportes de bitácoras"</h3></div>
-                                <input type="hidden" value="${deleteBtn.dataset.id}" name="contactoId"/>
-                                <input type="hidden" value="${(deleteBtn.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
-                                <div class="info-window__selectbuttons-box">
-                                   <input class="selectbuttons-box__button" type="submit" value="${(deleteBtn.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
-                                   <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
-                                </div>
-                            </form>
-                        `;
+                       
+                       enterOrClientDeletebackWindow.innerHTML = enterOrContactSwitchWindow(e.target.classList[0], deleteBtn);
+
                         Se selecciona los elementos html generados en este contexto, el botón "Cancelar" en la constante contactDeleteCancelBtn
                          * y la ventana emergente que en este caso es un formulario a la constante contactDeleteFormWindow    
                         const contactDeleteCancelBtn = enterOrClientDeletebackWindow.querySelector(".selectbuttons-box__cancel-delete-button");
@@ -1509,20 +1341,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         * de edición de tipos typesEditForms.php, osease que PHP se encarga de llenar los dataset), entonces se accede al dataset para
                         * incluir en el formulario el id del tipo a desactivar/activar y su visibilidad, el id del tipo y la visibilidad se alojan en sus respectivos 
                         * inputs tipo "hidden", estos datos los procesará el metodo enableOrDisableType del controlador UserController
-                       enableOrDisablebackWindow.innerHTML = `
-                            <form class="enable-or-disable__info-window" action="${BASE_URL}home/?homeController=user&homeAction=enableOrDisableType" method="POST">
-                                <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/caution-sign_75243.png"/></div>
-                                <div class="info-window__text-box"><h3>¿Está seguro de ${(deleteBtn.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} el tipo 
-                                        con Id ${deleteBtn.dataset.id}?, este registro ${(deleteBtn.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
-                                        en la caja de selección del formulario de "Crear un equipo"</h3></div>
-                                <input type="hidden" value="${deleteBtn.dataset.id}" name="tipoId"/>
-                                <input type="hidden" value="${(deleteBtn.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
-                                <div class="info-window__selectbuttons-box">
-                                   <input class="selectbuttons-box__button" type="submit" value="${(deleteBtn.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
-                                   <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
-                                </div>
-                            </form>
-                        `;
+                       enableOrDisablebackWindow.innerHTML = typeSwitchWindow(deleteBtn);
                         Se selecciona los elementos html generados en este contexto, el botón "Cancelar" en la constante typeDeleteCancelBtn
                          * y la ventana emergente que en este caso es un formulario a la constante typeDeleteFormWindow  
                         const typeDeleteCancelBtn = enableOrDisablebackWindow.querySelector(".selectbuttons-box__cancel-delete-button");
@@ -1616,20 +1435,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         * de edición de equipos devicesEditForms.php, osease que PHP se encarga de llenar los dataset), entonces se accede al dataset para
                         * incluir en el formulario el id del equipo a desactivar/activar y su visibilidad, el id del equipo y la visibilidad se alojan en sus respectivos
                         * input tipo "hidden", estos datos los procesará el metodo enableOrDisableType del controlador UserController
-                       enableOrDisablebackWindow.innerHTML = `
-                            <form class="enable-or-disable__info-window" action="${BASE_URL}home/?homeController=user&homeAction=enableOrDisableDevice" method="POST">
-                                <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/caution-sign_75243.png"/></div>
-                                <div class="info-window__text-box"><h3>¿Está seguro de ${(deleteBtn.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} el equipo 
-                                        con Id ${deleteBtn.dataset.id}?, este registro ${(deleteBtn.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
-                                        en la caja de selección de equipo del formulario de "Nueva bitácora" y en los filtros de "Reportes de bitácoras"</h3></div>
-                                <input type="hidden" value="${deleteBtn.dataset.id}" name="equipoId"/>
-                                <input type="hidden" value="${(deleteBtn.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
-                                <div class="info-window__selectbuttons-box">
-                                   <input class="selectbuttons-box__button" type="submit" value="${(deleteBtn.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
-                                   <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
-                                </div>
-                            </form>
-                        `;
+                       enableOrDisablebackWindow.innerHTML = deviceSwitchWindow(deleteBtn);
                         Se selecciona los elementos html generados en este contexto, el botón "Cancelar" en la constante deviceDeleteCancelBtn
                          * y la ventana emergente que en este caso es un formulario a la constante deviceDeleteFormWindow    
                         const deviceDeleteCancelBtn = enableOrDisablebackWindow.querySelector(".selectbuttons-box__cancel-delete-button");
@@ -1873,21 +1679,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                      * valores que estarán alojados en un input tipo hidden, luego esta tambien un campo para que el administrador pueda
                                      * escribirlo antes de confirmar, tanto los input hidden como el password del administrador serán procesados por
                                      * el metodo enableOrDisableBinn del controlador UserController
-                                    binnDeletebackWindow.innerHTML = `
-                                        <form class="binnacle-delete__info-window" action="${BASE_URL}home/?homeController=user&homeAction=enableOrDisableBinn" method="POST">
-                                            <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/caution-sign_75243.png"/></div>
-                                            <div class="info-window__text-box"><h3>¿Está seguro de ${(delBtn.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} la bitácora 
-                                                    con Id ${delBtn.dataset.id}?, este registro ${(delBtn.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
-                                                    en el apartado de "Reportes de bitácoras" al menos que se seleccione 
-                                                    ${(delBtn.dataset.visibility === "ENABLED") ? 'Desactivado' : 'Activado'} en la caja de selección de "Visible" en la busqueda</h3></div>
-                                            <input type="hidden" value="${delBtn.dataset.id}" name="bitacoraId"/>
-                                            <input type="hidden" value="${(delBtn.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
-                                            <div class="info-window__selectbuttons-box">
-                                                <input class="selectbuttons-box__button" type="submit" value="${(delBtn.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
-                                                <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
-                                            </div>
-                                        </form>
-                                    `;
+                                    binnDeletebackWindow.innerHTML = binnsSwitchWindow(delBtn);
                                     Después de cambiar el contenido html de binnDeletebackWindow, entonces toca seleccionar el contenido creado en 
                                      * este contexto, esto es seleccionar la ventana emergente y agregarla en la constante binnDelWindow y el botón
                                      * "Cancelar" el cual se agrega en la constante binnDelCancelBtn
@@ -1933,21 +1725,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                      * valores que estarán alojados en un input tipo hidden, luego esta tambien un campo para que el administrador pueda
                                      * escribirlo antes de confirmar, tanto los input hidden como el password del administrador serán procesados por
                                      * el metodo enableOrDisableBinn del controlador UserController
-                    binnDeletebackWindow.innerHTML = `
-                        <form class="binnacle-delete__info-window" action="${BASE_URL}home/?homeController=user&homeAction=enableOrDisableBinn" method="POST">
-                            <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="${BASE_URL}assets/img/caution-sign_75243.png"/></div>
-                            <div class="info-window__text-box"><h3>¿Está seguro de ${(delBtn.dataset.visibility === "ENABLED") ? "desactivar" : "activar"} la bitácora 
-                                    con Id ${delBtn.dataset.id}?, este registro ${(delBtn.dataset.visibility === "ENABLED") ? 'no será visible' : 'será visible'} 
-                                    en el apartado de "Reportes de bitácoras" a menos que se seleccione 
-                                    ${(delBtn.dataset.visibility === "ENABLED") ? '"Desactivado"' : '"Activado"'} en la caja de selección de "Visible:" en el filtrado</h3></div>
-                            <input type="hidden" value="${delBtn.dataset.id}" name="bitacoraId"/>
-                            <input type="hidden" value="${(delBtn.dataset.visibility === "ENABLED") ? 'DISABLED' : 'ENABLED'}" name="visibilidad"/>
-                            <div class="info-window__selectbuttons-box">
-                                <input class="selectbuttons-box__button" type="submit" value="${(delBtn.dataset.visibility === "ENABLED") ? 'Desactivar' : 'Activar'}"/>
-                                <button class="selectbuttons-box__cancel-delete-button" type="button">Cancelar</button>
-                            </div>
-                        </form>
-                    `;
+                    binnDeletebackWindow.innerHTML = binnsSwitchWindow(delBtn);
                     Después de cambiar el contenido html de binnDeletebackWindow, entonces toca seleccionar el contenido creado en 
                      * este contexto, esto es seleccionar la ventana emergente y agregarla en la constante binnDelWindow y el botón
                      * "Cancelar" el cual se agrega en la constante binnDelCancelBtn
@@ -2058,7 +1836,1056 @@ document.addEventListener("DOMContentLoaded", ()=>{
     //--------------------------GESTIÓN DE EVENTOS------------------------------
 });
 */
+
 const innerContents = require('../UIFunctions/innerContents.js');
+const {fireEvent} = require('@testing-library/dom');
+
 describe('Pruebas de innerContents, callbacks del archivo home.js', ()=>{
 
+    beforeEach(()=>{
+
+        BASE_URL = 'http://localhost:8081/SOSv5/service-order-system/';
+
+        mockContactServerData = {
+            entInfoForContactForm: {
+                Id: 10,
+                Telefonos: '462341267, 4623421908',
+                Nombre_comercial: 'Metalurgica Salvatierra',
+                Horario: 'De 7:00 am a 9:00 pm',
+                Razon_social: 'SIB2003159K1',
+                Atencion: 'De 9:00 am a 3:00 pm',
+                Calle_numero: 'Calle Insurgentes #2341',
+                Colonia: 'Col. Valle Azulejos',
+                Entre_calles: 'Entre Prologación Indios Y Calle San Ignacio',
+                Localidad: 'Irapuato, Gto',
+                Dirigirse_con: 'La Recepcionista Alejandra Gonzalez',
+                Email: 'metalurgica_salvatierra1298@gmail.com'
+            }
+        };
+
+        mockEntInfoServerData = {
+            
+            entInfo: {
+                Telefonos: '462341267, 4623421908',
+                Nombre_comercial: 'Metalurgica Salvatierra',
+                Horario: 'De 7:00 am a 9:00 pm',
+                Razon_social: 'SIB2003159K1',
+                Atencion: 'De 9:00 am a 3:00 pm',
+                Calle_numero: 'Calle Insurgentes #2341',
+                Colonia: 'Col. Valle Azulejos',
+                Entre_calles: 'Entre Prologación Indios Y Calle San Ignacio',
+                Localidad: 'Irapuato, Gto',
+                Dirigirse_con: 'La Recepcionista Alejandra Gonzalez',
+                Email: 'metalurgica_salvatierra1298@gmail.com'
+            },
+
+            enterpriseContacts: [
+                {
+                    Id: 1,
+                    Nombre_completo: 'Rosalva Genoveva Goméz'
+                },
+                {
+                    Id: 2,
+                    Nombre_completo: 'Hector Morales Torres'	
+                }
+            ],
+
+            enterpriseDevices: [
+                {
+                    Id: 1,
+                    Marca: 'LG',
+                    Numero_serie: 'LG-UN850-ZX438J'
+                },
+                {
+                    Id: 2,
+                    Marca: 'LENOVO',
+                    Numero_serie: 'LEN-X1C9-KL937T'                    
+                }
+            ]
+        };
+
+        mockBinnInsertData = {
+            Tipo: 'Laptop',
+            Marca: 'LENOVO',
+            Modelo: 'THINKPAD X1 CARBON GEN 9',
+            Numero_serie: 'LEN-X1C9-KL937T',
+            Numero_inventario: '0'
+        };
+
+        mockBinnLinks ={
+            binns: [
+                {
+                    Id: '1',
+                    Nombre_comercial: 'Metalurgica Salvatierra',
+                    Estatus: 'Sin terminar'
+                },
+                {
+                    Id: '2',
+                    Nombre_comercial: 'Papelería la moderna',
+                    Estatus: 'Sin terminar'            
+                },
+                {
+                    Id: '3',
+                    Nombre_comercial: 'Farmacias Isseg',
+                    Estatus: 'Sin terminar'
+                }
+            ],
+            buttons: '<div class="Zebra_Pagination"><ol class="pagination"><li class="page-item disabled"><a href="javascript:void(0)" class="page-link">«</a></li><li class="page-item active"><a href="/SOSv5/service-order-system/home?homeController=binnacle&amp;homeAction=binnaclesReport&amp;empresaId=&amp;contactoId=&amp;equipoId=&amp;servicioOEquipo=Equipo_id&amp;estatus=en+proceso&amp;visible=ENABLED&amp;startedOrEnded=Inicio&amp;leftDay=&amp;rightDay=" class="page-link">1</a></li><li class="page-item disabled"><a href="javascript:void(0)" class="page-link">»</a></li></ol></div>'
+        }
+
+        mockBinnFiltered ={
+            binns: [
+                {
+                    Id: '1',
+                    Nombre: 'Elena',
+                    Apellidos: 'Rodriguez',
+                    Nombre_completo: 'Rosalva Genoveva Goméz',
+                    Nombre_comercial: 'Metalurgica Salvatierra',
+                    Visibilidad: 'ENABLED'
+                },
+                {
+                    Id: '2',
+                    Nombre: 'Elena',
+                    Apellidos: 'Rodriguez',
+                    Nombre_completo: 'Alejandra Méndez',
+                    Nombre_comercial: 'Papelería la moderna',
+                    Visibilidad: 'ENABLED'            
+                },
+                {
+                    Id: '3',
+                    Nombre: 'Elena',
+                    Apellidos: 'Rodriguez',
+                    Nombre_completo: 'Luis Fernando Chávez',
+                    Nombre_comercial: 'Farmacias Isseg',
+                    Visibilidad: 'ENABLED'
+                }
+            ],
+            buttons: '<div class="Zebra_Pagination"><ol class="pagination"><li class="page-item disabled"><a href="javascript:void(0)" class="page-link">«</a></li><li class="page-item active"><a href="/SOSv5/service-order-system/home?homeController=binnacle&amp;homeAction=binnaclesReport&amp;empresaId=&amp;contactoId=&amp;equipoId=&amp;servicioOEquipo=Equipo_id&amp;estatus=en+proceso&amp;visible=ENABLED&amp;startedOrEnded=Inicio&amp;leftDay=&amp;rightDay=" class="page-link">1</a></li><li class="page-item disabled"><a href="javascript:void(0)" class="page-link">»</a></li></ol></div>'
+        }
+        
+        binnLinksHref = [
+            `${BASE_URL}finishing/?controller=followupform&action=index&id=1`,
+            `${BASE_URL}finishing/?controller=followupform&action=index&id=2`,
+            `${BASE_URL}finishing/?controller=followupform&action=index&id=3`
+        ];
+
+        binnFilteredHref = [
+            `${BASE_URL}home/?homeController=binnacle&homeAction=showBinnacle&homeId=1`,
+            `${BASE_URL}home/?homeController=binnacle&homeAction=generateBinnacleReport&homeId=1`,
+            `${BASE_URL}home/?homeController=binnacle&homeAction=editBinnacle&homeId=1`,
+            `${BASE_URL}home/?homeController=binnacle&homeAction=showBinnacle&homeId=2`,
+            `${BASE_URL}home/?homeController=binnacle&homeAction=generateBinnacleReport&homeId=2`,
+            `${BASE_URL}home/?homeController=binnacle&homeAction=editBinnacle&homeId=2`,
+            `${BASE_URL}home/?homeController=binnacle&homeAction=showBinnacle&homeId=3`,
+            `${BASE_URL}home/?homeController=binnacle&homeAction=generateBinnacleReport&homeId=3`,
+            `${BASE_URL}home/?homeController=binnacle&homeAction=editBinnacle&homeId=3`
+        ];
+
+        paginationButtons = '<div class="Zebra_Pagination"><ol class="pagination"><li class="page-item disabled"><a href="javascript:void(0)" class="page-link">«</a></li><li class="page-item active"><a href="/SOSv5/service-order-system/home?homeController=binnacle&amp;homeAction=binnaclesReport&amp;empresaId=&amp;contactoId=&amp;equipoId=&amp;servicioOEquipo=Equipo_id&amp;estatus=en+proceso&amp;visible=ENABLED&amp;startedOrEnded=Inicio&amp;leftDay=&amp;rightDay=" class="page-link">1</a></li><li class="page-item disabled"><a href="javascript:void(0)" class="page-link">»</a></li></ol></div>'
+
+        mockdataManagmentProcedure = async jsonRes =>{
+
+            if(jsonRes.entInfoForContactForm != null){
+                    
+                contactFormTbody.innerHTML = `
+                        <tr>
+                            <td class="contact-form-table__label-column">QUIÉN SOLICITA:</td>
+                            <td class="contact-form-table__input-column">
+                                <input type="hidden" name="hiddenEntId" id="hiddenEntId" value="${jsonRes.entInfoForContactForm.Id}"/>
+                                <input class="inputs-box__input" type="text" name="contacto" id="contacto"/>
+                            </td>
+                            <td class="contact-form-table__label-column">TELÉFONOS:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" type="text" name="telefonos" id="telefonos" value="${jsonRes.entInfoForContactForm.Telefonos}" readonly/>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <td class="contact-form-table__label-column">NOMBRE COMERCIAL:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" type="text" name="nombreComercial" id="nombreComercial" value="${jsonRes.entInfoForContactForm.Nombre_comercial}" readonly/>
+                            </td>
+                            <td class="contact-form-table__label-column">HORARIO:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" type="text" name="horario" id="horario" value="${(jsonRes.entInfoForContactForm.Horario !== "") ? jsonRes.entInfoForContactForm.Horario : "Sin asignar"}" readonly/>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <td class="contact-form-table__label-column">RAZÓN SOCIAL:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" type="text" name="razonSocial" id="razonSocial" value="${(jsonRes.entInfoForContactForm.Razon_social !== "") ? jsonRes.entInfoForContactForm.Razon_social : "Sin asignar"}" readonly/>
+                            </td>
+                            <td class="contact-form-table__label-column">ATENCIÓN:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" type="text" name="atencion" id="atencion" value="${(jsonRes.entInfoForContactForm.Atencion !== "") ? jsonRes.entInfoForContactForm.Atencion : "Sin asignar"}" readonly/>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <td class="contact-form-table__label-column">CALLE Y NÚMERO:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" type="text" name="calleYNumero" id="calleYNumero" value="${(jsonRes.entInfoForContactForm.Calle_numero !== "") ? jsonRes.entInfoForContactForm.Calle_numero : "Sin asignar"}" readonly/>
+                            </td>
+                            <td class="contact-form-table__label-column">COLONIA:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" type="text" name="colonia" id="colonia" value="${(jsonRes.entInfoForContactForm.Colonia !== "") ? jsonRes.entInfoForContactForm.Colonia : "Sin asignar"}" readonly/>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <td class="contact-form-table__label-column">ENTRE CALLES:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" type="text" name="entreCalles" id="entreCalles" value="${(jsonRes.entInfoForContactForm.Entre_calles !== "") ? jsonRes.entInfoForContactForm.Entre_calles : "Sin asignar"}" readonly/>
+                            </td>
+                            <td class="contact-form-table__label-column">LOCALIDAD:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" type="text" name="localidad" id="localidad" value="${(jsonRes.entInfoForContactForm.Localidad !== "") ? jsonRes.entInfoForContactForm.Localidad : "Sin asignar"}" readonly/>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <td class="contact-form-table__label-column">DIRIGIRSE CON:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" type="text" name="dirigirseCon" id="dirigirseCon" value="${(jsonRes.entInfoForContactForm.Dirigirse_con !== "") ? jsonRes.entInfoForContactForm.Dirigirse_con : "Sin asignar"}" readonly/>
+                            </td>
+                            <td class="contact-form-table__label-column">EMAIL:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" type="email" name="email" id="email" value="${(jsonRes.entInfoForContactForm.Email !== "") ? jsonRes.entInfoForContactForm.Email : "Sin asignar"}" disabled/>
+                            </td>
+                        </tr>
+                `;
+            }else if(jsonRes.entInfo != null){
+                
+                let deviceOptionsHtml = "";
+                let contactOptionsHtml = "";
+        
+                if (jsonRes.enterpriseDevices.length > 0) {
+                    for (const device of jsonRes.enterpriseDevices) {
+                        deviceOptionsHtml += `<option value="${device.Id}">${device.Marca} - ${device.Numero_serie}</option>`;
+                    }
+                }
+        
+                if (jsonRes.enterpriseContacts.length > 0) {
+                    for (const contact of jsonRes.enterpriseContacts) {
+                        contactOptionsHtml += `<option value="${contact.Id}">${contact.Nombre_completo}</option>`;
+                    }
+                }
+        
+                contactFormTbody.innerHTML = `
+                        <tr>
+                            <td class="contact-form-table__label-column">QUIÉN SOLICITA:</td>
+                            <td class="contact-form-table__input-column">
+                                <select class="js-example-placeholder-single" name="contactos" id="firstFormContactSelect">
+                                        <option></option>
+                                        ${contactOptionsHtml}
+                                </select>
+                            </td>
+                            <td class="contact-form-table__label-column">TELÉFONOS:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" id="telefonos" value="${jsonRes.entInfo.Telefonos}" disabled=""/> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="contact-form-table__label-column">NOMBRE COMERCIAL:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" id="nombreComercial" value="${jsonRes.entInfo.Nombre_comercial}" disabled=""/>
+                            </td>
+                            <td class="contact-form-table__label-column">HORARIO:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" id="horario" value="${(jsonRes.entInfo.Horario !== "") ? jsonRes.entInfo.Horario : "Sin asignar"}" disabled=""/>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <td class="contact-form-table__label-column">RAZÓN SOCIAL:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" id="razonSocial" value="${(jsonRes.entInfo.Razon_social !== "") ? jsonRes.entInfo.Razon_social : "Sin asignar"}" disabled=""/>
+                            </td>
+                            <td class="contact-form-table__label-column">ATENCIÓN:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" id="atencion" value="${(jsonRes.entInfo.Atencion !== "") ? jsonRes.entInfo.Atencion : "Sin asignar"}" disabled=""/>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <td class="contact-form-table__label-column">CALLE Y NÚMERO:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" id="calleYNumero" value="${(jsonRes.entInfo.Calle_numero !== "") ? jsonRes.entInfo.Calle_numero : "Sin asignar"}" disabled=""/>
+                            </td>
+                            <td class="contact-form-table__label-column">COLONIA:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" id="colonia" value="${(jsonRes.entInfo.Colonia !== "") ? jsonRes.entInfo.Colonia : "Sin asignar"}" disabled=""/>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <td class="contact-form-table__label-column">ENTRE CALLES:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" id="entreCalles" value="${(jsonRes.entInfo.Entre_calles !== "") ? jsonRes.entInfo.Entre_calles : "Sin asignar"}" disabled=""/>
+                            </td>
+                            <td class="contact-form-table__label-column">LOCALIDAD:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" id="localidad" value="${(jsonRes.entInfo.Localidad !== "") ? jsonRes.entInfo.Localidad : "Sin asignar"}" disabled=""/>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <td class="contact-form-table__label-column">DIRIGIRSE CON:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" id="dirigirseCon" value="${(jsonRes.entInfo.Dirigirse_con !== "") ? jsonRes.entInfo.Dirigirse_con : "Sin asignar"}" disabled=""/>
+                            </td>
+                            <td class="contact-form-table__label-column">EMAIL:</td>
+                            <td class="contact-form-table__input-column">
+                                <input class="inputs-box__input" id="email" value="${(jsonRes.entInfo.Email !== "") ? jsonRes.entInfo.Email : "Sin asignar"}" disabled=""/>
+                            </td>
+                        </tr>
+                `;
+        
+                deviceSelectTbody.innerHTML = `
+                    <tr>
+                        <td class="device-select-table__label-column" valign="middle">EQUIPO:</td>
+                        <td class="device-select-table__select-column">
+                            <select class="js-example-placeholder-single" name="equipos" id="firstFormDeviceSelect">
+                                <option></option>
+                                ${deviceOptionsHtml}
+                            </select>
+                        </td>
+                        <td class="device-select-table__button-column">
+                            <button class="binnacle-form__button" type="button" id="firstFormCancelDeviceSelectBtn">Cancelar selección</button>  
+                        </td>
+                    </tr>
+                `;
+        
+                await new Promise(resolve => setTimeout(resolve, 0));
+        
+                const contactsSelect = contactFormTbody.querySelector("#firstFormContactSelect");
+                const devicesSelect = deviceSelectTbody.querySelector("#firstFormDeviceSelect");
+                const cancelDevice = deviceSelectTbody.querySelector("#firstFormCancelDeviceSelectBtn");
+                /*
+                $(contactsSelect).select2({
+                    placeholder: "Selecciona un contacto",
+                    width: "100%"
+                });
+        
+                $(devicesSelect).select2({
+                    placeholder: "Selecciona un equipo",
+                    width: "100%"
+                });
+                */
+                devicesSelect.addEventListener('change', () => {
+                    
+                    const deviceIdSelected = devicesSelect.value;
+                    if (deviceIdSelected !== "") {
+                        /*
+                        fetch(BASE_URL + "home/?homeController=binnacle&homeAction=index", {
+                            "method": "POST",
+                            "headers": {
+                                "Content-Type": "application/json; charset=utf-8"
+                            },
+                            "body": JSON.stringify({"deviceId": `${deviceIdSelected}`})
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                        */
+                            deviceFormTbody.innerHTML = `
+                                <tr>
+                                    <td class="device-form-table__label-column">TIPO:</td>
+                                    <td class="device-form-table__input-column"><input class="inputs-box__input" id="tipo" value="${mockBinnInsertData.Tipo.charAt(0).toUpperCase() + mockBinnInsertData.Tipo.slice(1)}" disabled=""/></td>
+                                </tr>
+                                <tr>
+                                    <td class="device-form-table__label-column">MARCA:</td>
+                                    <td class="device-form-table__input-column"><input class="inputs-box__input" id="marca" value="${mockBinnInsertData.Marca}" disabled=""/></td>
+                                </tr>
+                                <tr>
+                                    <td class="device-form-table__label-column">MODELO:</td>
+                                    <td class="device-form-table__input-column"><input class="inputs-box__input" id="modelo" value="${mockBinnInsertData.Modelo}" disabled=""/></td>
+                                </tr>
+                                <tr>
+                                    <td class="device-form-table__label-column">N.S:</td>
+                                    <td class="device-form-table__input-column"><input class="inputs-box__input" id="numeroSerie" value="${mockBinnInsertData.Numero_serie}" disabled=""/></td>
+                                </tr>
+                                <tr>
+                                    <td class="device-form-table__label-column">NO.INVENTARIO:</td>
+                                    <td class="device-form-table__input-column"><input class="inputs-box__input" id="numeroInventario" value="${(mockBinnInsertData.Numero_inventario !== "0") ? mockBinnInsertData.Numero_inventario : "N/A"}" disabled=""/></td>
+                                </tr>
+                            `; 
+                        //});
+        
+                    }
+                });
+        
+                cancelDevice.addEventListener("click", () => {
+                    
+                    deviceFormTbody.innerHTML = innerContents.resetDeviceFields();
+        
+                    /*se quita cualquier valor que haya tenido
+                        * el select de dispositivo activando su placeholder*/
+        
+                    devicesSelect.value = "";
+                });
+            }
+        };
+    });
+
+    afterEach(() => {
+        document.body.innerHTML = '';
+    });
+
+    test('pruebas de dataManagmentProcedure, caso formulario de contacto y cancelación', ()=>{
+
+        document.body.innerHTML = `
+            <select class="js-example-placeholder-single" name="empresas" id="newContectFormEnterprisesSelect">
+                <option></option>
+                <option value="10">Metalurgica Salvatierra - SIB2003159K1</option>
+            </select>
+            <button class="binnacle-form__button" type="button" id="newContactFormCancelSelectBtn">Cancelar Selección</button>
+            <table class="contact-form-table">
+                <tbody id="contactFormTbody">
+                </tbody>
+            </table>    
+        `;
+
+        const newContectFormEnterprisesSelect = document.querySelector('#newContectFormEnterprisesSelect');
+        const contactFormTbody = document.querySelector('#contactFormTbody');
+        const newContactFormCancelSelectBtn = document.querySelector('#newContactFormCancelSelectBtn');
+
+        newContectFormEnterprisesSelect.addEventListener('change', ()=>{
+
+            const enterpriseIdSelected = newContectFormEnterprisesSelect.value;
+            
+            if(enterpriseIdSelected !== ""){
+                /*  
+                fetch(BASE_URL + "home/?homeController=contact&homeAction=index", {
+                    "method": "POST",
+                    "headers": {
+                        "Content-Type": "application/json; charset=utf-8"
+                    },
+                    "body": JSON.stringify({"newContactEnterId": `${enterpriseIdSelected}`})
+                })
+                .then(res => res.json())
+                .then(data => {
+                    */
+                    mockdataManagmentProcedure(mockContactServerData);
+                //});            
+            }
+        });
+
+        newContactFormCancelSelectBtn.addEventListener("click", (e)=>{
+            contactFormTbody.innerHTML = innerContents.resetContactFields(e.target.id);
+            newContectFormEnterprisesSelect.value = "";
+        });
+
+        fireEvent.change(newContectFormEnterprisesSelect, { target: { value: '10' } });
+
+        const hiddenEntId = contactFormTbody.querySelector('#hiddenEntId');
+        const telefonos = contactFormTbody.querySelector('#telefonos');
+        const nombreComercial = contactFormTbody.querySelector('#nombreComercial');
+        const horario = contactFormTbody.querySelector('#horario');
+        const razonSocial = contactFormTbody.querySelector('#razonSocial');
+        const atencion = contactFormTbody.querySelector('#atencion');
+        const calleYNumero = contactFormTbody.querySelector('#calleYNumero');
+        const colonia = contactFormTbody.querySelector('#colonia');
+        const entreCalles = contactFormTbody.querySelector('#entreCalles');
+        const localidad = contactFormTbody.querySelector('#localidad');
+        const dirigirseCon = contactFormTbody.querySelector('#dirigirseCon');
+        const email = contactFormTbody.querySelector('#email');
+
+        expect(hiddenEntId.value).toBe('10');
+        expect(telefonos.value).toBe('462341267, 4623421908');
+        expect(nombreComercial.value).toBe('Metalurgica Salvatierra');
+        expect(horario.value).toBe('De 7:00 am a 9:00 pm');
+        expect(razonSocial.value).toBe('SIB2003159K1');
+        expect(atencion.value).toBe('De 9:00 am a 3:00 pm');
+        expect(calleYNumero.value).toBe('Calle Insurgentes #2341');
+        expect(colonia.value).toBe('Col. Valle Azulejos');
+        expect(entreCalles.value).toBe('Entre Prologación Indios Y Calle San Ignacio');
+        expect(localidad.value).toBe('Irapuato, Gto');
+        expect(dirigirseCon.value).toBe('La Recepcionista Alejandra Gonzalez');
+        expect(email.value).toBe('metalurgica_salvatierra1298@gmail.com');
+
+        newContactFormCancelSelectBtn.click();
+
+        const inputs = contactFormTbody.querySelectorAll('.inputs-box__input');
+
+        inputs.forEach(input =>{
+            expect(input.value).toBe("");
+        });
+
+        expect(newContectFormEnterprisesSelect.value).toBe("");
+    });
+
+    test('pruebas de dataManagmentProcedure, caso formulario de registro de bitácora y cancelación', ()=>{
+
+        document.body.innerHTML = `
+            <select class="js-example-placeholder-single" name="empresas" id="firstFormenterprisesSelect">
+                <option></option>
+                <option value="10">Metalurgica Salvatierra - SIB2003159K1</option>
+            </select>
+
+            <button class="binnacle-form__button" type="button" id="firstFormCancelSelectBtn">Cancelar Selección</button> 
+
+            <table class="contact-form-table">
+                <tbody id="contactFormTbody">
+                </tbody>
+            </table>
+
+            <table class="device-select-table" cellspacing="0">
+                <tbody id="deviceSelectTbody">
+                </tbody>
+            </table>
+            
+            <table class="device-form-table" cellspacing="0">
+                <tbody id="deviceFormTbody">
+                </tbody>
+            </table>
+        `;
+
+        const firstFormenterprisesSelect = document.querySelector('#firstFormenterprisesSelect');
+        const firstFormCancelSelectBtn = document.querySelector('#firstFormCancelSelectBtn');
+        const contactFormTbody = document.querySelector('#contactFormTbody');
+        const deviceSelectTbody = document.querySelector('#deviceSelectTbody');
+        const deviceFormTbody = document.querySelector('#deviceFormTbody');
+
+        firstFormenterprisesSelect.addEventListener("change", ()=>{
+            
+            const enterpriseIdSelected = firstFormenterprisesSelect.value;
+            
+            if(enterpriseIdSelected !== ""){
+                
+                deviceFormTbody.innerHTML = innerContents.resetDeviceFields();
+                /*
+                fetch(BASE_URL + "home/?homeController=binnacle&homeAction=index", {
+                    "method": "POST",
+                    "headers": {
+                        "Content-Type": "application/json; charset=utf-8"
+                    },
+                    "body": JSON.stringify({"enterpriseId": `${enterpriseIdSelected}`})
+                })
+                .then(res => res.json())
+                .then(data => {*/
+                    mockdataManagmentProcedure(mockEntInfoServerData);
+
+                    
+                //});            
+            }
+        });
+
+        firstFormCancelSelectBtn.addEventListener('click', (e)=>{
+            contactFormTbody.innerHTML = innerContents.resetContactFields(e.target.id);     
+            deviceSelectTbody.innerHTML = innerContents.resetDeviceSelect();
+            deviceFormTbody.innerHTML = innerContents.resetDeviceFields();
+            
+            firstFormenterprisesSelect.value = "";
+        });
+
+        fireEvent.change(firstFormenterprisesSelect, { target: { value: '10' } });
+
+        const firstFormContactSelect = contactFormTbody.querySelector('#firstFormContactSelect');
+        const contactOptions = firstFormContactSelect.options;
+        const telefonos = contactFormTbody.querySelector('#telefonos');
+        const nombreComercial = contactFormTbody.querySelector('#nombreComercial');
+        const horario = contactFormTbody.querySelector('#horario');
+        const razonSocial = contactFormTbody.querySelector('#razonSocial');
+        const atencion = contactFormTbody.querySelector('#atencion');
+        const calleYNumero = contactFormTbody.querySelector('#calleYNumero');
+        const colonia = contactFormTbody.querySelector('#colonia');
+        const entreCalles = contactFormTbody.querySelector('#entreCalles');
+        const localidad = contactFormTbody.querySelector('#localidad');
+        const dirigirseCon = contactFormTbody.querySelector('#dirigirseCon');
+        const email = contactFormTbody.querySelector('#email');
+
+        const firstFormDeviceSelect = deviceSelectTbody.querySelector('#firstFormDeviceSelect');
+        const deviceOptions = firstFormDeviceSelect.options;
+
+        expect(contactOptions).toHaveLength(3);
+        expect(telefonos.value).toBe('462341267, 4623421908');
+        expect(nombreComercial.value).toBe('Metalurgica Salvatierra');
+        expect(horario.value).toBe('De 7:00 am a 9:00 pm');
+        expect(razonSocial.value).toBe('SIB2003159K1');
+        expect(atencion.value).toBe('De 9:00 am a 3:00 pm');
+        expect(calleYNumero.value).toBe('Calle Insurgentes #2341');
+        expect(colonia.value).toBe('Col. Valle Azulejos');
+        expect(entreCalles.value).toBe('Entre Prologación Indios Y Calle San Ignacio');
+        expect(localidad.value).toBe('Irapuato, Gto');
+        expect(dirigirseCon.value).toBe('La Recepcionista Alejandra Gonzalez');
+        expect(email.value).toBe('metalurgica_salvatierra1298@gmail.com');
+
+        expect(deviceOptions).toHaveLength(3);
+        
+        firstFormCancelSelectBtn.click();
+
+        const emptyContSelect = contactFormTbody.querySelector("#firstFormContactSelect");
+        const emptyContSelectOpt = emptyContSelect.options;
+        const contDivs = contactFormTbody.querySelectorAll(".inputs-box__input");
+        const emptyDceSelect = deviceSelectTbody.querySelector("#firstFormDeviceSelect");
+        const emptyDceSelectOpt = emptyDceSelect.options;
+        const dceDivs = deviceFormTbody.querySelectorAll(".inputs-box__input");
+
+        expect(emptyContSelectOpt).toHaveLength(1);
+
+        contDivs.forEach(div =>{
+            expect(div.innerHTML).toBe("");
+        });
+
+        expect(emptyDceSelect).toHaveLength(1);
+
+        dceDivs.forEach(div =>{
+            expect(div.innerHTML).toBe("");
+        });
+
+        expect(firstFormenterprisesSelect.value).toBe("");
+    });
+    
+    test('caso formulario de registro de bitácora, selección de un dispositivo y cancelación', ()=>{
+
+        document.body.innerHTML = `
+        <table class="device-select-table" cellspacing="0">
+            <tbody id="deviceSelectTbody">
+                <tr>
+                    <td class="device-select-table__label-column" valign="middle">EQUIPO:</td>
+                    <td class="device-select-table__select-column">
+                        <select class="js-example-placeholder-single" name="equipos" id="firstFormDeviceSelect">
+                            <option></option>
+                            <option value="2">LENOVO - LEN-X1C9-KL937T</option>
+                        </select>
+                    </td>
+                    <td class="device-select-table__button-column">
+                        <button class="binnacle-form__button" type="button" id="firstFormCancelDeviceSelectBtn">Cancelar selección</button>  
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="device-form-table" cellspacing="0">
+            <tbody id="deviceFormTbody">
+            </tbody>
+        </table>
+        `;
+
+        const devicesSelect = document.querySelector("#firstFormDeviceSelect");
+        const cancelDevice = document.querySelector("#firstFormCancelDeviceSelectBtn");
+        const deviceFormTbody = document.querySelector('#deviceFormTbody');
+
+        devicesSelect.addEventListener('change', () => {
+                    
+            const deviceIdSelected = devicesSelect.value;
+            if (deviceIdSelected !== "") {
+                /*
+                fetch(BASE_URL + "home/?homeController=binnacle&homeAction=index", {
+                    "method": "POST",
+                    "headers": {
+                        "Content-Type": "application/json; charset=utf-8"
+                    },
+                    "body": JSON.stringify({"deviceId": `${deviceIdSelected}`})
+                })
+                .then(res => res.json())
+                .then(data => {
+                */
+                    deviceFormTbody.innerHTML = `
+                        <tr>
+                            <td class="device-form-table__label-column">TIPO:</td>
+                            <td class="device-form-table__input-column"><input class="inputs-box__input" id="tipo" value="${mockBinnInsertData.Tipo.charAt(0).toUpperCase() + mockBinnInsertData.Tipo.slice(1)}" disabled=""/></td>
+                        </tr>
+                        <tr>
+                            <td class="device-form-table__label-column">MARCA:</td>
+                            <td class="device-form-table__input-column"><input class="inputs-box__input" id="marca" value="${mockBinnInsertData.Marca}" disabled=""/></td>
+                        </tr>
+                        <tr>
+                            <td class="device-form-table__label-column">MODELO:</td>
+                            <td class="device-form-table__input-column"><input class="inputs-box__input" id="modelo" value="${mockBinnInsertData.Modelo}" disabled=""/></td>
+                        </tr>
+                        <tr>
+                            <td class="device-form-table__label-column">N.S:</td>
+                            <td class="device-form-table__input-column"><input class="inputs-box__input" id="numeroSerie" value="${mockBinnInsertData.Numero_serie}" disabled=""/></td>
+                        </tr>
+                        <tr>
+                            <td class="device-form-table__label-column">NO.INVENTARIO:</td>
+                            <td class="device-form-table__input-column"><input class="inputs-box__input" id="numeroInventario" value="${(mockBinnInsertData.Numero_inventario !== "0") ? mockBinnInsertData.Numero_inventario : "N/A"}" disabled=""/></td>
+                        </tr>
+                    `; 
+                //});
+
+            }
+        });
+
+        cancelDevice.addEventListener("click", () => {
+            
+            deviceFormTbody.innerHTML = innerContents.resetDeviceFields();
+
+            /*se quita cualquier valor que haya tenido
+                * el select de dispositivo activando su placeholder*/
+
+            devicesSelect.value = "";
+        });
+
+        fireEvent.change(devicesSelect, { target: { value: '2' } });
+
+        const tipo = deviceFormTbody.querySelector("#tipo");
+        const marca = deviceFormTbody.querySelector("#marca");
+        const modelo = deviceFormTbody.querySelector("#modelo");
+        const numeroSerie = deviceFormTbody.querySelector("#numeroSerie");
+        const numeroInventario = deviceFormTbody.querySelector("#numeroInventario");
+
+        expect(tipo.value).toBe('Laptop');
+        expect(marca.value).toBe('LENOVO');
+        expect(modelo.value).toBe('THINKPAD X1 CARBON GEN 9');
+        expect(numeroSerie.value).toBe('LEN-X1C9-KL937T');
+        expect(numeroInventario.value).toBe('N/A');
+
+        cancelDevice.click();
+
+        const divs = deviceFormTbody.querySelectorAll(".inputs-box__input");
+
+        divs.forEach(div =>{
+            expect(div.innerHTML).toBe("");
+        });
+
+        expect(devicesSelect.value).toBe("");
+    });
+
+    test('caso links en el seguimiento de bitácoras', ()=>{
+        
+        document.body.innerHTML = `
+            <select class="numkey-box__select" name="pagElem" id="numkeySelect">
+                <option value="1">1</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+            </select>
+            <div id="linksArea"></div>
+            <div id="paginationBox"></div>
+        `;
+
+        const linksArea = document.querySelector('#linksArea');
+        const paginationBox = document.querySelector('#paginationBox');
+        const numkeySelect = document.querySelector('#numkeySelect');
+
+        numkeySelect.addEventListener("change", () =>{
+            
+            const numSelected = numkeySelect.value;
+
+            if(numSelected != null){
+                /*
+                fetch(BASE_URL + "home/?homeController=binnacle&homeAction=followuplist", {
+                    "method": "POST",
+                    "headers": {
+                        "Content-Type": "application/json; charset=utf-8"
+                    },
+                    "body": JSON.stringify({"number": `${numSelected}`})
+                })
+                .then(res => res.json())
+                .then(data => {
+                */    
+                    linksArea.innerHTML = "";
+                    mockBinnLinks.binns.forEach(binn =>{
+                        linksArea.append(innerContents.generateLinks(binn));
+                    });
+                    paginationBox.innerHTML = mockBinnLinks.buttons;
+                //});
+            }
+            
+        });
+
+        fireEvent.change(numkeySelect, {target: {value: '5'}});
+        expect(numkeySelect.value).toBe('5');
+
+        const binnRows = linksArea.querySelectorAll(".binn-row");
+        expect(binnRows).toHaveLength(3);
+
+        for(let i = 0; i < binnRows.length; i++){
+            expect(binnRows[i].href).toBe(binnLinksHref[i]);
+        }
+
+        expect(paginationBox.innerHTML).toBe(paginationButtons);
+    });
+
+    test('caso selección de empresa en reporte de bitácoras', ()=>{
+        
+        document.body.innerHTML = `
+            <select class="js-example-placeholder-single" name="empresaId" id="binnFiltersEnterSelect">
+                <option></option>
+                <option value="10">Metalurgica Salvatierra - SIB2003159K1</option>
+            </select>
+
+            <select class="js-example-placeholder-single" name="contactoId" id="binnFiltersContactSelect">
+                <option></option>
+            </select>
+
+            <select class="js-example-placeholder-single" name="equipoId" id="binnFiltersDeviceSelect">
+                <option></option>
+            </select>
+        `;
+
+        const binnFiltersEnterSelect = document.querySelector('#binnFiltersEnterSelect');
+        const binnFiltersContactSelect = document.querySelector('#binnFiltersContactSelect');
+        const binnFiltersDeviceSelect = document.querySelector('#binnFiltersDeviceSelect');
+
+        binnFiltersEnterSelect.addEventListener("change", ()=>{
+            
+            const enterIdFromFilterSelected = binnFiltersEnterSelect.value;
+            if(enterIdFromFilterSelected !== ""){
+                /*
+                fetch(BASE_URL + "home/?homeController=binnacle&homeAction=binnaclesReport", {
+                "method": "POST",
+                "headers": {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                "body": JSON.stringify({"enterIdFromBinnFilter": `${enterIdFromFilterSelected}`})
+                })
+                .then(res => res.json())
+                .then(data => {*/
+                    
+                    let contactOptionsHtml = "<option value=''></option>";
+                    let devicesOptionsHtml = "<option value=''></option>";
+                    
+                    if (mockEntInfoServerData.enterpriseContacts.length > 0) {
+                        for(const contact of mockEntInfoServerData.enterpriseContacts){
+                            contactOptionsHtml += `<option value="${contact.Id}">${contact.Nombre_completo}</option>`;
+                        }        
+                    }
+                    
+                    if (mockEntInfoServerData.enterpriseDevices.length > 0) {
+                        for(const device of mockEntInfoServerData.enterpriseDevices){
+                            devicesOptionsHtml += `<option value="${device.Id}">${device.Marca} - ${device.Numero_serie}</option>`;
+                        }
+                    }
+                    
+                    binnFiltersContactSelect.innerHTML = contactOptionsHtml;
+                    binnFiltersDeviceSelect.innerHTML = devicesOptionsHtml;
+                //});
+            }
+        });
+
+        fireEvent.change(binnFiltersEnterSelect, {target: {value: '10'}});
+        expect(binnFiltersEnterSelect.value).toBe('10');
+
+        const contactOptions = binnFiltersContactSelect.options;
+        const devicesOptions = binnFiltersDeviceSelect.options;
+
+        expect(contactOptions).toHaveLength(3);
+        expect(devicesOptions).toHaveLength(3);
+    });
+
+    test('caso generación de filas en la tabla de reportes de bitácoras', ()=>{
+
+        document.body.innerHTML = `
+            <select class="binnacle-data-table-wrapper__numkey-select" name="pagElem" id="binnsFilternumkeySelect">
+                <option value="5">5</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+
+            <table class="binnacles-filter__binnacle-data-table">
+                <tbody id="binnacleTbody"></tbody>
+            </table>
+
+            <div class="binnacles-filter__pagination-control-box" id="binnFilterPaginationBox"></div>
+        `;
+        
+        const binnsFilternumkeySelect = document.querySelector('#binnsFilternumkeySelect');
+        const binnacleTbody = document.querySelector('#binnacleTbody');
+        const binnFilterPaginationBox = document.querySelector('#binnFilterPaginationBox');
+
+        binnsFilternumkeySelect.addEventListener("change", () =>{
+            
+            const binnsFilterNumSelected = binnsFilternumkeySelect.value;
+            
+            if(binnsFilterNumSelected != null){
+                /*
+                fetch(BASE_URL + "home/?homeController=binnacle&homeAction=binnaclesReport", {
+                    "method": "POST",
+                    "headers": {
+                        "Content-Type": "application/json; charset=utf-8"
+                    },
+                    "body": JSON.stringify({"binnsFilterNumber": `${binnsFilterNumSelected}`})
+                })
+                .then(res => res.json())
+                .then(data => {*/
+
+                    binnacleTbody.innerHTML = "";
+                    mockBinnFiltered.binns.forEach(binn =>{
+                        binnacleTbody.append(innerContents.generateTableRow(binn));
+                    });
+                    binnFilterPaginationBox.innerHTML = mockBinnFiltered.buttons;
+                    /*
+                    const binnEDBtns = binnacleTbody.querySelectorAll(".binnacle-data-table__binn-delete-btn");
+                    
+                    binnEDBtns.forEach(delBtn =>{
+                    
+                        delBtn.addEventListener("click", ()=>{
+                            
+                            binnDeletebackWindow.classList.remove("hidThis");
+                            binnDeletebackWindow.innerHTML = binnsSwitchWindow(delBtn);
+                            
+                            const binnDelWindow = binnDeletebackWindow.querySelector(".binnacle-delete__info-window");
+                            const binnDelCancelBtn = binnDeletebackWindow.querySelector(".selectbuttons-box__cancel-delete-button");
+                            binnDelWindow.classList.add("activate-pop-in");
+                            
+                            binnDelCancelBtn.addEventListener("click", ()=>{
+                                binnDelWindow.classList.remove("activate-pop-in");
+                                binnDelWindow.classList.add("activate-pop-out");
+                                setTimeout(() => {
+                                    binnDeletebackWindow.classList.add("hidThis");
+                                    binnDelWindow.remove();
+                                }, 200);
+                                
+                            });
+                        });
+                    });
+                });*/
+            }    
+        });
+
+        fireEvent.change(binnsFilternumkeySelect, {target: {value: '5'}});
+        expect(binnsFilternumkeySelect.value).toBe('5');
+
+        const rowLinks = binnacleTbody.querySelectorAll('.generated-link');
+        expect(rowLinks).toHaveLength(9);
+        const rowBtns = binnacleTbody.querySelectorAll('.binnacle-data-table__binn-delete-btn');
+        expect(rowBtns).toHaveLength(3);
+
+        for(let i = 0; i < rowLinks.length; i++){
+            expect(rowLinks[i].href).toBe(binnFilteredHref[i]);
+        }
+
+        for(let i = 0; i < rowBtns.length; i++){
+            expect(rowBtns[i].dataset.id).toBe(`${i + 1}`);
+        }
+        for(let i = 0; i < rowBtns.length; i++){
+            expect(rowBtns[i].classList).toHaveLength(1);
+        }
+        for(let i = 0; i < rowBtns.length; i++){
+            expect(rowBtns[i].dataset.visibility).toBe('ENABLED');
+        }
+        for(let i = 0; i < rowBtns.length; i++){
+            expect(rowBtns[i].innerHTML).toBe('Desactivar');
+        }
+
+        expect(binnFilterPaginationBox.innerHTML).toBe(paginationButtons);
+    });
+
+    test('caso ventana emergente de desactivación de Empresa', ()=>{
+
+        document.body.innerHTML = `
+            <div class="enter-or-client-delete__window-background hidThis" id="enterOrClientDeletebackWindow"></div>
+            <button class="enterprise-forms__delete-button" type="button" data-id="10" data-visibility="ENABLED">Desactivar empresa</button>
+        `;
+
+        const enterOrClientDeletebackWindow = document.querySelector('#enterOrClientDeletebackWindow');
+        const switchButton = document.querySelector('.enterprise-forms__delete-button');
+
+        switchButton.addEventListener("click", (e)=>{
+            enterOrClientDeletebackWindow.innerHTML = innerContents.enterOrContactSwitchWindow(e.target.classList[0], switchButton);
+        });
+
+        switchButton.click();
+
+        const empresaId = enterOrClientDeletebackWindow.querySelector('.empresa-id');
+        const visibilidad = enterOrClientDeletebackWindow.querySelector('.visibilidad');
+        const submitBtn = enterOrClientDeletebackWindow.querySelector('.selectbuttons-box__button');
+
+        expect(empresaId.value).toBe('10');
+        expect(visibilidad.value).toBe('DISABLED');
+        expect(submitBtn.value).toBe('Desactivar');
+    });
+
+    test('caso ventana emergente de desactivación de Contacto', ()=>{
+
+        document.body.innerHTML = `
+            <div class="enter-or-client-delete__window-background hidThis" id="enterOrClientDeletebackWindow"></div>
+            <button class="contact-form__delete-button" type="button" data-id="5" data-visibility="ENABLED">Desactivar contacto</button>
+        `;
+
+        const enterOrClientDeletebackWindow = document.querySelector('#enterOrClientDeletebackWindow');
+        const switchButton = document.querySelector('.contact-form__delete-button');
+
+        switchButton.addEventListener("click", (e)=>{
+            enterOrClientDeletebackWindow.innerHTML = innerContents.enterOrContactSwitchWindow(e.target.classList[0], switchButton);
+        });
+
+        switchButton.click();
+
+        const contactoId = enterOrClientDeletebackWindow.querySelector('.contacto-id');
+        const visibilidad = enterOrClientDeletebackWindow.querySelector('.visibilidad');
+        const submitBtn = enterOrClientDeletebackWindow.querySelector('.selectbuttons-box__button');
+
+        expect(contactoId.value).toBe('5');
+        expect(visibilidad.value).toBe('DISABLED');
+        expect(submitBtn.value).toBe('Desactivar');
+    });
+
+    test('caso ventana emergente de desactivación de Tipo', ()=>{
+
+        document.body.innerHTML = `
+            <div class="enable-or-disable__window-background hidThis" id="enableOrDisablebackWindow"></div>
+            <button class="contact-form__delete-button" type="button" data-id="5" data-visibility="ENABLED">Desactivar tipo</button>
+        `;
+
+        const enableOrDisablebackWindow = document.querySelector('#enableOrDisablebackWindow');
+        const switchButton = document.querySelector('.contact-form__delete-button');
+
+        switchButton.addEventListener("click", (e)=>{
+            enableOrDisablebackWindow.innerHTML = innerContents.typeSwitchWindow(switchButton);
+        });
+
+        switchButton.click();
+
+        const tipoId = enableOrDisablebackWindow.querySelector('.tipo-id');
+        const visibilidad = enableOrDisablebackWindow.querySelector('.visibilidad');
+        const submitBtn = enableOrDisablebackWindow.querySelector('.selectbuttons-box__button');
+
+        expect(tipoId.value).toBe('5');
+        expect(visibilidad.value).toBe('DISABLED');
+        expect(submitBtn.value).toBe('Desactivar');
+    });
+
+    test('caso ventana emergente de desactivación de Equipo', ()=>{
+
+        document.body.innerHTML = `
+            <div class="enable-or-disable__window-background hidThis" id="enableOrDisablebackWindow"></div>
+            <button class="contact-form__delete-button" type="button" data-id="5" data-visibility="ENABLED">Desactivar equipo</button>
+        `;
+
+        const enableOrDisablebackWindow = document.querySelector('#enableOrDisablebackWindow');
+        const switchButton = document.querySelector('.contact-form__delete-button');
+
+        switchButton.addEventListener("click", (e)=>{
+            enableOrDisablebackWindow.innerHTML = innerContents.deviceSwitchWindow(switchButton);
+        });
+
+        switchButton.click();
+
+        const equipoId = enableOrDisablebackWindow.querySelector('.equipo-id');
+        const visibilidad = enableOrDisablebackWindow.querySelector('.visibilidad');
+        const submitBtn = enableOrDisablebackWindow.querySelector('.selectbuttons-box__button');
+
+        expect(equipoId.value).toBe('5');
+        expect(visibilidad.value).toBe('DISABLED');
+        expect(submitBtn.value).toBe('Desactivar');
+    });
+
+    test('caso ventana emergente de desactivación de Bitácora', ()=>{
+
+        document.body.innerHTML = `
+            <div class="binnacle-delete__window-background hidThis" id="binnDeletebackWindow"></div>
+            <button class="binnacle-data-table__binn-delete-btn" type="button" data-id="5" data-visibility="ENABLED">Desactivar equipo</button>
+        `;
+
+        const binnDeletebackWindow = document.querySelector('#binnDeletebackWindow');
+        const switchButton = document.querySelector('.binnacle-data-table__binn-delete-btn');
+
+        switchButton.addEventListener("click", (e)=>{
+            binnDeletebackWindow.innerHTML = innerContents.binnsSwitchWindow(switchButton);
+        });
+
+        switchButton.click();
+
+        const bitacoraId = binnDeletebackWindow.querySelector('.bitacora-id');
+        const visibilidad = binnDeletebackWindow.querySelector('.visibilidad');
+        const submitBtn = binnDeletebackWindow.querySelector('.selectbuttons-box__button');
+
+        expect(bitacoraId.value).toBe('5');
+        expect(visibilidad.value).toBe('DISABLED');
+        expect(submitBtn.value).toBe('Desactivar');
+    });
 });

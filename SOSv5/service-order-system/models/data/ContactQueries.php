@@ -2,9 +2,12 @@
 
 class ContactQueries{
 
-    private $db, $model;
+    private $db, $model, $db_class;
+    public function __construct($msDatabase){
+        $this->db_class = $msDatabase;
+    }
     public function setConnection(){
-        $this->db = DataBaseMssql::getConnection();
+        $this->db = $this->db_class->getConnection();
     }
     public function closeConnection(){
         $this->db = null;

@@ -342,5 +342,5 @@ function generateSignPad(technicianCanvas, clientCanvas, formData, serverData){
     //--------------------------------------------------------------------
     
 }
-//export {generateSignPad, generateCanvas, dataURLtoBlob, isCanvasBlank};
-module.exports = { generateCanvas, dataURLtoBlob, isCanvasBlank };
+export {generateSignPad, generateCanvas, dataURLtoBlob, isCanvasBlank};
+//module.exports = { generateCanvas, dataURLtoBlob, isCanvasBlank };

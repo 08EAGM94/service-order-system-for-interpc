@@ -12,20 +12,19 @@ class Utils{
         if (!empty($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > 1800) {
             // Caducar sesión
             session_unset();
-            session_destroy();
             header("Location: ".base_url."home/");
             exit;
         }
     }
     public static function showError($container){
-        $error = $container->get('ErrorController');
+        $error = $container->make('ErrorController');
         $error->index();
     }
 
     public static function defaultHomePage($container){
         $controllerName = default_homeController;
         $defaultAction = default_action;
-        $controlador = $container->get($controllerName);
+        $controlador = $container->make($controllerName);
         $controlador->$defaultAction();
     }
     public static function generateWelcomeBanner(){
@@ -88,7 +87,7 @@ class Utils{
                     $enter_devices = $dceService->getChildrenByEnterprise($dceDTO);
 
                     if(sizeof($enter_devices) === 0)
-                        throw new Exception();
+                        throw new UnknownInDataBaseException("La empresa seleccionada no tiene dispositivos");
 
                     $enterDTO->enterprise_id = $_SESSION["idSession"]["devicesReport_enterId"];
                     $enter_info = $enterService->getInfo($enterDTO);
@@ -96,6 +95,8 @@ class Utils{
                     $data = file_get_contents($path);
                     $logo_base64 = "data:image/png;base64,".base64_encode($data);
 
+                }catch(UnknownInDataBaseException $ex){
+                    $_SESSION["exceptions"]["unknownInDataBaseEx"] = $ex->getMessage();
                 }catch(EntityException $ex){
                     $_SESSION["exceptions"]["entitiesEx"] = $ex->getMessage();
                 }catch(Exception $ex){
@@ -152,6 +153,8 @@ class Utils{
                     
                 }catch(UnknownInDataBaseException $ex){
                     $_SESSION["exceptions"]["unknownInDataBaseEx"] = $ex->getMessage();
+                }catch(EntityException $ex){
+                    $_SESSION["exceptions"]["entitiesEx"] = $ex->getMessage();
                 }catch(Exception $ex){
                     $_SESSION["exceptions"]["getBinnInfoEx"] = "No se logró obtener los "
                                     ."datos de la bitácora seleccionada, posible "
@@ -190,7 +193,9 @@ class Utils{
                         null,
                         $_GET["homeAction"]
                         );
-                } catch (Exception $ex) {
+                }catch(EntityException $ex){
+                    $_SESSION["exceptions"]["entitiesEx"] = $ex->getMessage();
+                }catch (Exception $ex) {
                     $_SESSION["exceptions"]["followUpQueryEx"] = "Se generó un error al "
                                 ."interactuar con la base de datos para la "
                                 ."obtención de datos necesarios crear "
@@ -488,25 +493,22 @@ class Utils{
                 $_SESSION["exceptions"]["techSignInsertException"] = "No se logró guardar "
                         ."la firma del técnico en la base de datos, se cortó "
                         ."la conexión a la base de datos";
-                if(!unlink("uploads/firmas/".$_SESSION["formSession"]["techSignature"])){
-                        $_SESSION["exceptions"]["unlinkTechSignEx"] = "La supuesta firma del técnico no se encontró en la aplicación web";
-                }
-                Utils::unsetFormSessions();
             }finally{
                 if(!empty($_SESSION["exceptions"])){
+                    if(!unlink("uploads/firmas/".$_SESSION["formSession"]["techSignature"])){
+                            $_SESSION["exceptions"]["unlinkTechSignEx"] = "La supuesta firma del técnico no se encontró en la aplicación web";
+                    }
+                    Utils::unsetFormSessions();
                     header("Location: ".base_url."home/");
                     exit;
                 }
             
                 try{
-
                     if(!empty($_SESSION["idSession"]["userSign_userId"])){
-                        if($_SESSION["idSession"]["userSign_userId"] === 
-                            $_SESSION["identity"]["Id"]){ 
-                            $_SESSION["identity"] = $usrService->getInfo();
-                        }else{
-                            $_SESSION["identity"] = $usrService->getInfo();
-                        }
+                        if($_SESSION["idSession"]["userSign_userId"] === $_SESSION["identity"]["Id"]) 
+                            $_SESSION["identity"] = $usrService->getInfo($usrDTO);
+                    }else{
+                        $_SESSION["identity"] = $usrService->getInfo($usrDTO);
                     }
                 } catch (Exception $ex) {
                     $_SESSION["exceptions"]["identitySessionUpdateEx"] = "No se logró actualizar la "
@@ -653,15 +655,14 @@ class Utils{
     public static function setIVAIfAmountIsNotNull($arr){
         $iva_format = null;
         if(!empty($arr["Monto"])){
-            /*todo lo que la base de datos devuelve es información en forma de string, incluyendo valores numericos, entonces
-                    * si Monto no es igual a "" entonces tiene un numero flotante, lo que se hace es convertir el indice "Monto" en un valor flotante y multiplicar 
-                    * ese valor por 1.16 (calculo del IVA en México), el resultado se guardará en la variable $iva_result*/
-                $iva_result = floatval($arr["Monto"]) * 1.16;
-                /*en la variable $with_iva contendrá la cantidad contenida en $iva_result pero configurada para que este solo 
-                    * tenga dos decimales, la variable $binn_info (y si entra en este if, tambien la variable $with_iva) lo 
-                    * utilizará la vista binnacleInfoCanvas.php en el bloque if de $_GET["homeAction"] === "showBinnacle"*/
-                $iva_format = sprintf("%.2f", $iva_result);
+            $iva_result = floatval($arr["Monto"]) * 1.16;
+            $iva_format = sprintf("%.2f", $iva_result);
         }
         return $iva_format;
+    }
+
+    public static function isAuthorizedBinnacle($arr){
+        if($arr['Estatus'] === 'finalizado' || $arr['Estatus'] === 'cancelado')
+            throw new UnauthorizedDataException('La bitácora que se intenta acceder está finalizada o cancelada');
     }
 }

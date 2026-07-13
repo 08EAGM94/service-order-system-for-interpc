@@ -44,6 +44,7 @@ class DeviceController{
     }
     public function editDevice(){
         if(!empty($_SESSION["isAdmin"])){
+            $_SESSION['LAST_ACTIVITY'] = time();
             
             Utils::setIdSession();
 
