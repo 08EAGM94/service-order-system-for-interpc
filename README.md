@@ -59,7 +59,7 @@ Por último, tenemos la vista del administrador, a diferencia del usuario donde 
 <br/>
 <h2 align="center">Aspectos técnicos</h2>
 <div align="center"><img width="626" height="665" alt="SOSArchGuia" src="https://github.com/user-attachments/assets/15806588-14b5-499c-9b9f-bf8fa833f103" /></div>
-<div align="center"><img width="4715" height="4853" alt="SOSArchDiagram" src="https://github.com/user-attachments/assets/16248ae7-59be-4f21-9c20-136c003d1fab" /></div>
+<div align="center"><img width="4715" height="4853" alt="SOSArchDiagramCorrected" src="https://github.com/user-attachments/assets/2feea038-a166-40df-9f75-20d58e9a051f" /></div>
 <br/>
 <p>
 Se añadió al sistema de ordenes de servicio una arquitectura de software "hexagonal" pensado para que el sistema sea fácilmente mantenible y escalable.
