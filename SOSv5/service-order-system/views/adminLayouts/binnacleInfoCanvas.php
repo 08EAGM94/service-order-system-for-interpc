@@ -534,7 +534,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     </div>    
     <div class="binnacleInfoCanvas__pdf-btn-box">
         <div class="pdf-btn-box__link-box">
-        <a class="binnacle-data-table__binn-pdf-link" href="<?= base_url;?>home/?homeController=user&homeAction=generateBinnacleReport&homeId=<?= $binn_info["Id"];?>">PDF</a>
+        <a class="binnacle-data-table__binn-pdf-link" href="<?= base_url;?>home/?homeController=binnacle&homeAction=generateBinnacleReport&homeId=<?= $binn_info["Id"];?>">PDF</a>
         </div>
     </div>
 </main>
@@ -545,10 +545,10 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->    
-    <?php if (!empty($_SESSION["binnacleUpdateSucceed"])): ?>
-        <div class="succeed-box"><?= $_SESSION["binnacleUpdateSucceed"]; ?></div>
+    <?php if (!empty($_SESSION["success"])): ?>
+        <div class="succeed-box"><?= $_SESSION["success"]; ?></div>
     <?php endif; ?>    
-    <form action="<?= base_url;?>home/?homeController=user&homeAction=updateBinnacleInfo" method="POST">
+    <form action="<?= base_url;?>home/?homeController=binnacle&homeAction=updateBinnacleInfo" method="POST">
     <div class="binnacle-edit__background hidThis" id="binnEditConfirmationBackground">
         <div class="binnacle-edit__info-window">
             <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
@@ -751,8 +751,8 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
         <button class="binnacle-data-table__binn-edit-link" type="button" id="editBinnacleBtn">GUARDAR</button>
         </div>
     </div>
-    <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
-sesiones de mensajes de errores, excepciones y de exito en un proceso -->
-    <?php Utils::unsetFlagsSessions();?>
 </main>
-<?php endif;?>
+<!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
+sesiones de mensajes de errores, excepciones y de exito en un proceso -->
+<?php Utils::unsetFlagsSessions();?>
+<?php endif;

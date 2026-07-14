@@ -7,11 +7,11 @@
         <link rel="stylesheet" type="text/css" href="<?=base_url;?>assets/fonts/Outfit/outfit.css"/>
         <link rel="stylesheet" type="text/css" href="<?=base_url;?>assets/css/finishingStyles.css"/>
         <link rel="stylesheet" type="text/css" href="<?=base_url;?>assets/css/finishingResponsive.css"/>
-        <?php if(!empty($_SESSION["dataSelectionForSigns"])): ?>
+        <?php if(!empty($_SESSION["formSession"]["dataSelectionForSigns"])): ?>
             <!-- Este script inicializa un objeto solo si la sesión  "binnacleSelection" no está vacía, este objeto 
             se usa en el archivo finishing.js para dar forma al nombre del archivo de las imagenes de las firmas (tanto 
             de clientes como de técnicos) -->
-            <script>window.serverData = <?=json_encode($_SESSION["dataSelectionForSigns"]);?></script>
+            <script>window.serverData = <?=json_encode($_SESSION["formSession"]["dataSelectionForSigns"]);?></script>
         <?php endif; ?>
         <script>
             //URL donde se aloja la aplicación web, los archivo JS necesita esta constante para 
@@ -22,7 +22,7 @@
             //se contiene en la constante JS de BASE_URL
             const BASE_URL = "<?=base_url;?>";
         </script> 
-        <script src="<?=base_url;?>assets/js/finishing.js"></script>
+        <script type="module" src="<?=base_url;?>assets/js/finishing.js"></script>
         <title>Seguimiento de bitacora</title>
     </head>
     

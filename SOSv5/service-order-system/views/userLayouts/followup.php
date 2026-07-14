@@ -6,44 +6,18 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->
-    <?php if(!empty($_SESSION["resetActivitiesIdEvaluationEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["resetActivitiesIdEvaluationEx"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["followupExeption"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["followupExeption"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["followupCancelExeption"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["followupCancelExeption"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["resetActivitiesException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["resetActivitiesException"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["binnFinishingException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["binnFinishingException"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["unlinkClientSignEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["unlinkClientSignEx"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["clientSignInsertException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["clientSignInsertException"]?></div>
+    <?php if (!empty($_SESSION["success"])): ?>
+        <div class="succeed-box"><?= $_SESSION["success"]; ?></div>
     <?php endif; ?>
     
-    
-    <?php if(!empty($_SESSION["binnSignsInsertSucceed"])):?>
-    <div class="succeed-box"><?=$_SESSION["binnSignsInsertSucceed"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["followupSucceed"])):?>
-    <div class="succeed-box"><?=$_SESSION["followupSucceed"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["followUpCancelSucceed"])):?>
-    <div class="succeed-box"><?=$_SESSION["followUpCancelSucceed"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["binnFinishingsucceed"])):?>
-    <div class="succeed-box"><?=$_SESSION["binnFinishingsucceed"]?></div>
-    <?php endif; ?>
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
+        <?php endforeach;?>
+    <?php endif;?>
     
     
-    <?php if($num_rows > 0): ?>
+    <?php if(sizeof($binn_pagination) > 0): ?>
     <div class="main__numkey-box" id="numkeyBox">
         Número de elementos en pantalla:
         <select class="numkey-box__select" name="pagElem" id="numkeySelect">
@@ -57,8 +31,8 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     </div>
     
     <div id="linksArea">
-    <?php while ($binn = $stmt_binns->fetch()):?>    
-    <a class="binn-row" href="<?= base_url;?>finishing/?controller=form&action=index&id=<?=$binn["Id"];?>">
+    <?php foreach($binn_pagination["binns"] as $binn):?>    
+    <a class="binn-row" href="<?= base_url;?>finishing/?controller=followupform&action=index&id=<?=$binn["Id"];?>">
         <div class="binn-row__id">Id - <?=$binn["Id"];?></div>
         <div class="binn-row__comm-name"><?=$binn["Nombre_comercial"];?></div>
         <div class="binn-row__status">
@@ -66,10 +40,10 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
             <?=($binn["Estatus"] === "falta confirmar") ? $binn["Estatus"] : "Sin terminar"?>
         </div>
     </a>
-    <?php endwhile;?>    
+    <?php endforeach;?>    
     </div>
     <div class="follow-up__pagination-control-box" id="paginationBox">    
-    <?php $pagination->render();?>
+    <?= $binn_pagination["buttons"];?>
     </div>
     <?php else: ?>
     <div class="withoutPendingBinns">
@@ -83,4 +57,4 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
 <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
 sesiones de mensajes de errores, excepciones y de exito en un proceso -->
 <?php Utils::unsetFlagsSessions();?>
-<?php Utils::unsetIdSessionsOfSearchForms();?>
+<?php Utils::unsetSearchFormsIdSession();

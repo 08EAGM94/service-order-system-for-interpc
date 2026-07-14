@@ -8,68 +8,24 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->
-    <?php if (!empty($_SESSION["updateEnterInfoSucceed"])): ?>
-        <div class="succeed-box"><?= $_SESSION["updateEnterInfoSucceed"]; ?></div>
-    <?php endif; ?>  
-    <?php if (!empty($_SESSION["updateClientSucceed"])): ?>
-        <div class="succeed-box"><?= $_SESSION["updateClientSucceed"]; ?></div>
-    <?php endif; ?> 
-    <?php if (!empty($_SESSION["disableEnterpriseSuccess"])): ?>
-        <div class="succeed-box"><?= $_SESSION["disableEnterpriseSuccess"]; ?></div>
-    <?php endif; ?>   
-    <?php if (!empty($_SESSION["disableContactSuccess"])): ?>
-        <div class="succeed-box"><?= $_SESSION["disableContactSuccess"]; ?></div>
-    <?php endif; ?>     
+    <?php if (!empty($_SESSION["success"])): ?>
+        <div class="succeed-box"><?= $_SESSION["success"]; ?></div>
+    <?php endif; ?>
     
-            
-    <?php if (!empty($_SESSION["num_of_clientsEx"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["num_of_clientsEx"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["ent_arrEx"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["ent_arrEx"]; ?></div>
-    <?php endif; ?>     
-    <?php if (!empty($_SESSION["clients_arrEx"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["clients_arrEx"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["updateEnterInfoEx"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["updateEnterInfoEx"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["updateClientException"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["updateClientException"]; ?></div>
-    <?php endif; ?>   
-    <?php if (!empty($_SESSION["selectDataEnterEditEx"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["selectDataEnterEditEx"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["disableEnterpriseEx"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["disableEnterpriseEx"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["disableContactEx"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["disableContactEx"]; ?></div>
-    <?php endif; ?>    
-        
-    <?php if(!empty($_SESSION["updateEnterpriseInfoErr"])):?>
-        <?php foreach($_SESSION["updateEnterpriseInfoErr"] as $err):?>
-            <div class="invalidinput-box"><?= $err;?></div>
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
         <?php endforeach;?>
     <?php endif;?>
-    <?php if(!empty($_SESSION["updateClientInfoErr"])):?>
-        <?php foreach($_SESSION["updateClientInfoErr"] as $err):?>
-            <div class="invalidinput-box"><?= $err;?></div>
-        <?php endforeach;?>
-    <?php endif;?>         
-    <?php if(!empty($_SESSION["disableEnterErr"])):?>
-        <?php foreach($_SESSION["disableEnterErr"] as $err):?>
-            <div class="invalidinput-box"><?= $err;?></div>
-        <?php endforeach;?>
-    <?php endif;?>
-    <?php if(!empty($_SESSION["disableContactErr"])):?>
-        <?php foreach($_SESSION["disableContactErr"] as $err):?>
-            <div class="invalidinput-box"><?= $err;?></div>
+    
+    <?php if(!empty($_SESSION["errors"])):?>
+        <?php foreach($_SESSION["errors"] as $err):?>
+            <div class="invalidinput-box"><?=$err?></div>
         <?php endforeach;?>
     <?php endif;?>         
     
     <div class="searchForm-wrapper">
-        <form class="searchForm" action="<?= base_url; ?>home/?homeController=user&homeAction=editEnterprise" method="POST">
+        <form class="searchForm" action="<?= base_url; ?>home/?homeController=enterprise&homeAction=index" method="POST">
             <div class="searchForm__select-wrapper">
                 <select class="js-example-placeholder-single" name="empresas" id="editEnterSelect">
                     <option></option>
@@ -84,9 +40,9 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
         </form>
     </div>    
        
-    <?php if(!empty($_SESSION["enterpriseEdit_enterId"])):?>
+    <?php if(!empty($_SESSION["idSession"]["enterpriseEdit_enterId"])):?>
         
-    <form class="enterprise-forms__form" action="<?= base_url;?>home/?homeController=user&homeAction=updateEnterInfo" method="POST">
+    <form class="enterprise-forms__form" action="<?= base_url;?>home/?homeController=enterprise&homeAction=updateEnterInfo" method="POST">
         <div class="enter-edit__background hidThis" id="enterpriseEditConfirmationBackground">
             <div class="enter-edit__info-window">
                 <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
@@ -137,9 +93,9 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
         </div>
     </form>
     
-    <?php if(!empty($contacts_arr)):?>
+    <?php if(sizeof($contacts_arr) > 0):?>
     <?php foreach ($contacts_arr as $contact):?>
-    <form class="enterprise-forms__contact-form" action="<?= base_url;?>home/?homeController=user&homeAction=updateContactInfo" method="Post">
+    <form class="enterprise-forms__contact-form" action="<?= base_url;?>home/?homeController=contact&homeAction=updateContactInfo" method="Post">
         <div class="contact-edit__background hidThis">
             <div class="contact-edit__info-window">
                 <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
@@ -176,4 +132,4 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
 </main>
 <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
 sesiones de mensajes de errores, excepciones y de exito en un proceso -->  
-<?php Utils::unsetFlagsSessions();?>
+<?php Utils::unsetFlagsSessions();

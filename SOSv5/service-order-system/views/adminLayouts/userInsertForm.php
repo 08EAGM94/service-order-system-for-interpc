@@ -6,41 +6,21 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->
-    <?php if (!empty($_SESSION["userDataSucceded"])): ?>
-        <div class="succeed-box"><?= $_SESSION["userDataSucceded"]; ?></div>
+    <?php if (!empty($_SESSION["success"])): ?>
+        <div class="succeed-box"><?= $_SESSION["success"]; ?></div>
     <?php endif; ?>
-        
-    <?php if (!empty($_SESSION["userDataException"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["userDataException"]; ?></div>
-    <?php endif; ?>    
-
-    <?php if (!empty($_SESSION["userDataErr"]) && !empty($_SESSION["userDataErr"]["nombre"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["userDataErr"]["nombre"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["userDataErr"]) && !empty($_SESSION["userDataErr"]["apellidos"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["userDataErr"]["apellidos"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["userDataErr"]) && !empty($_SESSION["userDataErr"]["alias"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["userDataErr"]["alias"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["userDataErr"]) && !empty($_SESSION["userDataErr"]["contrasena"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["userDataErr"]["contrasena"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["userDataErr"]) && !empty($_SESSION["userDataErr"]["confContrasena"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["userDataErr"]["confContrasena"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["userDataErr"]) && !empty($_SESSION["userDataErr"]["pwdFileds"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["userDataErr"]["pwdFileds"]; ?></div>
-    <?php endif; ?>         
-    <?php if (!empty($_SESSION["userDataErr"]) && !empty($_SESSION["userDataErr"]["privilegio"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["userDataErr"]["privilegio"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["userDataErr"]) && !empty($_SESSION["userDataErr"]["adminContrasena"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["userDataErr"]["adminContrasena"]; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION["userDataErr"]) && !empty($_SESSION["userDataErr"]["adminPWDRejected"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["userDataErr"]["adminPWDRejected"]; ?></div>
-    <?php endif; ?>     
+    
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
+        <?php endforeach;?>
+    <?php endif;?>
+    
+    <?php if(!empty($_SESSION["errors"])):?>
+        <?php foreach($_SESSION["errors"] as $err):?>
+            <div class="invalidinput-box"><?=$err?></div>
+        <?php endforeach;?>
+    <?php endif;?>     
         
     <form class="userform__form" action="<?= base_url; ?>home/?homeController=user&homeAction=insertDBUser" method="POST">
         
@@ -109,4 +89,4 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
 </main>
 <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
 sesiones de mensajes de errores, excepciones y de exito en un proceso -->
-<?php Utils::unsetFlagsSessions();?>
+<?php Utils::unsetFlagsSessions();

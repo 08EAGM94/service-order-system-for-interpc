@@ -6,57 +6,33 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->
-    <?php if(!empty($_SESSION["remindedOrConsentReportEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["remindedOrConsentReportEx"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["followUpQueryEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["followUpQueryEx"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["followUpNumRowsEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["followUpNumRowsEx"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["identitySessionUpdateEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["identitySessionUpdateEx"]?></div>
-    <?php endif; ?>
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
+        <?php endforeach;?>
+    <?php endif;?>
     
-    
-    <?php if(!empty($_SESSION["clientArrayException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["clientArrayException"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["enterpriseArrayException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["enterpriseArrayException"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["deviceArrayException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["deviceArrayException"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["typeArrayException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["typeArrayException"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["unlinkTechSignEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["unlinkTechSignEx"]?></div>
-    <?php endif; ?>
-    
-    <a class="menu-main__binnacle-link" href="<?=base_url;?>home/?homeController=user&homeAction=newbinnacle">
+    <a class="menu-main__binnacle-link" href="<?=base_url;?>home/?homeController=binnacle&homeAction=index">
         <div class="binnacle-link__img"><img src="<?= base_url; ?>assets/img/clipboard_2921124.png"/></div>
         <h2 class="binnacle-link__subtitle">Nueva bitacora</h2>
     </a>
     
-    <a class="menu-main__new-contact-link" href="<?= base_url; ?>home/?homeController=user&homeAction=newcontact">
+    <a class="menu-main__new-contact-link" href="<?= base_url; ?>home/?homeController=contact&homeAction=index">
         <div class="new-contact-link__img"><img src="<?= base_url; ?>assets/img/contact-book_12370535.png"/></div>
         <h2 class="new-contact-link__subtitle">Crear contacto</h2>
     </a>
     
-    <a class="menu-main__new-type-link" href="<?= base_url; ?>home/?homeController=user&homeAction=newdevicetype">
+    <a class="menu-main__new-type-link" href="<?= base_url; ?>home/?homeController=type&homeAction=index">
         <div class="new-type-link__img"><img src="<?= base_url; ?>assets/img/shapes_16867372.png"/></div>
         <h2 class="new-type-link__subtitle">Crear tipo de equipo</h2>
     </a>
     
-    <a class="menu-main__new-device-link" href="<?= base_url; ?>home/?homeController=user&homeAction=newdevice">
+    <a class="menu-main__new-device-link" href="<?= base_url; ?>home/?homeController=device&homeAction=index">
         <div class="new-device-link__img"><img src="<?= base_url; ?>assets/img/web_16029055.png"/></div>
         <h2 class="new-device-link__subtitle">Crear un equipo</h2>
     </a>
 
-    <a class="menu-main__following-link" href="<?= base_url; ?>home/?homeController=user&homeAction=followuplist">
+    <a class="menu-main__following-link" href="<?= base_url; ?>home/?homeController=binnacle&homeAction=followuplist">
         <div class="following-link__img"><img src="<?= base_url; ?>assets/img/performance-appraisal_12773568.png"/></div>
         <h2 class="following-link__subtitle">Seguimiento de bitacora</h2>
     </a>

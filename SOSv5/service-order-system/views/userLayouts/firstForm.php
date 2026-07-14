@@ -6,25 +6,23 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->
-    <?php if(!empty($_SESSION["getInfoForSelectsException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["getInfoForSelectsException"];?></div>
+    <?php if (!empty($_SESSION["success"])): ?>
+        <div class="succeed-box"><?= $_SESSION["success"]; ?></div>
     <?php endif; ?>
     
-    <?php if(!empty($_SESSION["binnDataSucceed"])):?>
-    <div class="succeed-box">Se guardaron todos los datos correctamente</div>
-    <?php endif; ?>
-   
-    <?php if(!empty($_SESSION["binnDataException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["binnDataException"];?></div>
-    <?php endif; ?>
-
-    <?php if(!empty($_SESSION["binnDataErr"])):?>
-        <?php foreach($_SESSION["binnDataErr"] as $err):?>
-            <div class="invalidinput-box"><?=$err;?></div>
-        <?php endforeach;?>    
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
+        <?php endforeach;?>
+    <?php endif;?>
+    
+    <?php if(!empty($_SESSION["errors"])):?>
+        <?php foreach($_SESSION["errors"] as $err):?>
+            <div class="invalidinput-box"><?=$err?></div>
+        <?php endforeach;?>
     <?php endif;?>    
     
-    <form class="binnacle-form" action="<?= base_url; ?>home/?homeController=user&homeAction=binninsertion" method="POST">
+    <form class="binnacle-form" action="<?= base_url; ?>home/?homeController=binnacle&homeAction=binninsertion" method="POST">
     <input type="hidden" name="userId" value="<?=$_SESSION["identity"]["Id"]?>">
     <fieldset class="binnacle-form__client-wrapper">
         <legend class="binnacle-form__legend">Cliente</legend>
@@ -207,4 +205,4 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
 </main>
 <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
 sesiones de mensajes de errores, excepciones y de exito en un proceso -->
-<?php Utils::unsetFlagsSessions();?>
+<?php Utils::unsetFlagsSessions();

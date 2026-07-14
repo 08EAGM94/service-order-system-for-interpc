@@ -8,21 +8,26 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <!-- Los controaldores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->
-    <?php if(!empty($_SESSION["loginErrors"]) && !empty($_SESSION["loginErrors"]["logFailed"])): ?>
-        <div class="invalidinput-box"><?=$_SESSION["loginErrors"]["logFailed"];?></div>
+    <?php if(!empty($_SESSION["errors"]) && !empty($_SESSION["errors"]["loginFailed"])): ?>
+        <div class="invalidinput-box"><?=$_SESSION["errors"]["loginFailed"];?></div>
     <?php endif; ?>
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
+        <?php endforeach;?>
+    <?php endif;?>
     <div class="user-login__title-box">
         <h2>Sistema de Ordenes de Servicio</h2>
     </div>
     <form class="user-login__form" action="<?= base_url; ?>home/?homeController=user&homeAction=login" method="POST">
-        <?php if(!empty($_SESSION["loginErrors"]) && !empty($_SESSION["loginErrors"]["nombre"])): ?>
-        <div class="invalidinput-box"><?=$_SESSION["loginErrors"]["nombre"];?></div>
+        <?php if(!empty($_SESSION["errors"]) && !empty($_SESSION["errors"]["nombre"])): ?>
+        <div class="invalidinput-box"><?=$_SESSION["errors"]["nombre"];?></div>
         <?php endif; ?>
         <label for="user">Usuario</label>
         <input type="text" name="user" id="user"/>
         
-        <?php if(!empty($_SESSION["loginErrors"]) && !empty($_SESSION["loginErrors"]["contrasena"])): ?>
-        <div class="invalidinput-box"><?=$_SESSION["loginErrors"]["contrasena"];?></div>
+        <?php if(!empty($_SESSION["errors"]) && !empty($_SESSION["errors"]["contrasena"])): ?>
+        <div class="invalidinput-box"><?=$_SESSION["errors"]["contrasena"];?></div>
         <?php endif; ?>
         <label for="pwd">Contraseña</label>
         <div class="user-login__pwd-box">
@@ -39,4 +44,4 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
 <div class="particles" id="particles-js"></div>
 <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
 sesiones de mensajes de errores, excepciones y de exito en un proceso -->
-<?php Utils::unsetFlagsSessions();?>
+<?php Utils::unsetFlagsSessions();

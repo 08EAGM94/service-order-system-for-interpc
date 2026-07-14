@@ -2,7 +2,7 @@
 <div class="binnacleremindedfields__windowform-background hidThis" id="formBackWindow">
     <div class="binnacleremindedfields__form-window" id="formWindow">
         <div class="form-window__form-box">
-            <form class="cancel-desc-form" action="<?= base_url; ?>finishing/?controller=form&action=cancellingBinn" method="POST">
+            <form class="cancel-desc-form" action="<?= base_url; ?>finishing/?controller=followupform&action=cancellingBinn" method="POST">
                 <input type="hidden" name="cancelwithid" value="<?=$_GET["id"]?>"/>
                 <input type="hidden" name="cancelestatus" value="cancelado"/>
                 <label class="cancel-desc-form__label" for="cancelDesc">Describe las razones de la cancelación</label>
@@ -34,37 +34,23 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->
-    <?php if(!empty($_SESSION["followupCancelErr"]) && !empty($_SESSION["followupCancelErr"]["cancelwithid"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["followupCancelErr"]["cancelwithid"];?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["followupCancelErr"]) && !empty($_SESSION["followupCancelErr"]["cancelestatus"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["followupCancelErr"]["cancelestatus"];?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["followupCancelErr"]) && !empty($_SESSION["followupCancelErr"]["cancelacion"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["followupCancelErr"]["cancelacion"];?></div>
+    <?php if (!empty($_SESSION["success"])): ?>
+        <div class="succeed-box"><?= $_SESSION["success"]; ?></div>
     <?php endif; ?>
     
-    <?php if(!empty($_SESSION["resetActivitiesSucceed"])):?>
-    <div class="succeed-box"><?=$_SESSION["resetActivitiesSucceed"]?></div>
-    <?php endif; ?>
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
+        <?php endforeach;?>
+    <?php endif;?>
     
-    <?php if(!empty($_SESSION["followupErr"]) && !empty($_SESSION["followupErr"]["id"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["followupErr"]["id"];?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["followupErr"]) && !empty($_SESSION["followupErr"]["estatus"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["followupErr"]["estatus"];?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["followupErr"]) && !empty($_SESSION["followupErr"]["binnFecha"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["followupErr"]["binnFecha"];?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["followupErr"]) && !empty($_SESSION["followupErr"]["seHizo"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["followupErr"]["seHizo"];?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["followupErr"]) && !empty($_SESSION["followupErr"]["observaciones"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["followupErr"]["observaciones"];?></div>
-    <?php endif; ?>
+    <?php if(!empty($_SESSION["errors"])):?>
+        <?php foreach($_SESSION["errors"] as $err):?>
+            <div class="invalidinput-box"><?=$err?></div>
+        <?php endforeach;?>
+    <?php endif;?>
     
-    <form action="<?= base_url;?>finishing/?controller=form&action=followupPartial" method="POST">
+    <form action="<?= base_url;?>finishing/?controller=followupform&action=followupPartial" method="POST">
         <input type="hidden" name="id" value="<?=$_GET["id"]?>"/>
         <input type="hidden" name="estatus" value="falta confirmar"/>
         
@@ -179,7 +165,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
         
         
         <div class="reminded-fields-buttonbox">
-        <a class="binnacleremindedfields__consent-button-link" href="<?= base_url;?>home/?homeController=user&homeAction=followuplist">Regresar</a>
+        <a class="binnacleremindedfields__consent-button-link" href="<?= base_url;?>home/?homeController=binnacle&homeAction=followuplist">Regresar</a>
         <?php if(!empty($info) && !empty($info["Nombre_comercial"])): ?>
         <button class="consentcancel__button" id="remindedCancelBtn" type="button">Cancelar</button>
         <input class="consentcancel__button" type="submit" value="Siguiente"/>

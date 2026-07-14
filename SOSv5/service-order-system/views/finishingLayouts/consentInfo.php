@@ -4,7 +4,7 @@
         <div class="pop-up-window-icon"><img class="pop-up-window-icon__img" src="<?= base_url;?>assets/img/caution-sign_75243.png"/></div>
         <div class="info-window__text-box"><h3>¿Estas seguro de cancelar el progreso de esta bitácora?</h3></div>
         <div class="info-window__selectbuttons-box">
-            <a class="selectbuttons-box__button ok" id="yes" href="<?= base_url; ?>finishing/?controller=form&action=resetActivitiesDescriptions&id=<?=$_GET["id"]?>">Si</a>
+            <a class="selectbuttons-box__button ok" id="yes" href="<?= base_url; ?>finishing/?controller=followupform&action=resetActivitiesDescriptions&id=<?=$_GET["id"]?>">Si</a>
             <button class="selectbuttons-box__button" id="consentNo" type="button">No</button>
         </div>
     </div>
@@ -14,7 +14,7 @@ vistas es recomendable poner esta etiqueta como el padre de los elementos html, 
 por los controladores en sus métodos de vistas, esto con el fin de determinar qué elementos html mostrar al usuario -->
 <main class="binnacleremindedfields-main">
     
-    <form action="<?=base_url;?>finishing/?controller=form&action=<?=(!empty($_SESSION["identity"]["Firma"])) ? "clientsign" : "techsign"?>" method="POST">
+    <form action="<?=base_url;?>finishing/?controller=followupform&action=<?=(!empty($_SESSION["identity"]["Firma"])) ? "clientsign" : "techsign"?>" method="POST">
 
         <div class="binnacleremindedfields__smallfieldsets-wrapper">
             
@@ -119,7 +119,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
         <?php if(!empty($info["Tecnico_firma"])): ?>
         <fieldset class="binnacleremindedfields__techsign-wrapper">
             <legend class="binnacleremindedfields__legend">Firma técnico</legend>
-            <img class="sign-area" src="<?= base_url;?>finishing/uploads/firmas/<?=$info["Tecnico_firma"]?>"/>
+            <img class="sign-area" src="<?= base_url;?>finishing/uploads/firmas/<?=$info["Tecnico_firma"]?>?nocache=<?= time();?>"/>
             <div class="binnacleremindedfields__nameandsurname-area">
                 <h3><?=$info["Nombre"]." ".$info["Apellidos"]?></h3>
             </div>
@@ -140,7 +140,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
         <input type="hidden" name="userSurname" value="<?=$info["Apellidos"]?>"/>
         
         <div class="consent-buttonbox">
-        <a class="binnacleremindedfields__consent-button-link" href="<?= base_url;?>home/?homeController=user&homeAction=followuplist">Regresar</a>
+        <a class="binnacleremindedfields__consent-button-link" href="<?= base_url;?>home/?homeController=binnacle&homeAction=followuplist">Regresar</a>
         <?php if(!empty($info) && !empty($info["Nombre_comercial"])): ?>
         <button class="consentcancel__button" id="consentCancelBtn" type="button">Cancelar</button>
         <input class="consentcancel__button" type="submit" value="Aceptar"/>

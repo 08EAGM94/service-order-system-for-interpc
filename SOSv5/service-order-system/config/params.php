@@ -6,6 +6,6 @@
     define("base_url", getenv("SOSV5_URL"));
     /*Las siguientes constantes se utilizan en el método estático defaultUserPage de la 
      * clase Utils, método estitico que se invoca en el archivo index de la carpeta home*/
-    define("default_userController", "UserController");
+    define("default_homeController", "UIController");
     define("default_action", "index");
     

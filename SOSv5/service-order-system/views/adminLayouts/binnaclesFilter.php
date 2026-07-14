@@ -2,7 +2,7 @@
 recomendable poner esta etiqueta como el padre de los elementos html, también se utiliza etiquetas PHP evaluando sesiones y variables inicializadas 
 por los controladores en sus métodos de vistas, esto con el fin de determinar qué elementos html mostrar al usuario -->
 <main class="binnacles-filter-main">
-    <form class="binnacles-filter__filter-options-form" action="<?= base_url;?>home/?homeController=user&homeAction=binnaclesReport" method="POST">
+    <form class="binnacles-filter__filter-options-form" action="<?= base_url;?>home/?homeController=binnacle&homeAction=binnaclesReport" method="POST">
         
         <div class="filter-options-form__left-piece">
             <div class="left-piece__up-options">
@@ -17,8 +17,8 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
                             <option></option>
                             <?php if (sizeof($empresas) > 0): ?>
                                 <?php foreach ($empresas as $enter): ?>
-                                    <?php if(!empty($_SESSION["Empresa_id"])):?>
-                                    <option value="<?= $enter["Id"]; ?>" <?= ($_SESSION["Empresa_id"] === $enter["Id"]) ? 'selected' : '';?>><?= $enter["Nombre_comercial"]; ?> - <?= (!empty($enter["Razon_social"])) ? $enter["Razon_social"] : ''; ?></option>
+                                    <?php if(!empty($_SESSION["binnFilterSession"]["Empresa_id"])):?>
+                                    <option value="<?= $enter["Id"]; ?>" <?= ($_SESSION["binnFilterSession"]["Empresa_id"] === $enter["Id"]) ? 'selected' : '';?>><?= $enter["Nombre_comercial"]; ?> - <?= (!empty($enter["Razon_social"])) ? $enter["Razon_social"] : ''; ?></option>
                                     <?php else:?>
                                     <option value="<?= $enter["Id"]; ?>"><?= $enter["Nombre_comercial"]; ?> - <?= (!empty($enter["Razon_social"])) ? $enter["Razon_social"] : ''; ?></option>
                                     <?php endif;?>
@@ -36,10 +36,10 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
                     <div class="up-options__clientSelect-wrapper">
                         <select class="js-example-placeholder-single" name="contactoId" id="binnFiltersContactSelect">
                             <option></option>
-                            <?php if (!empty($_SESSION["enterpriseRelatedContacts"])): ?>
-                                <?php foreach ($_SESSION["enterpriseRelatedContacts"] as $contact): ?>
-                                    <?php if(!empty($_SESSION["Contacto_id"])):?>
-                                    <option value="<?= $contact["Id"]; ?>" <?= ($_SESSION["Contacto_id"] === $contact["Id"]) ? 'selected' : '';?>><?= $contact["Nombre_completo"]; ?></option>
+                            <?php if (!empty($_SESSION["binnFilterSession"]["enterpriseRelatedContacts"])): ?>
+                                <?php foreach ($_SESSION["binnFilterSession"]["enterpriseRelatedContacts"] as $contact): ?>
+                                    <?php if(!empty($_SESSION["binnFilterSession"]["Contacto_id"])):?>
+                                    <option value="<?= $contact["Id"]; ?>" <?= ($_SESSION["binnFilterSession"]["Contacto_id"] === $contact["Id"]) ? 'selected' : '';?>><?= $contact["Nombre_completo"]; ?></option>
                                     <?php else:?>
                                     <option value="<?= $contact["Id"]; ?>"><?= $contact["Nombre_completo"]; ?></option>
                                     <?php endif;?>
@@ -58,10 +58,10 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
                         <select class="js-example-placeholder-single" name="equipoId" id="binnFiltersDeviceSelect">
                             <option></option>
                             
-                            <?php if (!empty($_SESSION["enterpriseRelatedDevices"])): ?>
-                                <?php foreach ($_SESSION["enterpriseRelatedDevices"] as $equipo): ?>
-                                    <?php if(!empty($_SESSION["Equipo_id"])):?>
-                                    <option value="<?= $equipo["Id"]; ?>" <?=($_SESSION["Equipo_id"] === $equipo["Id"]) ? 'selected' : '';?>><?= $equipo["Marca"];?> - <?= $equipo["Numero_serie"];?></option>
+                            <?php if (!empty($_SESSION["binnFilterSession"]["enterpriseRelatedDevices"])): ?>
+                                <?php foreach ($_SESSION["binnFilterSession"]["enterpriseRelatedDevices"] as $equipo): ?>
+                                    <?php if(!empty($_SESSION["binnFilterSession"]["Equipo_id"])):?>
+                                    <option value="<?= $equipo["Id"]; ?>" <?=($_SESSION["binnFilterSession"]["Equipo_id"] === $equipo["Id"]) ? 'selected' : '';?>><?= $equipo["Marca"];?> - <?= $equipo["Numero_serie"];?></option>
                                     <?php else:?>
                                     <option value="<?= $equipo["Id"]; ?>"><?= $equipo["Marca"];?> - <?= $equipo["Numero_serie"];?></option>
                                     <?php endif;?>
@@ -83,9 +83,9 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
                     </div>
 
                     <select class="up-options__serviceOrDevice-select" name="servicioOEquipo" id="servicioOEquipo">
-                        <?php if(!empty($_SESSION["isServiceOrDevice"])):?>
-                            <option value="Servicio" <?= ($_SESSION["isServiceOrDevice"] === "Servicio") ? "selected" : "";?>>Servicio</option>
-                            <option value="Equipo_id" <?= ($_SESSION["isServiceOrDevice"] === "Equipo_id") ? "selected" : "";?>>Equipo</option>
+                        <?php if(!empty($_SESSION["binnFilterSession"]["IsServiceOrDevice"])):?>
+                            <option value="Servicio" <?= ($_SESSION["binnFilterSession"]["IsServiceOrDevice"] === "Servicio") ? "selected" : "";?>>Servicio</option>
+                            <option value="Equipo_id" <?= ($_SESSION["binnFilterSession"]["IsServiceOrDevice"] === "Equipo_id") ? "selected" : "";?>>Equipo</option>
                         <?php else:?>
                             <option value="Servicio">Servicio</option>
                             <option value="Equipo_id">Equipo</option>
@@ -99,11 +99,11 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
                     </div>
 
                     <select class="up-options__estatus-select" name="estatus" id="estatus">
-                        <?php if(!empty($_SESSION["Estatus"])):?>
-                            <option value="en proceso" <?= ($_SESSION["Estatus"] === "en proceso") ? "selected" : "";?>>En proceso</option>
-                            <option value="falta confirmar" <?= ($_SESSION["Estatus"] === "falta confirmar") ? "selected" : "";?>>Falta confirmar</option>
-                            <option value="cancelado" <?= ($_SESSION["Estatus"] === "cancelado") ? "selected" : "";?>>Cancelado</option>
-                            <option value="finalizado" <?= ($_SESSION["Estatus"] === "finalizado") ? "selected" : "";?>>Finalizado</option>
+                        <?php if(!empty($_SESSION["binnFilterSession"]["Estatus"])):?>
+                            <option value="en proceso" <?= ($_SESSION["binnFilterSession"]["Estatus"] === "en proceso") ? "selected" : "";?>>En proceso</option>
+                            <option value="falta confirmar" <?= ($_SESSION["binnFilterSession"]["Estatus"] === "falta confirmar") ? "selected" : "";?>>Falta confirmar</option>
+                            <option value="cancelado" <?= ($_SESSION["binnFilterSession"]["Estatus"] === "cancelado") ? "selected" : "";?>>Cancelado</option>
+                            <option value="finalizado" <?= ($_SESSION["binnFilterSession"]["Estatus"] === "finalizado") ? "selected" : "";?>>Finalizado</option>
                         <?php else:?>
                             <option value="en proceso">En proceso</option>
                             <option value="falta confirmar">Falta confirmar</option>
@@ -119,9 +119,9 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
                     </div>
 
                     <select class="up-options__estatus-select" name="visible" id="visible">
-                        <?php if(!empty($_SESSION["Visible"])):?>
-                            <option value="ENABLED" <?= ($_SESSION["Visible"] === "ENABLED") ? "selected" : "";?>>Activado</option>
-                            <option value="DISABLED" <?= ($_SESSION["Visible"] === "DISABLED") ? "selected" : "";?>>Desactivado</option>
+                        <?php if(!empty($_SESSION["binnFilterSession"]["Visible"])):?>
+                            <option value="ENABLED" <?= ($_SESSION["binnFilterSession"]["Visible"] === "ENABLED") ? "selected" : "";?>>Activado</option>
+                            <option value="DISABLED" <?= ($_SESSION["binnFilterSession"]["Visible"] === "DISABLED") ? "selected" : "";?>>Desactivado</option>
                         <?php else:?>
                             <option value="ENABLED">Activado</option>
                             <option value="DISABLED">Desactivado</option>
@@ -133,9 +133,9 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
             <div class="left-piece__down-options">
                 
                 <select class="down-options__startedOrEnded-select" name="startedOrEnded">
-                    <?php if(!empty($_SESSION["StartedOrEnded"])):?>
-                    <option value="Inicio" <?= ($_SESSION["StartedOrEnded"] === "Inicio") ? "selected" : "";?>>Iniciado entre</option>
-                    <option value="Fin" <?= ($_SESSION["StartedOrEnded"] === "Fin") ? "selected" : "";?>>Finalizado entre</option>
+                    <?php if(!empty($_SESSION["binnFilterSession"]["StartedOrEnded"])):?>
+                    <option value="Inicio" <?= ($_SESSION["binnFilterSession"]["StartedOrEnded"] === "Inicio") ? "selected" : "";?>>Iniciado entre</option>
+                    <option value="Fin" <?= ($_SESSION["binnFilterSession"]["StartedOrEnded"] === "Fin") ? "selected" : "";?>>Finalizado entre</option>
                     <?php else:?>
                     <option value="Inicio">Iniciado entre</option>
                     <option value="Fin">Finalizado entre</option>
@@ -143,11 +143,11 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
                 </select>
                 
                 <div class="down-options__date-inputs-box">
-                    <?php if(!empty($_SESSION["LeftDay"]) && !empty($_SESSION["RightDay"])):?>
+                    <?php if(!empty($_SESSION["binnFilterSession"]["LeftDay"]) && !empty($_SESSION["binnFilterSession"]["RightDay"])):?>
                     <strong>El</strong>
-                    <input class="down-options__date-input" type="date" name="leftDay" value="<?= $_SESSION["LeftDay"];?>"/>
+                    <input class="down-options__date-input" type="date" name="leftDay" value="<?= $_SESSION["binnFilterSession"]["LeftDay"];?>"/>
                     <strong>Hasta el</strong>
-                    <input class="down-options__date-input" type="date" name="rightDay" value="<?= $_SESSION["RightDay"];?>"/>
+                    <input class="down-options__date-input" type="date" name="rightDay" value="<?= $_SESSION["binnFilterSession"]["RightDay"];?>"/>
                     <?php else:?>
                     <strong>El</strong>
                     <input class="down-options__date-input" type="date" name="leftDay"/>
@@ -167,56 +167,24 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     <!-- Los controladores inicializan sesiones con strings que necesitan ser mostradas al usuario, se utilizan etiquetas PHP para evaluar 
     si existen estas sesiones, si existen, entonces se utiliza los valores de estas sesiones con un elemento html el cual muestra al usuario 
     el mensaje en forma de flags -->
-    <?php if (!empty($_SESSION["disableBinnSuccess"])): ?>
-        <div class="succeed-box"><?= $_SESSION["disableBinnSuccess"]; ?></div>
-    <?php endif; ?> 
-           
-    <?php if (!empty($_SESSION["gettingUsersException"])): ?>
-        <div class="invalidinput-box"><?= $_SESSION["gettingUsersException"]; ?></div>
-    <?php endif; ?> 
-    <?php if(!empty($_SESSION["dces_arrException"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["dces_arrException"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["num_rowsEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["num_rowsEx"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["binnsRowsPaginationEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["binnsRowsPaginationEx"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["binnReportgetClientsForSelectEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["binnReportgetClientsForSelectEx"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["getBinnInfoEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["getBinnInfoEx"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["binnacleUpdateEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["binnacleUpdateEx"]?></div>
-    <?php endif; ?>
-    <?php if(!empty($_SESSION["disableBinnEx"])):?>
-    <div class="invalidinput-box"><?=$_SESSION["disableBinnEx"]?></div>
+    <?php if (!empty($_SESSION["success"])): ?>
+        <div class="succeed-box"><?= $_SESSION["success"]; ?></div>
     <?php endif; ?>
     
-    
-    <?php if(!empty($_SESSION["binnFilterErr"])):?>
-        <?php foreach($_SESSION["binnFilterErr"] as $err):?>
-            <div class="invalidinput-box"><?=$err?></div>
+    <?php if(!empty($_SESSION["exceptions"])):?>
+        <?php foreach($_SESSION["exceptions"] as $ex):?>
+            <div class="invalidinput-box"><?=$ex?></div>
         <?php endforeach;?>
     <?php endif;?>
     
-    <?php if(!empty($_SESSION["updateBinnacleInfoErr"])):?>
-        <?php foreach($_SESSION["updateBinnacleInfoErr"] as $err):?>
+    <?php if(!empty($_SESSION["errors"])):?>
+        <?php foreach($_SESSION["errors"] as $err):?>
             <div class="invalidinput-box"><?=$err?></div>
         <?php endforeach;?>
-    <?php endif;?>
-       
-    <?php if(!empty($_SESSION["disableBinnErr"])):?>
-        <?php foreach($_SESSION["disableBinnErr"] as $err):?>
-            <div class="invalidinput-box"><?=$err?></div>
-        <?php endforeach;?>
-    <?php endif;?>         
+    <?php endif;?>       
     
-    <?php if(!empty($_SESSION["filtValidated"])):?>
-    <?php if($num_rows > 0):?>
+    <?php if(!empty($_SESSION["binnFilterSession"])):?>
+    <?php if(sizeof($binn_pagination) > 0):?>
     <div class="binnacle-delete__window-background hidThis" id="binnDeletebackWindow"></div>       
     <div class="binnacles-filter__binnacle-data-table-wrapper">
         <div class="binnacle-data-table-wrapper__numkey-box">
@@ -240,27 +208,27 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
             </thead>
 
             <tbody id="binnacleTbody">
-                <?php while($binn = $stmt_binns->fetch()):?>
+                <?php foreach($binn_pagination["binns"] as $binn):?>
                 <tr class="binnacle-data-table__row">
-                    <td class="binnacle-data-table__regular-td"><a class="binnacle-data-table__binn-link" href="<?= base_url;?>home/?homeController=user&homeAction=showBinnacle&homeId=<?=$binn["Id"];?>"><?=$binn["Id"];?></a></td>
+                    <td class="binnacle-data-table__regular-td"><a class="binnacle-data-table__binn-link" href="<?= base_url;?>home/?homeController=binnacle&homeAction=showBinnacle&homeId=<?=$binn["Id"];?>"><?=$binn["Id"];?></a></td>
                     <td class="binnacle-data-table__regular-td"><?=$binn["Nombre"]." ".$binn["Apellidos"];?></td>
                     <td>
                         <div class="binnacle-data-table__client-name-box"><?=$binn["Nombre_completo"];?></div>
                         <div class="binnacle-data-table__enterprise-name-box"><?=$binn["Nombre_comercial"];?></div>
                     </td>
-                    <td class="binnacle-data-table__regular-td"><a class="binnacle-data-table__binn-pdf-link" href="<?= base_url;?>home/?homeController=user&homeAction=generateBinnacleReport&homeId=<?=$binn["Id"];?>">PDF</a></td>
-                    <td class="binnacle-data-table__regular-td"><a class="binnacle-data-table__binn-edit-link" href="<?= base_url;?>home/?homeController=user&homeAction=editBinnacle&homeId=<?=$binn["Id"];?>">Editar</a></td>
+                    <td class="binnacle-data-table__regular-td"><a class="binnacle-data-table__binn-pdf-link" href="<?= base_url;?>home/?homeController=binnacle&homeAction=generateBinnacleReport&homeId=<?=$binn["Id"];?>">PDF</a></td>
+                    <td class="binnacle-data-table__regular-td"><a class="binnacle-data-table__binn-edit-link" href="<?= base_url;?>home/?homeController=binnacle&homeAction=editBinnacle&homeId=<?=$binn["Id"];?>">Editar</a></td>
                     <td class="binnacle-data-table__regular-td"><button class="binnacle-data-table__binn-delete-btn <?=($binn["Visibilidad"] === "ENABLED") ? "" : 
                             "activation-background"?>" type="button" data-id="<?=$binn["Id"];?>" 
                             data-visibility="<?=$binn["Visibilidad"];?>"><?=($binn["Visibilidad"] === "ENABLED") ? "Desactivar" : "Activar"?></button></td>
                 </tr>
-                <?php endwhile;?>
+                <?php endforeach;?>
             </tbody>
         </table>
     </div> 
     
     <div class="binnacles-filter__pagination-control-box" id="binnFilterPaginationBox">
-        <?php $pagination->render();?>
+        <?= $binn_pagination["buttons"];?>
     </div>
     <?php else:?>
     <div class="binnacles-filter__without-binns-row">
@@ -271,4 +239,4 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
 </main>
 <!-- generalmente, las vistas que muestran mensajes flags tienen una etiqueta PHP donde se utiliza el método estático unsetFlagsSessions el cual elimina las 
 sesiones de mensajes de errores, excepciones y de exito en un proceso -->
-<?php Utils::unsetFlagsSessions();?>
+<?php Utils::unsetFlagsSessions();
