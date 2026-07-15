@@ -236,7 +236,7 @@
                 width: 80%;
                 vertical-align: top;">
                 <fieldset style="width: 90%;
-                            height: 250px;
+                            height: 180px;
                             border: 2px solid black; padding: 10px;
                             border-radius: 5px;">
                     <legend style="background: black;
@@ -393,7 +393,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
         </tr>
     </table>
     <?php endif;?>    
-    
+    <div class="table-wrapper--scroll">
     <fieldset class="binnacleInfoCanvas__client-table-wrapper">
         <legend class="client-table-wrapper__legend">CLIENTE</legend>
         <table class="binnacleInfoCanvas__client-table" cellspacing="0">
@@ -435,7 +435,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
             </tr>
         </table>
     </fieldset>
-    
+    </div>
     <?php if(!empty($binn_info["Servicio"])):?>    
     <fieldset class="binnacleInfoCanvas__service-desc-wrapper">
         <legend class="binnacleInfoCanvas__service-legend">SERVICIO</legend>
@@ -610,7 +610,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
         </tr>
     </table>
     <?php endif;?>    
-    
+    <div class="table-wrapper--scroll">
     <fieldset class="binnacleInfoCanvas__client-table-wrapper">
         <legend class="client-table-wrapper__legend">CLIENTE</legend>
         <table class="binnacleInfoCanvas__client-table" cellspacing="0">
@@ -652,7 +652,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
             </tr>
         </table>
     </fieldset>
-    
+    </div>
     <?php if(!empty($binn_info["Servicio"])):?>    
     <fieldset class="binnacleInfoCanvas__service-desc-wrapper">
         <legend class="binnacleInfoCanvas__service-legend">SERVICIO</legend>

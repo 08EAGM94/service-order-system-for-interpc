@@ -24,6 +24,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
     
     <form class="binnacle-form" action="<?= base_url; ?>home/?homeController=binnacle&homeAction=binninsertion" method="POST">
     <input type="hidden" name="userId" value="<?=$_SESSION["identity"]["Id"]?>">
+    <div class="table-wrapper--scroll">
     <fieldset class="binnacle-form__client-wrapper">
         <legend class="binnacle-form__legend">Cliente</legend>
         
@@ -120,7 +121,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
             </tbody>
         </table>
     </fieldset>
-
+    </div>                            
     <fieldset class="binnacle-form__serviceOrDevice-wrapper">
 
         <input class="serviceOrDevice__radio" type="radio" id="activityChoice1" name="tipoActividades" value="servicio"/>

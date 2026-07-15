@@ -32,7 +32,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
                 </div>
             </div>
         </div>
-        
+        <div class="table-wrapper--scroll">
         <fieldset class="newDeviceForm__fieldset">
             <legend class="newDeviceForm__legend">Equipo</legend>
             
@@ -91,7 +91,7 @@ por los controladores en sus métodos de vistas, esto con el fin de determinar q
                 </tbody>
             </table>
         </fieldset>
-            
+        </div>    
         <div class="registration__main-button-wrapper">
             <?php if(empty($_SESSION["isAdmin"])):?>
             <a class="registration__button-link" href="<?= base_url;?>home/">Regresar</a>
