@@ -515,7 +515,7 @@ function mockSetBinnFilterSessions($dto){
         $_SESSION["binnFilterSession"]["RightDay"] = (!empty($dto->right_day)) ? $dto->right_day : null;
         $_SESSION["binnFilterSession"]["Visible"] = $dto->visibilidad;
 
-        $_SESSION["header"] = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=binnacle&homeAction=binnaclesReport&".$queryString;
+        $_SESSION["header"] = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=binnacle&homeAction=binnaclesReport&".$queryString;
         //exit;
     }
 }
@@ -527,7 +527,7 @@ function mockSaveSignaturesFiles($root){
         if(!unlink($root.'/'.$_SESSION["formSession"]["dataSelectionForSigns"]["oldTechSign"])){
             $_SESSION["exceptions"]["unlinkTechSignEx"] = "La supuesta firma del técnico no se encontró en la aplicación web";
             Utils::unsetFormSessions();
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
             //exit;
         }
         
@@ -540,7 +540,7 @@ function mockSaveSignaturesFiles($root){
         copy($tech_sign_file["tmp_name"], 
                     $root.'/'.$technician_name);
         $_SESSION["formSession"]["techSignature"] = $technician_name;
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/finishing/?controller=followupform&action=techsign";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/finishing/?controller=followupform&action=techsign";
     }
     
     if(isset($_FILES["techSign"])){
@@ -552,7 +552,7 @@ function mockSaveSignaturesFiles($root){
         copy($tech_sign_file["tmp_name"], 
                     $root.'/'.$technician_name);
         $_SESSION["formSession"]["techSignature"] = $technician_name;
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/finishing/?controller=followupform&action=techsign";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/finishing/?controller=followupform&action=techsign";
     }
     
     if(isset($_FILES["cliSign"])){
@@ -581,7 +581,7 @@ function mockSessionLifetime(){
         $_SESSION = [];
         //session_unset();
         //session_destroy();
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
     return $result;
@@ -642,7 +642,7 @@ function mockSetDataSelectionForSigns(){
 
             
         }else{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
             //exit;
         }
     }
@@ -661,7 +661,7 @@ function mockSetDataSelectionForSigns(){
                     "oldTechSign"   => $_POST["oldTechSign"]
                 );
         }else{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
             //exit;
         }
     }
@@ -701,7 +701,7 @@ function mockUserIndex(){
         $_SESSION['LAST_ACTIVITY'] = time();
         $result = '../views/adminLayouts/userInsertForm.php';
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
     return $result;
@@ -759,7 +759,7 @@ function mockEditSign($container = null, $usrDTO = null, $usrSignService = null)
             $result = (isset($_SESSION["header"])) ? $_SESSION["header"] : '../views/userLayouts/editSign.php';
         }
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -801,7 +801,7 @@ function mockUserNewPassword($container = null){
         }
 
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit; 
     }
 
@@ -898,12 +898,12 @@ function mockInsertDBUser($container = null){
         }catch(Exception $ex){
             $_SESSION["exceptions"]["userDataException"] = "Acción fallida, probable nombre de usuario existente en la base de datos o falta de conexión a la base de datos";
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=user&homeAction=index";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=user&homeAction=index";
             //exit;
         }
 
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -944,12 +944,12 @@ function mockUpdateUserPassword($container = null){
             $_SESSION["exceptions"]["userPWDException"] = "No se pudo reestablecer "
                         ."la contraseña, posible corte de conexión a la base de datos";
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=user&homeAction=userNewPassword";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=user&homeAction=userNewPassword";
             //exit;
         }
 
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit; 
     }
 
@@ -992,12 +992,12 @@ function mockDisableUser($container = null){
             $_SESSION["exceptions"]["disableUserEx"] = "No se logró desactivar al usuario, posible corte "
                         . "de conexión a la base de datos";
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=user&homeAction=userNewPassword";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=user&homeAction=userNewPassword";
             //exit;
         }
             
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit; 
     }
 
@@ -1014,7 +1014,7 @@ function mockTypeIndex(){
         
         $result = '../views/userLayouts/newTypeForm.php';
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1036,7 +1036,7 @@ function mockEditTypes($container = null){
         }
 
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1066,12 +1066,12 @@ function mockInsertType($container = null){
                         ."existente en la base de datos o se haya cortado la conexión a "
                         . "la base de datos";
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=type&homeAction=index";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=type&homeAction=index";
             //exit;
         }
         
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1115,12 +1115,12 @@ function mockUpdateTypeInfo($container = null){
                         ."existente en la base de datos o se haya cortado la conexión a "
                         . "la base de datos";
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=type&homeAction=editTypes";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=type&homeAction=editTypes";
             //exit;
         }
 
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1157,12 +1157,12 @@ function mockEnableOrDisableType($container = null){
         }catch(Exception $ex){
             $_SESSION["exceptions"]["disableTypeEx"] = "No se logró ".$str_portion_two." el tipo con ID ".$dto->type_id.", posible corte de conexión a la base de datos";
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=type&homeAction=editTypes";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=type&homeAction=editTypes";
             //exit;
         }
             
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit; 
     }
 
@@ -1205,7 +1205,7 @@ function mockEnterpriseIndex($container = null){
         }
             
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1261,12 +1261,12 @@ function mockUpdateEnterInfo($container = null){
                         ."el proceso de actualización de datos de la "
                         ."empresa, posible corte de conexión a la base de datos";
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=enterprise&homeAction=index";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=enterprise&homeAction=index";
             //exit;
         }
 
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1303,12 +1303,12 @@ function mockEnableOrDisableEnterprise($container = null){
         }catch(Exception $ex){
             $_SESSION["exceptions"]["disableTypeEx"] = "No se logró ".$str_portion_two." la empresa con ID ".$dto->enterprise_id.", posible corte de conexión a la base de datos";
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=enterprise&homeAction=index";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=enterprise&homeAction=index";
             //exit;
         }
 
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit; 
     }
 
@@ -1340,7 +1340,7 @@ function mockDeviceIndex($container = null){
         }
         
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1381,7 +1381,7 @@ function mockEditDevice($container = null){
         }
         
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1426,7 +1426,7 @@ function mockDevicesReport($container = null){
         }
         
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit; 
     }
 
@@ -1468,12 +1468,12 @@ function mockInsertDevice($container = null){
                         ."lo más probable es que se haya ingresado un número de serie "
                         ."existente en la base de datos o se haya cortado la conexión a la base de datos";
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=device&homeAction=index";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=device&homeAction=index";
             //exit;
         }
         
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1518,12 +1518,12 @@ function mockUpdateDeviceInfo($container = null){
                         ."de serie que ya se encuentra en la base de datos. Otro problema posible "
                         ."es que se haya cortado la conexión a la base de datos";
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=device&homeAction=editDevice";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=device&homeAction=editDevice";
             //exit;
         }
         
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1559,12 +1559,12 @@ function mockEnableOrDisableDevice($container = null){
         }catch(Exception $ex){
             $_SESSION["exceptions"]["disableTypeEx"] = "No se logró ".$str_portion_two." el equipo con ID ".$dto->device_id.", posible corte de conexión a la base de datos";
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=device&homeAction=editDevice";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=device&homeAction=editDevice";
             //exit;
         }
 
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit; 
     }
 
@@ -1593,7 +1593,7 @@ function mockContactIndex($container = null){
         }
         
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1665,12 +1665,12 @@ function mockInsertContact($container = null){
                     . "en la base de datos, o se haya cortado la conexión a la base de datos";
             }
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=contact&homeAction=index";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=contact&homeAction=index";
             //exit;
         }
             
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1709,12 +1709,12 @@ function mockUpdateContactInfo($container = null){
         }catch(Exception $ex){
             $_SESSION["exceptions"]["updateClientException"] = "Hubo un problema dentro del proceso de modificación del contacto, posible corte de conexión a la base de datos";
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=enterprise&homeAction=index";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=enterprise&homeAction=index";
             //exit;
         }
 
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1751,12 +1751,12 @@ function mockEnableOrDisableContact($container = null){
         }catch(Exception $ex){
             $_SESSION["exceptions"]["disableTypeEx"] = "No se logró ".$str_portion_two." el contacto con ID ".$dto->contact_id.", posible corte de conexión a la base de datos";
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=enterprise&homeAction=index";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=enterprise&homeAction=index";
             //exit;
         }
 
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit; 
     }
 
@@ -1784,7 +1784,7 @@ function mockBinnIndex($container = null){
             $result = '../views/userLayouts/firstForm.php';
         }    
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1827,7 +1827,7 @@ function mockFollowuplist($container = null){
         }
             
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
     
@@ -1868,7 +1868,7 @@ function mockBinnaclesReport($container = null){
         }
         
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1917,7 +1917,7 @@ function mockShowBinnacle($container = null){
         }
         
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -1964,7 +1964,7 @@ function mockEditBinnacle($container = null){
         }
 
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -2000,12 +2000,12 @@ function mockBinninsertion($container = null){
         }catch(Exception $ex){
             $_SESSION["exceptions"]["binnDataException"] = "Acción fallida, probable falta de conexión a la base de datos".$ex;
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=binnacle&homeAction=index";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=binnacle&homeAction=index";
             //exit;
         }
 
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -2064,12 +2064,12 @@ function mockUpdateBinnacleInfo($container = null){
             }
             */
 
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=binnacle&homeAction=editBinnacle&homeId=".$dto->binnacle_id;
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=binnacle&homeAction=editBinnacle&homeId=".$dto->binnacle_id;
             //exit;
         }
         
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -2106,12 +2106,12 @@ function mockEnableOrDisableBinn($container = null){
         }catch(Exception $ex){
             $_SESSION["exceptions"]["disableTypeEx"] = "No se logró ".$str_portion_two." la bitácora con ID ".$dto->binnacle_id.", posible corte de conexión a la base de datos";
         }finally{
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=binnacle&homeAction=binnaclesReport";
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=binnacle&homeAction=binnaclesReport";
             //exit;
         }
             
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit; 
     }
 
@@ -2154,11 +2154,11 @@ function mockFollowupformIndex($container = null){
                 exit;        
             }
             */            
-            $result = (isset($info_verified)) ? $info_verified : "Location: http://localhost:8081/SOSv5/service-order-system/home/";                
+            $result = (isset($info_verified)) ? $info_verified : "Location: http://localhost:8081/SOSv6/service-order-system/home/";                
         }
             
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -2173,7 +2173,7 @@ function mockTechsign(){
         $result[] = '../views/finishingLayouts/technicianCanvas.php';
         $result[] = '../views/finishingLayouts/absoluteElems.php';            
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
     return $result;
@@ -2186,7 +2186,7 @@ function mockClientsign(){
         $result[] = '../views/finishingLayouts/clientCanvas.php';
         $result[] = '../views/finishingLayouts/absoluteElems.php';
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
     return $result;
@@ -2223,13 +2223,13 @@ function mockFollowupPartial($container = null){
                 exit;            
             }*/
             
-            $result = "Location: http://localhost:8081/SOSv5/service-order-system/finishing/?controller=followupform&action=index&id=".
+            $result = "Location: http://localhost:8081/SOSv6/service-order-system/finishing/?controller=followupform&action=index&id=".
                 $dto->binnacle_id;
             //exit;
         }
 
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
     
@@ -2259,17 +2259,17 @@ function mockResetActivitiesDescriptions($container = null){
         }finally{
             /*
             if(!empty($_SESSION["exceptions"])){
-                header("Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=binnacle&homeAction=followuplist");
+                header("Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=binnacle&homeAction=followuplist");
                 exit;
             }*/
             
-            $result = (!empty($_SESSION["exceptions"])) ? "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=binnacle&homeAction=followuplist" : 
-                "Location: http://localhost:8081/SOSv5/service-order-system/finishing/?controller=followupform&action=index&id=".$dto->binnacle_id;
+            $result = (!empty($_SESSION["exceptions"])) ? "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=binnacle&homeAction=followuplist" : 
+                "Location: http://localhost:8081/SOSv6/service-order-system/finishing/?controller=followupform&action=index&id=".$dto->binnacle_id;
             //exit;
         }
 
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
     
@@ -2309,13 +2309,13 @@ function mockCancellingBinn($container = null){
                 exit;
             }*/
 
-            $result = (sizeof($errorArr) > 0) ? "Location: http://localhost:8081/SOSv5/service-order-system/finishing/?controller=followupform&action=index&id=".$dto->binnacle_id : 
-                "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=binnacle&homeAction=followuplist";
+            $result = (sizeof($errorArr) > 0) ? "Location: http://localhost:8081/SOSv6/service-order-system/finishing/?controller=followupform&action=index&id=".$dto->binnacle_id : 
+                "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=binnacle&homeAction=followuplist";
             //exit;   
         }
             
     }else{
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -2351,12 +2351,12 @@ function mockFinishbinnacle($container = null){
 
                 //Utils::unsetFormSessions();
 
-                $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=binnacle&homeAction=followuplist";
+                $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=binnacle&homeAction=followuplist";
                 //exit;
             }
 
     } else {
-        $result = "Location: http://localhost:8081/SOSv5/service-order-system/home/";
+        $result = "Location: http://localhost:8081/SOSv6/service-order-system/home/";
         //exit;
     }
 
@@ -2385,7 +2385,7 @@ function mockReportPdfGenerator($container){
                 $dto2 = $container->make('enterDTO');
                 $dto2->enterprise_id = $_SESSION["idSession"]["devicesReport_enterId"];
                 $enter_info = $container->make('enterService')->getInfo($dto2);
-                $path = "/var/www/html/SOSv5/service-order-system/assets/img/logo.png";
+                $path = "/var/www/html/SOSv6/service-order-system/assets/img/logo.png";
                 $data = file_get_contents($path);
                 $logo_base64 = "data:image/png;base64,".base64_encode($data);
 
@@ -2400,11 +2400,11 @@ function mockReportPdfGenerator($container){
             }finally{
                 /*
                 if(!empty($_SESSION["exceptions"])){
-                    header("Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=device&homeAction=devicesReport");
+                    header("Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=device&homeAction=devicesReport");
                     exit;
                 }*/
 
-                $result = (isset($_SESSION["exceptions"])) ? "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=device&homeAction=devicesReport" : 
+                $result = (isset($_SESSION["exceptions"])) ? "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=device&homeAction=devicesReport" : 
                     '../views/adminLayouts/devicesPDF.php';
                 //exit;
             }
@@ -2423,18 +2423,18 @@ function mockReportPdfGenerator($container){
                 if(empty($binn_info))
                     throw new UnknownInDataBaseException("El id de la bitácora no existe en la base de datos");
 
-                $logo_path = "/var/www/html/SOSv5/service-order-system/assets/img/logo.png";
+                $logo_path = "/var/www/html/SOSv6/service-order-system/assets/img/logo.png";
                 $logo_file = file_get_contents($logo_path);
                 $logo_base64 = "data:image/png;base64,".base64_encode($logo_file);
 
-                $without_img_path = "/var/www/html/SOSv5/service-order-system/assets/img/no-image-icon-23494.png";
+                $without_img_path = "/var/www/html/SOSv6/service-order-system/assets/img/no-image-icon-23494.png";
                 $without_img_file = file_get_contents($without_img_path);
                 $no_img_base64 = "data:image/png;base64,".base64_encode($without_img_file);
 
                 ($binn_info["Estatus"] !== 'en proceso') ?
-                    $tech_sign_path = "/var/www/html/SOSv5/service-order-system/finishing/uploads/firmas/".$binn_info["Tecnico_firma"] : $tech_sign_path = null;
+                    $tech_sign_path = "/var/www/html/SOSv6/service-order-system/finishing/uploads/firmas/".$binn_info["Tecnico_firma"] : $tech_sign_path = null;
                 ($binn_info["Estatus"] === 'finalizado') ?
-                    $cli_sign_path = "/var/www/html/SOSv5/service-order-system/finishing/uploads/firmas/".$binn_info["Firma_cliente"] : $cli_sign_path = null;    
+                    $cli_sign_path = "/var/www/html/SOSv6/service-order-system/finishing/uploads/firmas/".$binn_info["Firma_cliente"] : $cli_sign_path = null;    
                 
                 if(!empty($tech_sign_path)){
                     (!is_file($tech_sign_path)) ?
@@ -2462,7 +2462,7 @@ function mockReportPdfGenerator($container){
                     exit;
                 }*/
 
-                $result = (isset($_SESSION["exceptions"])) ? "Location: http://localhost:8081/SOSv5/service-order-system/home/?homeController=binnacle&homeAction=binnaclesReport" :
+                $result = (isset($_SESSION["exceptions"])) ? "Location: http://localhost:8081/SOSv6/service-order-system/home/?homeController=binnacle&homeAction=binnaclesReport" :
                      '../views/adminLayouts/binnacleInfoCanvas.php';
                 //exit;
             }

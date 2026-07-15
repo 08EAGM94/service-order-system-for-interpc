@@ -488,7 +488,7 @@ class BinnacleController{
 
 beforeEach(function(){
     $this->container = testContainerFactory();
-    $this->base_url = 'http://localhost:8081/SOSv5/service-order-system/';
+    $this->base_url = 'http://localhost:8081/SOSv6/service-order-system/';
     $this->buttons = '<div class="Zebra_Pagination"><ol class="pagination"><li class="page-item disabled"><a href="javascript:void(0)" class="page-link">&laquo;</a></li><li class="page-item active"><a href="/SOSv5/service-order-system/home" class="page-link">1</a></li><li class="page-item disabled"><a href="javascript:void(0)" class="page-link">&raquo;</a></li></ol></div>';
 });
 

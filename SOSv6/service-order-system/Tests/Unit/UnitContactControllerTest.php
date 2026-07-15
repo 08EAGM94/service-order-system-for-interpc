@@ -1,7 +1,7 @@
 <?php
 
 beforeEach(function(){
-    $this->base_url = 'http://localhost:8081/SOSv5/service-order-system/';
+    $this->base_url = 'http://localhost:8081/SOSv6/service-order-system/';
 });
 
 test('prueba método index, acceso denegado', function(){

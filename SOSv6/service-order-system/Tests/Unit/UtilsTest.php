@@ -4,7 +4,7 @@ use org\bovigo\vfs\vfsStream;
 
 beforeEach(function(){
     $this->container = testContainerFactory();
-    $this->base_url = 'http://localhost:8081/SOSv5/service-order-system/';
+    $this->base_url = 'http://localhost:8081/SOSv6/service-order-system/';
     $this->default_homeController = 'UIController';
 });
 
@@ -193,7 +193,7 @@ test('prueba método saveSignaturesFiles, caso "newTechSign"', function () {
     
     $root = vfsStream::setup("uploads/firmas");
     $virtual_png = $root->url() .'/'.'test_sign.png';
-    $some_sign = file_get_contents('/var/www/html/SOSv5/service-order-system/finishing/uploads/firmas/userid_2_Edgar_Allan_Gutierrez_Morales_Sign.png');
+    $some_sign = file_get_contents('/var/www/html/SOSv6/service-order-system/finishing/uploads/firmas/userid_2_Edgar_Allan_Gutierrez_Morales_Sign.png');
     file_put_contents($virtual_png, $some_sign);
 
     $tmp_file = tempnam(sys_get_temp_dir(), 'test_');
@@ -216,7 +216,7 @@ test('prueba método saveSignaturesFiles, caso "newTechSign"', function () {
 test('prueba método saveSignaturesFiles, caso "techSign"', function () {
     
     $root = vfsStream::setup("uploads/firmas");
-    $some_sign = file_get_contents('/var/www/html/SOSv5/service-order-system/finishing/uploads/firmas/userid_2_Edgar_Allan_Gutierrez_Morales_Sign.png');
+    $some_sign = file_get_contents('/var/www/html/SOSv6/service-order-system/finishing/uploads/firmas/userid_2_Edgar_Allan_Gutierrez_Morales_Sign.png');
 
     $tmp_file = tempnam(sys_get_temp_dir(), 'test_');
     file_put_contents($tmp_file, $some_sign);
@@ -236,7 +236,7 @@ test('prueba método saveSignaturesFiles, caso "techSign"', function () {
 test('prueba método saveSignaturesFiles, caso "cliSign"', function () {
     
     $root = vfsStream::setup("uploads/firmas");
-    $some_sign = file_get_contents('/var/www/html/SOSv5/service-order-system/finishing/uploads/firmas/userid_2_Edgar_Allan_Gutierrez_Morales_Sign.png');
+    $some_sign = file_get_contents('/var/www/html/SOSv6/service-order-system/finishing/uploads/firmas/userid_2_Edgar_Allan_Gutierrez_Morales_Sign.png');
 
     $tmp_file = tempnam(sys_get_temp_dir(), 'test_');
     file_put_contents($tmp_file, $some_sign);
