@@ -18,9 +18,9 @@ ir despues de cualquier vista generada por controladores, si no se hace, PHP arr
                 <li class="mobile-navbar__row">
                     <a class="mobile-navbar__row-link" href="#">Crear registros <div class="mobile-navbar__icon-wrapper"><i class="fa-solid fa-chevron-down" style="top: 1.5rem;"></i></div></a>
                     <ul class="mobile-submenu__linkList">
-                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=contact&homeAction=newcontact">Crear contacto</a></li>
-                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=type&homeAction=newdevicetype">Crear tipo de equipo</a></li>
-                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=device&homeAction=newdevice">Crear un equipo</a></li>    
+                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=contact&homeAction=index">Crear contacto</a></li>
+                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=type&homeAction=index">Crear tipo de equipo</a></li>
+                        <li class="mobile-submenu__row"><a class="mobile-submenu__link" href="<?= base_url;?>home/?homeController=device&homeAction=index">Crear un equipo</a></li>    
                     </ul>
                 </li>
                 <li class="mobile-navbar__row">
